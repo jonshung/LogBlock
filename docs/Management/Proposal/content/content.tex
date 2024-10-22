@@ -1,0 +1,120 @@
+\chapter{Introduction}
+
+LogBlock is an online social media Service platform with a programming media sharing centrical view. The platform provides an easier and user-friendly means 
+for both new and senior developers to share their open contributions without compromising too much on reachability of contents.
+
+    \section{Purpose}
+    The LogBlock Software Requirements Proposal is addressed to general team development members and business officers. 
+    The specification provides high-level abstracted views on the Service's functional operations as well as initial descriptions on the system's constraints.
+
+    \section{Intended Use}
+    The proposal and occasional feature references in this document should be viewed as
+    the descriptions of the software Services the system is expected to provide to  users and the constraints
+    under which it must operate.
+    \\\\
+    Although some technical details may be included, this document \textbf{does not} enforces the inclusion of the defined implementation guides and should only act as a guidance
+    to the desired outcomes of the system.
+    \\\\
+    Albeit usually up-to-date, consumers of this document should note that due to the ever-changing requirements as well as the production model of the development organization, 
+    minors changes are introduced to accomodate with the needed alternation associated in each development cycle's retrospective. It is advised that consumers of this document practice
+    \textbf{revision} of changes in known interval.
+
+    \section{Development Team Information}
+    \begin{itemize}
+        \item \textbf{Team Leader, Project Manager}: Hung K. Ngu (22127134) (nkhung22@clc.fitus.edu.vn)
+        \item \textbf{Executive Officer, Business Analyst}: Long T. Tran (22127249) (ttlong221@clc.fitus.edu.vn)
+        \item \textbf{Back-End Implementation Personel}: An C. Trinh (22127004) (tcan22@clc.fitus.edu.vn)
+        \item \textbf{Front-End Implementation Personel}: Cuong Ng. N. Tran (22127048) (tnncuong22@clc.fitus.edu.vn)
+        \item \textbf{Quality Assurance Personel}: Long T. T. Nguyen (22127247) (nttlong22@clc.fitus.edu.vn) 
+    \end{itemize}
+\newpage
+
+\chapter{Overall Description}
+    \section{Service overview}
+    The LogBlock Social Media Service (hence forward will be referenced as the Service) is a multi-media platform for \textbf{programming-based} content distributions, with a focus on 
+    appealing interfaces and ease of access to code block \textbf{authoring tools} for interactive guides, code snippets. The Service aims to provide a personal profile space for content storage, while
+    also encouraging \textbf{visibility} of knowledge via tailored exploration functionalities based on posts interaction. On a post-level, we provides a community-building scheme, allowing users
+    to comment and react, share the content they are seeing, while also allowing \textbf{Experts} to recommend alternative solutions to the original posts.
+
+    \section{User Classes and Characteristics}
+    \textbf{Targeted Users}: the Service is open to public usage, and partition users based on functional requirements as well as contributions to the platform.
+    The intended user classes include four main classes: \textit{Guests, Registered user, Experts and Administrators}.
+    \\\\
+    \textbf{Guest} class provides a mean for public, new-come users to access shared content on the platform without explicitly register an operational account. Albeit the class
+    is contrained to various functions of the Service, including: the ability to \textit{post}, the ability to generate interactions with posts via commenting and reaction and limited view of other registred user profiles.
+    \\\\
+    \textbf{Registered} class is considered to be the main targeted consumer of the platform. Registered users are generated through the platform's \textit{authentication system} and should be consistent
+    until the \ac{EOS} of such Service. Registered user can access almost all services provided by the platform as they are the targeted audience, and in turn, the platform is designed
+    to best accomodate the changing needs and scalability of this user base.
+    \\\\
+    \textbf{Expert} class inherents all functionalities of the Registered class and provides a way for the platform administration to demonstrate \textit{verifiable} and \textit{trusted content}, as well as providing functionalities
+    for expert individuals to reach their targeted audience in a controllable manners by means of higher post visibility and \textbf{Expert Suggested Solution}.
+    \\\\
+    \textbf{Administrator} class is the gateway for the social developement team and moderators associated with the users' business organization to access the platform and uses tools that provide administration capabilities
+    in order to enforce the Terms of Service of public usage. The administrator class also provides a mean for public users to flag and directly send reports to the moderating sections, allowing the ability to 
+    quickly identify and resolve issues of other users.
+
+    \section{Operating Environment}
+    The platform primary operating is \textbf{Web Browsers}, offering extensibilities and incorperating OS features for ease of usage of the platform.
+    The choice of platforms reflects the needs reach the maximum number of users while offering backwards compatibilities with user on older software or hardwares.
+
+    \section{Constraints}
+    The platform should respect Privacy and Data Protection. All user data must be securely stored, adhering to relevant privacy regulations (GDPR, CCPA).
+    \\\\
+    The platform should not promote hazardous contents and should not provide intervention methods to steer naratives or spread conspiracy.
+    \\\\
+    The system should handle large volumes of users and content uploads with minimized performance degradation. The system should provides a mean for administrator to monitor uptime and be notified
+    of downtime as soon as possible.
+    \\\\
+    Based on the choice of Operating Environment, the design of User Interaction, User Experience should be consistent across different devices and browsers, offering Cross-Platform Compatibility.
+
+    \section{Abstract Functional Requirements}
+        \subsection{User Profile Management}
+        The standard view of the service can be consumed by Users of all classes. Users are, by default, participating in by the \textbf{Guest} role, which has limited views and
+        can only access posts which are shared by the it's unique address. The main targeted audience is \textbf{Registered Users}. Registered Users is associated with
+        a unique \textbf{Handle} to identify users on the platform. An account is also included with each Handle.
+        \\\\
+        Registered Users can tailor a \textbf{personal profile} page to their liking with the tools provided by the platform, including a biography section, public relation
+        connection statistic and a posts history to view the Registered User's \textbf{previously published posts}. Registered User is the majority targeted audience for 
+        many operations of the platform, allowing development to focus on improving the user experience of the specific class.
+
+        \subsection{Abstract User Cross Interactions}
+        The platform provides a \textbf{Follow/Unfollowing} button for external Registered users to subscribe to the targeted profile. Addtionally, the platform provides a 
+        \textbf{Message} button for external Registered users to directly message the recipient profile privately. Subsequently, it also introduce a \textbf{Block/Report}
+        button for External Registered users to report, isolate unwanted or harmful contents and notify the moderation team.
+        
+        \subsection{Content Sharing Block (Post)}
+        Content Blocks are the main content unit within the platform, offering extensive \textbf{authoring tools} for Registered Users to leverage the platform and share educational
+        works. With code-block as the main formula, content blocks (posts) should be visually appealing, but not obstructive and should corresponds to the flexible design of 
+        the platform.The content block should be able to display original user's description, code block, as well as salient attachment through Markdown rendering. Additionally, 
+        External Registered users can like, share and save content blocks. External Registered users can comment on the content blocks, creating a sub-thread within the 
+        content block.
+
+        \subsection{Content Feed, Exploration and Interaction}
+        News Feed acts as a gateway for External Registered Users content to be promoted to connected Registered users. Though limited, Registered Users can leverage News Feed
+        to filter out only \textbf{connected organization} for trusted and reliable contents. News Feed also features a block for advertiser to place their contents, creating
+        a business scheme for the service.
+        \\\\
+        Registered Users can explore trending posts outside of own's connection through the Explorations page. Exploration posts is updated and sorted based on 
+        \textbf{real time interaction rate, tags} within an interval. The specific period is determined by the Administration team.
+        \\\\
+        Registered Users can explore or connect with known associates through the \textbf{search function}. The search function should be viewed as the main source of specific 
+        content searching, and should find corresponding results based on \textbf{display name} and \textbf{User Handle}.
+
+        \subsection{Expert Requirements}
+        Experts class is a verifiable method for the operation team to introduce \textbf{affiliation} with individuals who have expertise in their respective fields, allowing them
+        to perform more publicly visible actions by encouraging their posts' visibility. Experts priviledge can only be leveraged by the administration team.
+        Expert class allows individuals to directly submit a publicly available \textbf{Expert Suggested Solution} in External Registered User Posts, which other Registered Users who 
+        visit the posts can also see and \textbf{upvote or downvote}. The original posting Registered User then can choose to \textbf{accept the changes or disregard it}.
+
+        \subsection{Administrator Requirements}
+        Administrators is the main operational class for the moderation team. It must have the ability to \textbf{monitor, flag, and remove} hazardous content. 
+        Administrators can issue warnings, suspend or ban accounts, and respond to flagged content in order to provide a human interaction resolution rather than 
+        relying on automatic flagging system. 
+
+        \subsection{Real Time Interaction}
+        Real Time Interaction is a mean for the platform to provides up-to-date user-subscribed content status. Real Time Interaction notify the Registered User 
+        through \textbf{emails}. Delivered content catalog can be Received Messages, New Connection Posts or Critical Action needed in User Profile Management.
+\newpage
+
+

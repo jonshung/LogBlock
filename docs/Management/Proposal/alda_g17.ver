@@ -1,0 +1,14 @@
+\begin {longtable}{@{}|l|l|>{\hsize =\vhAuthorColWidth }X|>{\hsize =\vhChangeColWidth }X|@{}}\hline 
+\textbf {\vhversionname }
+ & \textbf {\vhdatename }
+ & \textbf {\vhauthorname }
+ & \textbf {\vhchangename }\\\hline 
+1.0
+ & 10.12.2024
+ & \listset {Hung K. Ngu}
+ & Basic social media services\\\hline 
+1.1
+ & 10.16.2024
+ & \listset {Hung K. Ngu}
+ & Programming-centralized design descriptions and development model\\\hline 
+\end {longtable}
