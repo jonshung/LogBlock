@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
+
+project(logblock VERSION 1.0 LANGUAGES CXX)
+
+### DEPENDENCIES ###
+## OAT++ ##
+set(BUILD_SHARED_LIBS OFF)
+set(OATPP_INSTALL ON)
+set(OATPP_BUILD_TESTS OFF)
+set(OATPP_LINK_TEST_LIBRARY OFF)
+set(OATPP_LINK_ATOMIC ON)
+set(OATPP_MSVC_LINK_STATIC_RUNTIME OFF)
+
+add_subdirectory(libs/oatpp)
