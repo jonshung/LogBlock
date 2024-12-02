@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.6.15)  19 OCT 2024 19:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.6.15)  6 NOV 2024 05:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/jonshung/homeworks_sem7/Intro2SE/Project/PA0_Project_Specifications/Documents/Proposal/alda_g17.tex
-(/home/jonshung/homeworks_sem7/Intro2SE/Project/PA0_Project_Specifications/Documents/Proposal/alda_g17.tex
+**/home/jonshung/homeworks_sem7/Intro2SE/Project/docs/Management/Proposal/alda_g17.tex
+(/home/jonshung/homeworks_sem7/Intro2SE/Project/docs/Management/Proposal/alda_g17.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-01-16> (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2022/07/02 v1.4n Standard LaTeX document class
@@ -1055,7 +1055,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  (./base/history.tex [1
 
-]
+] [2]
 \openout3 = `alda_g17.ver'.
 
 \vh@hstfile=\write6
@@ -1074,12 +1074,12 @@ l.126 \include{content/content}
  (./content/content.tex
 Chapter 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 11--21
+Underfull \hbox (badness 10000) in paragraph at lines 12--25
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 11--21
+Underfull \hbox (badness 10000) in paragraph at lines 12--25
 
  []
 
@@ -1088,79 +1088,131 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--21
 
 ]
 Chapter 2.
-Package acronym Info: Label `acro:EOS' newly defined as it shall be overridden
-although it is yet undefined on input line 47.
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--56
+Underfull \hbox (badness 10000) in paragraph at lines 45--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--56
+Underfull \hbox (badness 10000) in paragraph at lines 45--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--56
+Underfull \hbox (badness 10000) in paragraph at lines 45--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--56
+Underfull \hbox (badness 10000) in paragraph at lines 45--61
 
  []
 
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 62--70
+Underfull \hbox (badness 10000) in paragraph at lines 67--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--70
+Underfull \hbox (badness 10000) in paragraph at lines 67--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--70
+Underfull \hbox (badness 10000) in paragraph at lines 67--75
+
+ []
+
+[4] [5] [6]
+Chapter 3.
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--191
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--80
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 94--103
+Underfull \hbox (badness 10000) in paragraph at lines 181--191
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--103
+Underfull \hbox (badness 10000) in paragraph at lines 193--198
 
  []
 
-[5]) 
+[7
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 208--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 232--244
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 232--244
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 232--244
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 246--253
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 258--264
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--285
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--285
+
+ []
+
+) [9] 
 AED: lastpage setting LastPage
 (./alda_g17.aux (./content/content.aux))
 Package rerunfilecheck Info: File `alda_g17.out' has not changed.
-(rerunfilecheck)             Checksum: 7F15E015BFA6A21C745BC8993FC36C16;3068.
+(rerunfilecheck)             Checksum: BE44AB259B715552725C2CBD63E671DD;5180.
  ) 
 Here is how much of TeX's memory you used:
- 26815 strings out of 476091
- 463197 string characters out of 5794081
- 1860330 words of memory out of 5000000
- 46637 multiletter control sequences out of 15000+600000
+ 26834 strings out of 476091
+ 463395 string characters out of 5794081
+ 1863330 words of memory out of 5000000
+ 46642 multiletter control sequences out of 15000+600000
  527287 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,7n,90p,2522b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,7n,90p,2501b,578s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on alda_g17.pdf (7 pages, 218029 bytes).
+Output written on alda_g17.pdf (12 pages, 229757 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
- 164 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 145 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 272 PDF objects out of 1000 (max. 8388607)
+ 232 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 225 words of extra memory for PDF output out of 10000 (max. 10000000)
 

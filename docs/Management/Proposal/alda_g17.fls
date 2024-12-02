@@ -1,9 +1,9 @@
-PWD /home/jonshung/homeworks_sem7/Intro2SE/Project/PA0_Project_Specifications/Documents/Proposal
+PWD /home/jonshung/homeworks_sem7/Intro2SE/Project/docs/Management/Proposal
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/jonshung/homeworks_sem7/Intro2SE/Project/PA0_Project_Specifications/Documents/Proposal/alda_g17.tex
+INPUT /home/jonshung/homeworks_sem7/Intro2SE/Project/docs/Management/Proposal/alda_g17.tex
 OUTPUT alda_g17.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls

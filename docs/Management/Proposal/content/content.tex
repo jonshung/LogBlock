@@ -6,6 +6,7 @@ for both new and senior developers to share their open contributions without com
     \section{Purpose}
     The LogBlock Software Requirements Proposal is addressed to general team development members and business officers. 
     The specification provides high-level abstracted views on the Service's functional operations as well as initial descriptions on the system's constraints.
+    The specification provides a developement contract applied to all personel of the developement team.
 
     \section{Intended Use}
     The proposal and occasional feature references in this document should be viewed as
@@ -14,19 +15,23 @@ for both new and senior developers to share their open contributions without com
     \\\\
     Although some technical details may be included, this document \textbf{does not} enforces the inclusion of the defined implementation guides and should only act as a guidance
     to the desired outcomes of the system.
+    %\\\\
+    %The document should provide a comprehensive development contract requirements for synchronization and regularization on team performance. The contract acts as an 
+    %ensurance for quality works and references for intended development cycles as well as appropriate actions of situations.
     \\\\
-    Albeit usually up-to-date, consumers of this document should note that due to the ever-changing requirements as well as the production model of the development organization, 
-    minors changes are introduced to accomodate with the needed alternation associated in each development cycle's retrospective. It is advised that consumers of this document practice
-    \textbf{revision} of changes in known interval.
+    Albeit usually up-to-date, consumers of this document should note that due to the ever-changing requirements as 
+    well as the production model of the development organization, minors changes are to be introduced to accomodate with the needed alternation associated in each 
+    development cycle's retrospective. And thus, it is advise to \textbf{revise} the document in known interval
 
     \section{Development Team Information}
     \begin{itemize}
-        \item \textbf{Team Leader, Project Manager}: Hung K. Ngu (22127134) (nkhung22@clc.fitus.edu.vn)
-        \item \textbf{Executive Officer, Business Analyst}: Long T. Tran (22127249) (ttlong221@clc.fitus.edu.vn)
-        \item \textbf{Back-End Implementation Personel}: An C. Trinh (22127004) (tcan22@clc.fitus.edu.vn)
-        \item \textbf{Front-End Implementation Personel}: Cuong Ng. N. Tran (22127048) (tnncuong22@clc.fitus.edu.vn)
-        \item \textbf{Quality Assurance Personel}: Long T. T. Nguyen (22127247) (nttlong22@clc.fitus.edu.vn) 
+        \item Team Leader, Project Manager: Hung K. Ngu (22127134) (nkhung22@clc.fitus.edu.vn)
+        \item Executive Officer: Long T. Tran (22127249) (ttlong221@clc.fitus.edu.vn)
+        \item Back-End Implementation Personel: An C. Trinh (22127004) (tcan22@clc.fitus.edu.vn)
+        \item Front-End Implementation Personel: Cuong Ng. N. Tran (22127048) (tnncuong22@clc.fitus.edu.vn)
+        \item Quality Assurance Personel: Long T. T. Nguyen (22127247) (nttlong22@clc.fitus.edu.vn) 
     \end{itemize}
+    
 \newpage
 
 \chapter{Overall Description}
@@ -37,18 +42,18 @@ for both new and senior developers to share their open contributions without com
     to comment and react, share the content they are seeing, while also allowing \textbf{Experts} to recommend alternative solutions to the original posts.
 
     \section{User Classes and Characteristics}
-    \textbf{Targeted Users}: the Service is open to public usage, and partition users based on functional requirements as well as contributions to the platform.
+    The Service is open to public usage, and partition users based on functional requirements as well as contributions to the platform.
     The intended user classes include four main classes: \textit{Guests, Registered user, Experts and Administrators}.
     \\\\
     \textbf{Guest} class provides a mean for public, new-come users to access shared content on the platform without explicitly register an operational account. Albeit the class
     is contrained to various functions of the Service, including: the ability to \textit{post}, the ability to generate interactions with posts via commenting and reaction and limited view of other registred user profiles.
     \\\\
     \textbf{Registered} class is considered to be the main targeted consumer of the platform. Registered users are generated through the platform's \textit{authentication system} and should be consistent
-    until the \ac{EOS} of such Service. Registered user can access almost all services provided by the platform as they are the targeted audience, and in turn, the platform is designed
+    until the  of such Service. Registered user can access almost all services provided by the platform as they are the targeted audience, and in turn, the platform is designed
     to best accomodate the changing needs and scalability of this user base.
     \\\\
     \textbf{Expert} class inherents all functionalities of the Registered class and provides a way for the platform administration to demonstrate \textit{verifiable} and \textit{trusted content}, as well as providing functionalities
-    for expert individuals to reach their targeted audience in a controllable manners by means of higher post visibility and \textbf{Expert Suggested Solution}.
+    for expert individuals to reach their targeted audience in a controllable manners by means of higher post visibility and \textbf{Expert Suggested Solution}
     \\\\
     \textbf{Administrator} class is the gateway for the social developement team and moderators associated with the users' business organization to access the platform and uses tools that provide administration capabilities
     in order to enforce the Terms of Service of public usage. The administrator class also provides a mean for public users to flag and directly send reports to the moderating sections, allowing the ability to 
@@ -70,51 +75,220 @@ for both new and senior developers to share their open contributions without com
 
     \section{Abstract Functional Requirements}
         \subsection{User Profile Management}
-        The standard view of the service can be consumed by Users of all classes. Users are, by default, participating in by the \textbf{Guest} role, which has limited views and
-        can only access posts which are shared by the it's unique address. The main targeted audience is \textbf{Registered Users}. Registered Users is associated with
-        a unique \textbf{Handle} to identify users on the platform. An account is also included with each Handle.
-        \\\\
-        Registered Users can tailor a \textbf{personal profile} page to their liking with the tools provided by the platform, including a biography section, public relation
-        connection statistic and a posts history to view the Registered User's \textbf{previously published posts}. Registered User is the majority targeted audience for 
-        many operations of the platform, allowing development to focus on improving the user experience of the specific class.
+        \textbf{FR-0}: Users can be promoted from Guest to Registered by creating an account through the service dedicated authentication system.
+        \\
+        \textbf{FR-1}: Each Registered user is associated with a unique Handle. Each Registered user is in possession of a personal profile.
+        \\
+        \textbf{FR-2}: Registered Users can create, update, and delete their profiles.
+        \\
+        \textbf{FR-3}: Profile features include a profile picture, biography section (with character limit), and posts display.
+        \\
+        \textbf{FR-4}: Follower and following counts should be displayed on the profile page.
+        \\
+        \textbf{FR-5}: Registered Users can pin posts to their profiles.
+        \\
+        \textbf{FR-6}: Registered Users can privately view their activity log.
 
         \subsection{Abstract User Cross Interactions}
-        The platform provides a \textbf{Follow/Unfollowing} button for external Registered users to subscribe to the targeted profile. Addtionally, the platform provides a 
-        \textbf{Message} button for external Registered users to directly message the recipient profile privately. Subsequently, it also introduce a \textbf{Block/Report}
-        button for External Registered users to report, isolate unwanted or harmful contents and notify the moderation team.
+        \textbf{FR-7}: Provides a Follow/Unfollowing button for external Registered users to subscribe to the targeted profile.
+        \\
+        \textbf{FR-8}: Provides a Message button for external Registered users to directly message the recipient profile privately.
+        \\
+        \textbf{FR-9}: Provides a Block/Report button for external Registered users to report, isolate unwanted or harmful contents and notify the moderation team.
         
         \subsection{Content Sharing Block (Post)}
-        Content Blocks are the main content unit within the platform, offering extensive \textbf{authoring tools} for Registered Users to leverage the platform and share educational
-        works. With code-block as the main formula, content blocks (posts) should be visually appealing, but not obstructive and should corresponds to the flexible design of 
-        the platform.The content block should be able to display original user's description, code block, as well as salient attachment through Markdown rendering. Additionally, 
-        External Registered users can like, share and save content blocks. External Registered users can comment on the content blocks, creating a sub-thread within the 
-        content block.
+        \textbf{FR-10}: The content block should be visually appealing, but not obstructive and should corresponds to the flexible design of the platform.
+        \\
+        \textbf{FR-11}: The content block should be able to display original user's description, code block, as well as salient attachment through Markdown rendering.
+        \\
+        \textbf{FR-12}: Registered Users can upload images from device storage or drag-and-drop using the running OS functionality.
+        \\
+        \textbf{FR-13}: Registered Users can tag other users as co-contributor.
+        \\
+        \textbf{FR-14}: The captioning description should be limited to at most 1000 characters.
+        \\
+        \textbf{FR-15}: External Registered users can like, share and save content blocks.
+        \\
+        \textbf{FR-16}: External Registered users can comment on the content blocks, creating a sub-thread within the content block
+        \\
+        \textbf{FR-17}: Sub-thread comments can be liked, commented on, creating another sub-thread depth if it does not already exists.
+        \\
+        \textbf{FR-18}: Sub-thread comments depth should not exceed 3.
 
         \subsection{Content Feed, Exploration and Interaction}
-        News Feed acts as a gateway for External Registered Users content to be promoted to connected Registered users. Though limited, Registered Users can leverage News Feed
-        to filter out only \textbf{connected organization} for trusted and reliable contents. News Feed also features a block for advertiser to place their contents, creating
-        a business scheme for the service.
-        \\\\
-        Registered Users can explore trending posts outside of own's connection through the Explorations page. Exploration posts is updated and sorted based on 
-        \textbf{real time interaction rate, tags} within an interval. The specific period is determined by the Administration team.
-        \\\\
-        Registered Users can explore or connect with known associates through the \textbf{search function}. The search function should be viewed as the main source of specific 
-        content searching, and should find corresponding results based on \textbf{display name} and \textbf{User Handle}.
+        \textbf{FR-19}: External Registered Users content can be promoted to connected Registered users through the use of News Feed.
+        \\
+        \textbf{FR-20}: Registered Users can explore trending posts outside of own's connection through the Explorations page.
+        \\
+        \textbf{FR-21}: Exploration posts is sorted based on real time interaction rate, tags.
+        \\
+        \textbf{FR-22}: Registered Users can explore or connect with known associates through the search function, 
+        the search function should find corresponding results based on display information and User Handle.
+        \\
+        \textbf{FR-23}: Search results should be locally stored.
+
+        \subsection{Direct Messaging}
+        \textbf{FR-24}: Registered Users can send and receive direct messages privately from external Registered users.
+        \\
+        \textbf{FR-25}: Direct messages are limited to markdown-compatible messages.
+        \\
+        \textbf{FR-26}: Direct message is limited to 500 characters per message.
 
         \subsection{Expert Requirements}
-        Experts class is a verifiable method for the operation team to introduce \textbf{affiliation} with individuals who have expertise in their respective fields, allowing them
-        to perform more publicly visible actions by encouraging their posts' visibility. Experts priviledge can only be leveraged by the administration team.
-        Expert class allows individuals to directly submit a publicly available \textbf{Expert Suggested Solution} in External Registered User Posts, which other Registered Users who 
-        visit the posts can also see and \textbf{upvote or downvote}. The original posting Registered User then can choose to \textbf{accept the changes or disregard it}.
+        \textbf{FR-27}: 
+        \textbf{FR-27}:
 
         \subsection{Administrator Requirements}
-        Administrators is the main operational class for the moderation team. It must have the ability to \textbf{monitor, flag, and remove} hazardous content. 
-        Administrators can issue warnings, suspend or ban accounts, and respond to flagged content in order to provide a human interaction resolution rather than 
-        relying on automatic flagging system. 
+        \textbf{FR-28}: User should not have the ability to access or leverage the functionalities of Administrator class without
+        direct promotion from the moderation team.
+        \\
+        \textbf{FR-29}: Administrators must have the ability to monitor, flag, and remove content.
+        \\
+        \textbf{FR-30}: Administrators can issue warnings, suspend or ban accounts, and respond to flagged content.
+        \\
+        \textbf{FR-31}: Administrators can view Service-specific users and manage ad content.
+        \\
+        \textbf{FR-32}: Administrators can create help forum responses for users.
 
         \subsection{Real Time Interaction}
-        Real Time Interaction is a mean for the platform to provides up-to-date user-subscribed content status. Real Time Interaction notify the Registered User 
-        through \textbf{emails}. Delivered content catalog can be Received Messages, New Connection Posts or Critical Action needed in User Profile Management.
+        \textbf{FR-33}: Real Time Interaction should provides up-to-date user-subscribed content status
+        through real time means.
+        \\
+        \textbf{FR-34}: Real Time Interaction should be implemented through email nofitications in implementation.
+        \\
+        \textbf{FR-35}: Real Time Interaction should be rate-limited to 3 updates per minute.
+
+        \subsection{Maintainability}
+        \textbf{FR-36}: The system should be modular and maintainable, allowing for future expansions of features, including additional editing tools or messaging capabilities.
+        \\
+        \textbf{FR-37}: The codebase should follow industry best practices and be well-documented to enable easy updates and bug fixes.
 \newpage
+
+\chapter{Development Team Contract}
+
+    \section{Development Team Roles and Responsibilities}
+    Each team member should be responsible for the development of functionality descriptions as well as detailed
+    implementation of the whole system due to the small team size.
+    In order to provide a more reliable method of man­age­ment, the team role is defined as follow:
+    \begin{itemize}
+        \item Team Leader, Project Manager: Hung K. Ngu (22127134) (nkhung22@clc.fitus.edu.vn)
+        \item Executive Officer: Long T. Tran (22127249) (ttlong221@clc.fitus.edu.vn)
+        \item Implementation Personel: An C. Trinh (22127004) (tcan22@clc.fitus.edu.vn)
+        \item Implementation Personel: Cuong Ng. N. Tran (22127048) (tnncuong22@clc.fitus.edu.vn)
+        \item Implementation Personel: Long T. T. Nguyen (22127247) (nttlong22@clc.fitus.edu.vn) 
+    \end{itemize}
+    
+    Project Manager should be responsible for the team coordination, performance and development documentation. 
+    Project Manager is expected to apply development schemes and follows standard developement procedures in order to accurately
+    track and maintain production quality.
+    Project Manager should be responsible for reporting and finalizing production results to User.
+    \\\\
+    Executive Officer should be responsible for team specific production. Detailed development models is implemented based on Executive Office
+    plan. Executice Officer is expected to finalize each modular functionalities of the product system specification.
+    \\\\
+    Implementation Personel is responsible for the specific implementation of the codebase as well as testing and ensuring working, performance and
+    competitive production results. Implementation Personel is expected to provide acceptable results in reasonable amount of time.
+    
+    \section{Development Communication Plans}
+    The Development Team communication plans will be conducted primarily online, with the exception of conflict resolutions and contract changes to be decided in person.
+    Members of developement team should be responsible for their updates on the team's status and quota. An interval of two days is recommended in order to not miss crucial
+    informations and executive decisions.
+    \\\\
+    Team members are expected to be noticed of communication updates and provides reply if necessary in manners of at-most three to five hours since the message departure.
+
+        \subsection{Communication Stack}
+        Based on the scope of the project, the communication stack should not be too complicated and based around third party Services, outlined as follow:
+        \begin{itemize}
+            \item Primary Communication Channel: Discord
+            \item Secondary Communication Channel: Email
+            \item Project and Task Management Service: Jira
+        \end{itemize}
+
+        \subsection{Executive Decision and Conflict Resolution Protocols}
+        The Development Team will conduct weekly retrospective survey and forward-looking between 19th hour and 22nd hour at weekend 
+        in order to evaluate team's production result as well as
+        planning the upcoming development direction; finalizing production materials for submission at each 2-week sprints.
+        \\\\
+        In order to promote innovative ideas and quick iterative development, Scrum model should be used as the engineering process. The team should be able
+        to quickly go through with one's work without fear of failure. After a trial and error process, the finalized ideas that inlined with the project core concept
+        are considered to be accepted into main development branch. 
+        \\\\
+        The process of deciding the integration of changes should be held at all weekends, during the retrospective and forward-looking process, in order to reflects
+        changes induced by technical blocks or by other constraints introduced in the development sprint. The process is based on the constrast majority vote system, 
+        enabling a quick and and thorough exhanges of ideas through continuous feedback and demonstration. After the demonstration section, final executive decisions are
+        relied on Executice Officer for acceptence.
+        \\\\
+        Conflicts are also part of the process, and undecisive actions of these aspects will cause long-term harm to the project development. Conflicts are to be reported
+        directly to Project Manager as per this contract, and violations of contracts terms are also subjected to incident loggings. The Conflicts Resolution Process determines
+        if it is necessary to escalate the actions needed.
+        \\
+        If the Conflicts are affecting less than three of the team's development member, disputes will be handled internally
+        by direct communication and case-specific actions. 
+        \\
+        Otherwise, if the Conflicts affect the majority of the team's developement member, an in person meeting will be held
+        to account for the related incidents and consideration to contract changes if it is a major blocking in the team's performance.
+
+        \subsection{Work Schedules and Deadlines}
+        The Development Team primarily operates online with flexible schedule, allowing other members to cover each's works while not compromising product quality
+        and timing contraints.
+        \\\\
+        The Development Process is conducted every week, spanning from Monday to Sunday. The ending of each week should be a milestone for product reanalysis and 
+        performance assertion. Tasks of each Process iteration will be declared and is expected to be completed in a timely manners based on the given periods.
+        \\\\
+        The Central Development Process Work Session will be conducted from the 20th hour to 22nd hour on Sunday, where the team will review production assets in order
+        to apply Quality Controls and maintaining consistency between different codebases.
+        \\\\
+        In the case of missing deadlines, the entire development team is responsible to commit mandatory overtime of combined work in order to resolve missing deadlines.
+        The responsible team member of the original task will be noticed of the incidents; an unreasonable amount of missing deadlines incidents will be reported to Project
+        Manager for further accessment.
+
+        \subsection{Code and Documentation Standards}
+        Each individual development team member is responsible for following the Code of Conducting while practicing implementation. The specific coding convention
+        is yet to be decided, but a good propotion will be based on C++ Core Guidelines.
+        \\
+        Individual development team member should prioritize readability and maintainability while implementing functionalities, obfuscation of codebase is yet to be
+        necessary and is considered a bad practice in this project.
+        \\\\
+        Based on the scope of the project, the development operations stack should not be too complicated and based around third party Services, outlined as follow:
+        \begin{itemize}
+            \item Development Operations and Source Control Service: Github
+            \item Project Documents and Assets Storage: Google Drive
+        \end{itemize}
+
+        Code testings software is yet to be determined. However, development team member should be responsible for quality working production results and self-penetration
+        testing before deliveries.
+        \\\\
+        Before the finalized decision on core implementation technologies, documentation standards is expected to follow IEEE Standard for Software User Documentation.
+        Based on chosen technology, a more flexible and open, autonomous solutions can be used to automate the technical documentation process. Outside of implementation,
+        the documentation is to follow the aforementioned standard.
+
+        \subsection{Accountability and Performance}
+        Development team members are expected to be on time with assigned tasks, while also maintaining quality in production results. In rare cases when a task period
+        is misaligned, further set-back can be applied to accomodate the necessary tasks.
+        \\
+        Development team members performance will be measured based on their communication participation, their accessment on project responsiblities and their ability to
+        provide exceptional results. 
+        \\
+        Though not necessary, development team member is also encouraged to propose changes to the development pipeline if see fits; but the 
+        final decision still relies on both Executive Officer and Project Manager.
+        \\\\
+        Lack of development participation will results in competency reassement. The Development Team will try to establish common grounds and provides necessary sup­ports
+        for each individuals during the handling of underperforming members.
+        \\
+        However, punishment of course partition degradation will be considered in some cases.
+        If incidents are repeated in an unreasonable amount, or conflicts causing blockage in the development process, notification to course instructor 
+        will be considered if applicable.
+        \\\\
+        Lack of team contract adhering will also inherently be processed based on the previously mentioned procedures. Though the Project Manager may consider
+        alternative methods such as contract validation in order to determine if the incident is the result of the incomplete nature of this contract or by the
+        subjective reasoning of individual.
+
+%\begin{appendices}
+%\input{base/acronyms}
+%\chapter{Analysis Models}
+%\chapter{To Be Determined List}
+
+
+%\end{appendices}
 
 
