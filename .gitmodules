@@ -1,6 +1,0 @@
-[submodule "src/back_end/src/back_end/libs/oatpp"]
-	path = src/back_end/src/back_end/libs/oatpp
-	url = https://github.com/oatpp/oatpp
-[submodule "src/back_end/libs/oatpp"]
-	path = src/back_end/libs/oatpp
-	url = https://github.com/oatpp/oatpp

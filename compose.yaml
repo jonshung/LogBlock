@@ -1,0 +1,26 @@
+name: logblock
+
+services:
+  back-end:
+    build:
+      context: src/back-end
+      tags:
+        - "logblock/back-end"
+    hostname: back-end
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  
+  db:
+    build:
+      context: src/database
+      tags:
+        - "logblock/database"
+    hostname: db
+    environment:
+      - POSTGRES_USER=logblock-db
+      - POSTGRES_PASSWORD=logblock_secrets_321@
+      - POSTGRES_DB=logblock
+    volumes:
+      - /usr/local/share/pgdata:/var/lib/postgresql/data
