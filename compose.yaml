@@ -18,9 +18,19 @@ services:
       tags:
         - "logblock/database"
     hostname: db
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=logblock-db
       - POSTGRES_PASSWORD=logblock_secrets_321@
       - POSTGRES_DB=logblock
     volumes:
-      - /usr/local/share/pgdata:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/usr/local/share/pgdata'
