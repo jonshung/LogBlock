@@ -1,40 +1,35 @@
 package com.logblock.backend.DataSource.Repository;
 
-import com.logblock.backend.DataSource.Model.Post;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.logblock.backend.DataSource.Model.Posting;
+
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface PostRepository extends JpaRepository<Post, Integer> {
+public interface PostRepository extends JpaRepository<Posting, Integer> {
 
     /**
      * Retrieve posts from a list of user IDs.
      *
-     * @param userIDs List of user IDs
+     * @param userID User ID
      * @return List of posts from the given user IDs
      */
-    List<Post> findPostsByUserIDs(List<Integer> userIDs);
+    @Query("SELECT p FROM Posting p")
+    List<Posting> findPostingsByUserID(int userID);
 
     /**
      * Retrieve all posts.
      *
      * @return List of all posts
      */
-    @Query("SELECT p FROM Post p")
-    List<Post> retrieveAllPosts();
-
-    /**
-     * Retrieve a post by its ID.
-     *
-     * @param postID ID of the post
-     * @return Post object if found, otherwise null
-     */
-    Optional<Post> retrievePost(int postID);
+    @Query("SELECT p FROM Posting p")
+    List<Posting> retrieveAllPostings();
 
     /**
      * Custom method to add a new post (using JpaRepository save method).
@@ -42,18 +37,10 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
      * @param newPost Post object to be added
      * @return ID of the newly added post
      */
-    default int addPost(Post newPost) {
-        Post savedPost = save(newPost); // JpaRepository's save method will handle the persist.
+    default int addPosting(Posting newPost) {
+        Posting savedPost = save(newPost); // JpaRepository's save method will handle the persist.
         return savedPost.getPostID();
     }
-
-    /**
-     * Retrieve trending posts based on upvotes and views.
-     *
-     * @return List of trending posts ordered by upvotes and views
-     */
-    @Query("SELECT p FROM Post p ORDER BY p.upvoters.size DESC, p.views DESC")
-    List<Post> findTrendingPosts();
 
     /**
      * Custom method to update an existing post (using JpaRepository save method).
@@ -62,16 +49,13 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
      * @param postContent Updated post information
      * @return ID of the updated post
      */
-    default int updatePost(int postID, Post postContent) {
-        Optional<Post> existingPostOpt = retrievePost(postID);
+    default int updatePosting(int postID, Posting postContent) {
+        Optional<Posting> existingPostOpt = findById(postID);
         if (existingPostOpt.isPresent()) {
-            Post existingPost = existingPostOpt.get();
+            Posting existingPost = existingPostOpt.get();
             existingPost.setCaption(postContent.getCaption());
-            existingPost.setMedia(postContent.getMedia());
             existingPost.setCreationDate(postContent.getCreationDate());
             existingPost.setLastModifiedDate(postContent.getLastModifiedDate());
-            existingPost.setTags(postContent.getTags());
-            existingPost.setUpvoters(postContent.getUpvoters());
             save(existingPost); // JpaRepository's save method will handle the update.
             return existingPost.getPostID();
         }
@@ -86,7 +70,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
      */
     @Transactional
     default int removePost(int postID) {
-        Optional<Post> post = retrievePost(postID);
+        Optional<Posting> post = findById(postID);
         if (post.isPresent()) {
             delete(post.get()); // JpaRepository's delete method will handle the removal.
             return 1;

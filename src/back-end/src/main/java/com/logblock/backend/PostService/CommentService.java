@@ -1,19 +1,17 @@
 package com.logblock.backend.PostService;
 
-import com.logblock.backend.DataSource.Model.Comment;
-import com.logblock.backend.DataSource.Repository.CommentRepository;
-import com.logblock.backend.DataSource.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.logblock.backend.DataSource.Model.Commenting;
+import com.logblock.backend.DataSource.Model.CommentingId;
+import com.logblock.backend.DataSource.Repository.CommentRepository;
 
 @Service
 public class CommentService {
 
     @Autowired
     private CommentRepository commentRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     /**
      * Update an existing comment.
@@ -23,8 +21,8 @@ public class CommentService {
      * @param commentInfo Updated comment information
      * @return ID of the updated comment
      */
-    public int updateComment(int postID, int commentID, Comment commentInfo) {
-        return commentRepository.updateComment(postID, commentID, commentInfo);
+    public int updateComment(int postID, int commentID, Commenting commentInfo) {
+        return commentRepository.updateComment(new CommentingId(postID, commentID), commentInfo);
     }
 
     /**
@@ -33,7 +31,7 @@ public class CommentService {
      * @param commentInfo The comment information to create
      * @return ID of the created comment
      */
-    public int createComment(Comment commentInfo) {
+    public int createComment(Commenting commentInfo) {
         // Assuming the postID is part of the commentInfo, otherwise, you would need to
         // pass postID separately
         return commentRepository.addComment(commentInfo.getPostID(), commentInfo);
@@ -57,7 +55,7 @@ public class CommentService {
      * @param commentID ID of the comment
      * @return Comment object if found, otherwise null
      */
-    public Comment retrievePostInfo(int postID, int commentID) {
+    public Commenting retrievePostInfo(int postID, int commentID) {
         return commentRepository.retrieveComment(postID, commentID);
     }
 }
