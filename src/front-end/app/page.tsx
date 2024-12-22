@@ -13,6 +13,7 @@ export default function Page() {
             <div className="absolute flex items-center left-[558px] top-[90px] w-[750px] h-[90px] bg-[#f4f4f4] rounded-[15px]">
                 <img
                     src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/chocoCaro_mmmpkq.png"
+                    alt=""
                     width={50}
                     height={50}
                     className="ml-[25px]"

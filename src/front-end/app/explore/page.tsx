@@ -1,6 +1,6 @@
 import Header from "@/app/components/header";
 import Navigator from "@/app/components/navigation-bar";
-import ConnectorsBox from "@/app/components/connectors/connectors-box";
+// import ConnectorsBox from "@/app/components/connectors/connectors-box";
 
 import { inter } from "@/app/ui/fonts";
 
