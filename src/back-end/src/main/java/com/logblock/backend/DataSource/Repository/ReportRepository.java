@@ -19,7 +19,7 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
      *
      * @return List of all reports
      */
-    @Query("SELECT r FROM Report r")
+    @Query("SELECT r FROM Reporting r")
     List<Report> retrieveAllReports();
 
     /**
@@ -40,6 +40,7 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
      * @param reportID ID of the report
      * @return Report object if found, otherwise null
      */
+    @Query("SELECT r FROM Reporting r WHERE r.reportID = :reportID")
     Optional<Report> findById(Integer reportID);
 
     /**
