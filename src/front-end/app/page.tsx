@@ -10,7 +10,6 @@ export default function Page() {
             <Header pageName="Home" />
             <SideNav />
             <ConnectorsBox />
-<<<<<<< HEAD
             <Link
                 href="/"
             >
@@ -25,19 +24,6 @@ export default function Page() {
                     <p className="text-xl text-[#3a3a3a]">What do you think?</p>
                 </div>
             </Link>
-=======
-            <div className="absolute flex items-center left-[558px] top-[90px] w-[750px] h-[90px] bg-[#f4f4f4] rounded-[15px]">
-                <img
-                    src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/chocoCaro_mmmpkq.png"
-                    alt=""
-                    width={50}
-                    height={50}
-                    className="ml-[25px]"
-                />
-                <span className="w-[15px]" />
-                <p className="text-xl text-[#3a3a3a]">What do you think?</p>
-            </div>
->>>>>>> 7e155dddf62c4b8ace9fbcdded90ee819813c99d
             {/* <div className="w-[750px] h-[1000px] bg-[#f4f4f4] rounded-[15px] absolute top-[200px] left-[558px]"></div> */}
         </main>
     );
