@@ -1,15 +1,16 @@
 package com.logblock.backend.ProfileService;
 
-import com.logblock.backend.DataSource.Model.Profile;
-import com.logblock.backend.DataSource.Repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.logblock.backend.DataSource.Model.User;
+import com.logblock.backend.DataSource.Repository.UserRepository;
 
 @Service
 public class ProfileService {
 
     @Autowired
-    private ProfileRepository profileRepository;
+    private UserRepository profileRepository;
 
     /**
      * Update user's biography.
@@ -19,9 +20,9 @@ public class ProfileService {
      * @return 1 if update is successful, otherwise 0
      */
     public int updateBiography(int userID, String newBiography) {
-        Profile profile = profileRepository.findById(userID).orElse(null);
+        User profile = profileRepository.findById(userID).orElse(null);
         if (profile != null) {
-            profile.setBiography(newBiography);
+            profile.setBioDesc(newBiography);
             profileRepository.save(profile);
             return 1; // Success
         }
@@ -36,7 +37,7 @@ public class ProfileService {
      * @return 1 if update is successful, otherwise 0
      */
     public int updateProfileImg(int userID, String newProfileImg) {
-        Profile profile = profileRepository.findById(userID).orElse(null);
+        User profile = profileRepository.findById(userID).orElse(null);
         if (profile != null) {
             profile.setProfileImg(newProfileImg);
             profileRepository.save(profile);
@@ -51,7 +52,7 @@ public class ProfileService {
      * @param userID ID of the user
      * @return Profile object if found, otherwise null
      */
-    public Profile retrieveProfileInfo(int userID) {
+    public User retrieveProfileInfo(int userID) {
         return profileRepository.findById(userID).orElse(null);
     }
 }

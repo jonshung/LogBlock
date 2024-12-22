@@ -1,11 +1,12 @@
 package com.logblock.backend.FeedsGenerationService;
 
-import com.logblock.backend.DataSource.Model.Post;
-import com.logblock.backend.DataSource.Repository.PostRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.logblock.backend.DataSource.Model.Posting;
+import com.logblock.backend.DataSource.Repository.PostRepository;
 
 @Service
 public class ExplorationFeedService {
@@ -18,9 +19,10 @@ public class ExplorationFeedService {
      *
      * @return List of trending posts
      */
-    public List<Post> generate() {
+    public List<Posting> generate() {
         // Retrieve all posts ordered by popularity or other metrics that represent
         // trending posts
-        return postRepository.findTrendingPosts(); // Assuming there is a method to get trending posts
+        //return postRepository.findTrendingPosts(); // Assuming there is a method to get trending posts
+        throw new UnsupportedOperationException("Feature incomplete. Contact assistance.");
     }
 }

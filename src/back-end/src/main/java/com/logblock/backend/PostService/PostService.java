@@ -1,22 +1,19 @@
 package com.logblock.backend.PostService;
 
-import com.logblock.backend.DataSource.Model.Post;
-import com.logblock.backend.DataSource.Model.Report;
-import com.logblock.backend.DataSource.Repository.PostRepository;
-import com.logblock.backend.DataSource.Repository.UserRepository;
-import com.logblock.backend.DataSource.Repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.logblock.backend.DataSource.Model.Posting;
+import com.logblock.backend.DataSource.Model.Report;
+import com.logblock.backend.DataSource.Repository.PostRepository;
+import com.logblock.backend.DataSource.Repository.ReportRepository;
 
 @Service
 public class PostService {
 
     @Autowired
     private PostRepository postRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private ReportRepository reportRepository;
@@ -29,8 +26,8 @@ public class PostService {
      * @return ID of the updated post
      */
     @Transactional
-    public int updatePost(int postID, Post postInfo) {
-        return postRepository.updatePost(postID, postInfo); // Call update method in repository
+    public int updatePost(int postID, Posting postInfo) {
+        return postRepository.updatePosting(postID, postInfo); // Call update method in repository
     }
 
     /**
@@ -40,7 +37,7 @@ public class PostService {
      * @return ID of the created post
      */
     @Transactional
-    public int createPost(Post postInfo) {
+    public int createPost(Posting postInfo) {
         // The PostRepository's save method will handle both add and update
         postRepository.save(postInfo);
         return postInfo.getPostID(); // Return the generated ID of the created post
@@ -64,7 +61,7 @@ public class PostService {
      * @param postID ID of the post
      * @return Post object if found, otherwise null
      */
-    public Post retrievePostInfo(int postID) {
+    public Posting retrievePostInfo(int postID) {
         // Use the repository's findById method
         return postRepository.findById(postID).orElse(null); // Return null if not found
     }
@@ -78,13 +75,9 @@ public class PostService {
      */
     @Transactional
     public int upvotePost(int postID, int userID) {
-        Post post = postRepository.findById(postID).orElse(null);
+        Posting post = postRepository.findById(postID).orElse(null);
         if (post != null) {
-            if (!post.getUpvoters().contains(userID)) {
-                post.getUpvoters().add(userID);
-                postRepository.save(post); // Save the updated post
-                return 1; // Success
-            }
+            throw new UnsupportedOperationException("Feature incomplete. Contact assistance.");
         }
         return 0; // Failure
     }
@@ -98,7 +91,7 @@ public class PostService {
      */
     @Transactional
     public int reportPost(int postID, int userID) {
-        Post post = postRepository.findById(postID).orElse(null);
+        Posting post = postRepository.findById(postID).orElse(null);
         if (post != null) {
             Report report = new Report();
             report.setReportedPostID(postID);

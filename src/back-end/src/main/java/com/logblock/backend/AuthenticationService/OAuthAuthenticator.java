@@ -1,11 +1,11 @@
 package com.logblock.backend.AuthenticationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.ResponseEntity;
-import java.io.IOException;
 
 @Service
 public class OAuthAuthenticator {
@@ -40,7 +40,7 @@ public class OAuthAuthenticator {
     }
 
     /**
-     * Authenticate user by OAuth token.
+     * Authenticate profile by OAuth token.
      *
      * @param request  HTTP request containing OAuth credentials (e.g., token)
      * @param response HTTP response
@@ -62,7 +62,7 @@ public class OAuthAuthenticator {
         boolean isAuthenticated = verifyToken(token);
 
         if (isAuthenticated) {
-            return ResponseEntity.ok("User authenticated successfully");
+            return ResponseEntity.ok("Profile authenticated successfully");
         } else {
             return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED)
                     .body("Invalid or expired token");

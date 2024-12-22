@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * The entry class that also acts as a Configuration class
- * The Class will load any 
  */
 @SpringBootApplication
 public class Entry {

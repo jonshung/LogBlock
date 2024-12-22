@@ -1,9 +1,10 @@
 package com.logblock.backend.AuthenticationService;
 
-import com.logblock.backend.DataSource.Model.User;
-import com.logblock.backend.DataSource.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.logblock.backend.DataSource.Model.User;
+import com.logblock.backend.DataSource.Repository.UserRepository;
 
 @Service
 public class AccountService {

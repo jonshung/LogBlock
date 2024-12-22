@@ -1,41 +1,35 @@
 package com.logblock.backend.DataSource.Model;
 
-import jakarta.persistence.*;
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Profile")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userID")
     private int userID;
 
+    @Column(name = "userEmail")
     private String userEmail;
+    @Column(name = "displayName")
     private String userName;
+    @Column(name = "biographyDesc")
     private String bioDesc;
+    @Column(name = "profileImage")
     private String profileImg;
+    @Column(name = "privLevel")
     private int privLevel;
-    private List<Integer> connections; // List of connected user IDs
-    @ElementCollection
-    private List<Integer> pinnedPosts;
-
-    @ElementCollection
-    private List<Integer> blockedProfiles;
-
-    @ElementCollection
-    private List<Integer> recentlyViewedPosts;
 
     // Getters và Setters
     public int getUserID() {
         return userID;
-    }
-
-    public List<Integer> getConnections() {
-        return connections;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public String getUserEmail() {
@@ -76,29 +70,5 @@ public class User {
 
     public void setPrivLevel(int privLevel) {
         this.privLevel = privLevel;
-    }
-
-    public List<Integer> getPinnedPosts() {
-        return pinnedPosts;
-    }
-
-    public void setPinnedPosts(List<Integer> pinnedPosts) {
-        this.pinnedPosts = pinnedPosts;
-    }
-
-    public List<Integer> getBlockedProfiles() {
-        return blockedProfiles;
-    }
-
-    public void setBlockedProfiles(List<Integer> blockedProfiles) {
-        this.blockedProfiles = blockedProfiles;
-    }
-
-    public List<Integer> getRecentlyViewedPosts() {
-        return recentlyViewedPosts;
-    }
-
-    public void setRecentlyViewedPosts(List<Integer> recentlyViewedPosts) {
-        this.recentlyViewedPosts = recentlyViewedPosts;
     }
 }

@@ -3,6 +3,7 @@ export default function ConnectorsCard({ name }: { name: string }) {
         <div className="flex items-center w-[465px] h-[65px] text-black tetx-lg font-medium">
             <img
                 src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/Henry_Clauss_hq9ijp.png"
+                alt="Connector"
                 width={50}
                 height={50}
             />

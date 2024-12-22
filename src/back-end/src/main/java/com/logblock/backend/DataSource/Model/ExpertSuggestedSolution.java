@@ -1,29 +1,41 @@
 package com.logblock.backend.DataSource.Model;
 
-import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "ESS")
+@IdClass(ESSId.class)
 public class ExpertSuggestedSolution {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int solID;
+    @Column(name = "solutionID")
+    private int solutionID;
 
+    @Id
+    @Column(name = "postID")
     private int postID;
-    private int solAuthor;
-    private String solCaption;
+    @Column(name = "solutionAuthor")
+    private int solutionAuthor;
+    @Column(name = "solutionCaption")
+    private String solutionCaption;
 
-    @ElementCollection
-    private List<String> solMedia;
-
-    private Date solCreationDate;
-    private Date solLastModifiedDate;
+    @Column(name = "solutionCreation")
+    private Date solutionCreationDate;
+    @Column(name = "solutionLastUpdate")
+    private Date solutionLastModifiedDate;
 
     // Getters
     public int getSolID() {
-        return solID;
+        return solutionID;
     }
 
     public int getPostID() {
@@ -31,43 +43,35 @@ public class ExpertSuggestedSolution {
     }
 
     public int getSolAuthor() {
-        return solAuthor;
+        return solutionAuthor;
     }
 
     public String getSolCaption() {
-        return solCaption;
-    }
-
-    public List<String> getSolMedia() {
-        return solMedia;
+        return solutionCaption;
     }
 
     public Date getSolCreationDate() {
-        return solCreationDate;
+        return solutionCreationDate;
     }
 
     public Date getSolLastModifiedDate() {
-        return solLastModifiedDate;
+        return solutionLastModifiedDate;
     }
 
     // Setters
     public void setSolAuthor(int newSolAuthor) {
-        this.solAuthor = newSolAuthor;
+        this.solutionAuthor = newSolAuthor;
     }
 
     public void setSolCaption(String newSolCaption) {
-        this.solCaption = newSolCaption;
-    }
-
-    public void setSolMedia(List<String> newSolMedia) {
-        this.solMedia = newSolMedia;
+        this.solutionCaption = newSolCaption;
     }
 
     public void setSolCreationDate(Date newSolCreationDate) {
-        this.solCreationDate = newSolCreationDate;
+        this.solutionCreationDate = newSolCreationDate;
     }
 
     public void setSolLastModifiedDate(Date newSolLastModifiedDate) {
-        this.solLastModifiedDate = newSolLastModifiedDate;
+        this.solutionLastModifiedDate = newSolLastModifiedDate;
     }
 }

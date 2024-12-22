@@ -1,16 +1,19 @@
 package com.logblock.backend.DataSource.Repository;
 
-import com.logblock.backend.DataSource.Model.Connection;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.logblock.backend.DataSource.Model.Connection;
+import com.logblock.backend.DataSource.Model.ConnectionId;
+
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface ConnectionRepository extends JpaRepository<Connection, Integer> {
+public interface ConnectionRepository extends JpaRepository<Connection, ConnectionId> {
 
     /**
      * Retrieve all connections.
@@ -21,13 +24,29 @@ public interface ConnectionRepository extends JpaRepository<Connection, Integer>
     List<Connection> retrieveAllConnections();
 
     /**
-     * Retrieve a connection by its ID.
+     * Find Connection
      *
+     * @param connectorID ID of the connector
+     * @return Connection object if found, otherwise null
+     */
+    List<Connection> findByConnectorID(Integer connectorID);
+
+    /**
+     * Find Connection
+     *
+     * @param connectedID ID of the connected to User
+     * @return Connection object if found, otherwise null
+     */
+    List<Connection> findByConnectedID(Integer connectedID);
+
+    /**
+     * Find Connection
+     *
+     * @param connectorID ID of the connector
      * @param connectionID ID of the connection
      * @return Connection object if found, otherwise null
      */
-    @Override
-    Optional<Connection> findById(Integer connectionID);
+    List<Connection> findByConnectedIDAndConnectorID(Integer connectedID, Integer connectorID);
 
     /**
      * Add a new connection.
@@ -44,12 +63,12 @@ public interface ConnectionRepository extends JpaRepository<Connection, Integer>
     /**
      * Update an existing connection.
      *
-     * @param connectionID      ID of the connection to update
+     * @param connectionId      ID of the connection to update
      * @param connectionContent Updated connection content
      * @return ID of the updated connection
      */
     @Transactional
-    default int updateConnection(int connectionID, Connection connectionContent) {
+    default int updateConnection(ConnectionId connectionID, Connection connectionContent) {
         Optional<Connection> existingConnectionOpt = findById(connectionID);
         if (existingConnectionOpt.isPresent()) {
             Connection existingConnection = existingConnectionOpt.get();
@@ -68,7 +87,7 @@ public interface ConnectionRepository extends JpaRepository<Connection, Integer>
      * @return 1 if the operation is successful, otherwise 0
      */
     @Transactional
-    default int removeConnection(int connectionID) {
+    default int removeConnection(ConnectionId connectionID) {
         Optional<Connection> connectionOpt = findById(connectionID);
         if (connectionOpt.isPresent()) {
             delete(connectionOpt.get()); // Delete the connection from the database

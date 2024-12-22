@@ -1,13 +1,15 @@
 package com.logblock.backend.DataSource.Repository;
 
-import com.logblock.backend.DataSource.Model.User;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.logblock.backend.DataSource.Model.User;
+
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -68,9 +70,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             existingUser.setBioDesc(userInfo.getBioDesc());
             existingUser.setProfileImg(userInfo.getProfileImg());
             existingUser.setPrivLevel(userInfo.getPrivLevel());
-            existingUser.setPinnedPosts(userInfo.getPinnedPosts());
-            existingUser.setBlockedProfiles(userInfo.getBlockedProfiles());
-            existingUser.setRecentlyViewedPosts(userInfo.getRecentlyViewedPosts());
             save(existingUser); // Save the updated user
             return existingUser.getUserID();
         }

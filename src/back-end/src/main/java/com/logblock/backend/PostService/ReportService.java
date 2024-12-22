@@ -1,19 +1,16 @@
 package com.logblock.backend.PostService;
 
-import com.logblock.backend.DataSource.Model.Report;
-import com.logblock.backend.DataSource.Repository.ReportRepository;
-import com.logblock.backend.DataSource.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.logblock.backend.DataSource.Model.Report;
+import com.logblock.backend.DataSource.Repository.ReportRepository;
 
 @Service
 public class ReportService {
 
     @Autowired
     private ReportRepository reportRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     /**
      * Retrieve report information.

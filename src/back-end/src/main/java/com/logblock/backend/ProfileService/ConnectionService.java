@@ -1,9 +1,10 @@
 package com.logblock.backend.ProfileService;
 
-import com.logblock.backend.DataSource.Repository.ConnectionRepository;
-import com.logblock.backend.DataSource.Model.Connection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.logblock.backend.DataSource.Model.Connection;
+import com.logblock.backend.DataSource.Repository.ConnectionRepository;
 
 @Service
 public class ConnectionService {
@@ -35,6 +36,7 @@ public class ConnectionService {
      * @return 1 if connection is deleted successfully, otherwise 0
      */
     public int deleteConnection(int connectorID, int connectToID) {
-        return deleteConnection(connectorID, connectToID);
+        throw new UnsupportedOperationException("Feature incomplete. Contact assistance.");
+        //return deleteConnection(connectorID, connectToID);
     }
 }

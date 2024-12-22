@@ -1,13 +1,15 @@
 package com.logblock.backend.DataSource.Repository;
 
-import com.logblock.backend.DataSource.Model.Report;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.logblock.backend.DataSource.Model.Report;
+
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Integer> {
@@ -38,7 +40,6 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
      * @param reportID ID of the report
      * @return Report object if found, otherwise null
      */
-    @Override
     Optional<Report> findById(Integer reportID);
 
     /**
