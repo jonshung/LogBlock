@@ -21,7 +21,7 @@ public class PostController {
      * @return Response with the status of the operation
      */
     @PutMapping("/{postID}")
-    public ResponseEntity<?> updatePost(@PathVariable int postID, @RequestBody Post postInfo) {
+    public ResponseEntity<?> updatePost(@PathVariable int postID, @RequestBody Posting postInfo) {
         int result = postService.updatePost(postID, postInfo);
         return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
@@ -33,7 +33,7 @@ public class PostController {
      * @return Response with the newly created post ID
      */
     @PostMapping
-    public ResponseEntity<?> createPost(@RequestBody Post postInfo) {
+    public ResponseEntity<?> createPost(@RequestBody Posting postInfo) {
         int result = postService.createPost(postInfo);
         return ResponseEntity.ok(result);
     }
@@ -57,8 +57,8 @@ public class PostController {
      * @return Response with the post information
      */
     @GetMapping("/{postID}")
-    public ResponseEntity<Post> retrievePostInfo(@PathVariable int postID) {
-        Post post = postService.retrievePostInfo(postID);
+    public ResponseEntity<Posting> retrievePostInfo(@PathVariable int postID) {
+        Posting post = postService.retrievePostInfo(postID);
         return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
     }
 
@@ -83,7 +83,7 @@ public class PostController {
      * @return Response with the status of the report
      */
     @PostMapping("/{postID}/report/{userID}")
-    public ResponseEntity<?> reportPost(@PathVariable int postID, @PathVariable int userID) {
+    public ResponseEntity<?> report(@PathVariable int postID, @PathVariable int userID) {
         int result = postService.reportPost(postID, userID);
         return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }

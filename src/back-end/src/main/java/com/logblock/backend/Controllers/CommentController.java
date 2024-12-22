@@ -23,7 +23,7 @@ public class CommentController {
      */
     @PutMapping("/{postID}/{commentID}")
     public ResponseEntity<?> updateComment(@PathVariable int postID, @PathVariable int commentID,
-            @RequestBody Comment commentInfo) {
+            @RequestBody Commenting commentInfo) {
         int result = commentService.updateComment(postID, commentID, commentInfo);
         return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
@@ -35,7 +35,7 @@ public class CommentController {
      * @return Response with the newly created comment ID
      */
     @PostMapping
-    public ResponseEntity<?> createComment(@RequestBody Comment commentInfo) {
+    public ResponseEntity<?> createComment(@RequestBody Commenting commentInfo) {
         int result = commentService.createComment(commentInfo);
         return ResponseEntity.ok(result);
     }
@@ -61,8 +61,8 @@ public class CommentController {
      * @return Response with the comment information
      */
     @GetMapping("/{postID}/{commentID}")
-    public ResponseEntity<Comment> retrievePostInfo(@PathVariable int postID, @PathVariable int commentID) {
-        Comment comment = commentService.retrievePostInfo(postID, commentID);
+    public ResponseEntity<Commenting> retrievePostInfo(@PathVariable int postID, @PathVariable int commentID) {
+        Commenting comment = commentService.retrievePostInfo(postID, commentID);
         return comment != null ? ResponseEntity.ok(comment) : ResponseEntity.notFound().build();
     }
 }

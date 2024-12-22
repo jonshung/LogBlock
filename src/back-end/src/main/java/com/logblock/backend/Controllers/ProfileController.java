@@ -46,8 +46,8 @@ public class ProfileController {
      * @return Response with the profile information
      */
     @GetMapping("/{userID}")
-    public ResponseEntity<Profile> retrieveProfileInfo(@PathVariable int userID) {
-        Profile profile = profileService.retrieveProfileInfo(userID);
+    public ResponseEntity<User> retrieveProfileInfo(@PathVariable int userID) {
+        User profile = profileService.retrieveProfileInfo(userID);
         return profile != null ? ResponseEntity.ok(profile) : ResponseEntity.notFound().build();
     }
 }
