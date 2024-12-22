@@ -26,8 +26,8 @@ public class FeedsController {
      * @return Response with the generated news feed posts
      */
     @GetMapping("/news/{userID}")
-    public ResponseEntity<List<Post>> generateNewsFeed(@PathVariable int userID) {
-        List<Post> posts = newsFeedService.generate(userID);
+    public ResponseEntity<List<Posting>> generateNewsFeed(@PathVariable int userID) {
+        List<Posting> posts = newsFeedService.generate(userID);
         return posts != null ? ResponseEntity.ok(posts) : ResponseEntity.noContent().build();
     }
 
@@ -37,8 +37,8 @@ public class FeedsController {
      * @return Response with the generated exploration feed posts
      */
     @GetMapping("/exploration")
-    public ResponseEntity<List<Post>> generateExplorationFeed() {
-        List<Post> posts = explorationFeedService.generate();
+    public ResponseEntity<List<Posting>> generateExplorationFeed() {
+        List<Posting> posts = explorationFeedService.generate();
         return posts != null ? ResponseEntity.ok(posts) : ResponseEntity.noContent().build();
     }
 }
