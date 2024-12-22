@@ -33,6 +33,16 @@ services:
       - db-data:/var/lib/postgresql/data
     restart: always
 
+  front-end:
+    build:
+      context: src/front-end
+      tags:
+        - "logblock/front-end"
+    hostname: front-end
+    ports:
+      - "3000:3000"
+    restart: always
+
 volumes:
   db-data:
     driver: local
