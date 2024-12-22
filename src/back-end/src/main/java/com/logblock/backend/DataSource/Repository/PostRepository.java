@@ -20,7 +20,7 @@ public interface PostRepository extends JpaRepository<Posting, Integer> {
      * @param userID User ID
      * @return List of posts from the given user IDs
      */
-    @Query("SELECT p FROM Posting p")
+    @Query("SELECT p FROM Posting p WHERE p.originalAuthor = :userID")
     List<Posting> findPostingsByUserID(int userID);
 
     /**
