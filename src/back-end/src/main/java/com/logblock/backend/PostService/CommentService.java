@@ -1,5 +1,7 @@
 package com.logblock.backend.PostService;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class CommentService {
      * @return ID of the updated comment
      */
     public int updateComment(int postID, int commentID, Commenting commentInfo) {
-        return commentRepository.updateComment(new CommentingId(postID, commentID), commentInfo);
+        return commentRepository.updateCommenting(new CommentingId(postID, commentID), commentInfo);
     }
 
     /**
@@ -34,7 +36,7 @@ public class CommentService {
     public int createComment(Commenting commentInfo) {
         // Assuming the postID is part of the commentInfo, otherwise, you would need to
         // pass postID separately
-        return commentRepository.addComment(commentInfo.getPostID(), commentInfo);
+        return commentRepository.addCommenting(commentInfo.getPostID(), commentInfo);
     }
 
     /**
@@ -45,7 +47,7 @@ public class CommentService {
      * @return 1 if successful, otherwise 0
      */
     public int deleteComment(int postID, int commentID) {
-        return commentRepository.removeComment(postID, commentID);
+        return commentRepository.removeCommenting(new CommentingId(postID, commentID));
     }
 
     /**
@@ -56,6 +58,10 @@ public class CommentService {
      * @return Comment object if found, otherwise null
      */
     public Commenting retrievePostInfo(int postID, int commentID) {
-        return commentRepository.retrieveComment(postID, commentID);
+        Optional<Commenting> result = commentRepository.findById(new CommentingId(postID, commentID));
+        if(!result.isPresent()) {
+            return null;
+        }
+        return result.get();
     }
 }

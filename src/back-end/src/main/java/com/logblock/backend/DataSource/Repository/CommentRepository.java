@@ -76,7 +76,7 @@ public interface CommentRepository extends JpaRepository<Commenting, CommentingI
      * @return 1 if the operation is successful, otherwise 0
      */
     @Transactional
-    default int removeComment(CommentingId commentID) {
+    default int removeCommenting(CommentingId commentID) {
         Optional<Commenting> commentOpt = findById(commentID);
         if (commentOpt.isPresent()) {
             Commenting comment = commentOpt.get();
