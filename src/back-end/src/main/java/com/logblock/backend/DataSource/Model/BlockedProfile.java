@@ -14,14 +14,14 @@ import jakarta.persistence.Table;
 public class BlockedProfile {
 
     @Id
-    @Column(name = "userID")
+    @Column(name = "userid")
     private int userID;
 
     @Id
-    @Column(name = "targetUserID")
+    @Column(name = "targetuserid")
     private int targetUserID;
 
-    @Column(name = "blockedDate")
+    @Column(name = "blockeddate")
     private Date blockedDate;
 
     public int getUserID() {

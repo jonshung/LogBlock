@@ -14,13 +14,13 @@ import jakarta.persistence.Table;
 public class PostingUpvote {
 
     @Id
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
     @Id
-    @Column(name = "upvoterID")
+    @Column(name = "upvoterid")
     private int upvoterID;
 
-    @Column(name = "upvoteDate")
+    @Column(name = "upvotedate")
     private Date upvoteDate;
 
     public int getPostID() {

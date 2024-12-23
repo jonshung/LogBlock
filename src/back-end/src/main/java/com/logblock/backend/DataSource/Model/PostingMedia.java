@@ -15,14 +15,14 @@ public class PostingMedia {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "mediaID")
+    @Column(name = "mediaid")
     private int mediaID;
 
     @Id
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
 
-    @Column(name = "mediaURI")
+    @Column(name = "mediauri")
     private String mediaURI;
 
     // Getters

@@ -15,14 +15,14 @@ public class Reporting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="reportID")
+    @Column(name="reportid")
     private int reportID;
 
     @Column(name="reporter")
     private int reporterID;
-    @Column(name="reportPostID")
+    @Column(name="reportpostid")
     private int reportedPostID;
-    @Column(name="reportDate")
+    @Column(name="reportdate")
     private Date reportedDate;
 
     // Getters

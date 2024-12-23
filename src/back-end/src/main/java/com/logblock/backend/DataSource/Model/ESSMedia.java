@@ -14,17 +14,17 @@ import jakarta.persistence.Table;
 public class ESSMedia {
 
     @Id
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
     @Id
-    @Column(name = "solutionID")
+    @Column(name = "solutionid")
     private int solutionID;
     @Id
-    @Column(name = "solutionMediaID")
+    @Column(name = "solutionmediaid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int solutionMediaID;
 
-    @Column(name = "solutionMediaURI")
+    @Column(name = "solutionmediauri")
     private String solutionMediaURI;
 
     public int getPostID() {

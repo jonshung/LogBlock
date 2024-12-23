@@ -18,9 +18,9 @@ public class Connection {
     private int connectorID;
 
     @Id
-    @Column(name = "connectedTo")
+    @Column(name = "connectedto")
     private int connectedID;
-    @Column(name = "connectionDate")
+    @Column(name = "connectiondate")
     private Date connectionDate;
 
     // Getters

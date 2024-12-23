@@ -17,17 +17,17 @@ public class Commenting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "commentID")
+    @Column(name = "commentid")
     private int commentID;
 
     @Id
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
-    @Column(name = "commentAuthor")
+    @Column(name = "commentauthor")
     private int authorID;
-    @Column(name = "commentCaption")
+    @Column(name = "commentcaption")
     private String caption;
-    @Column(name = "commentCreation")
+    @Column(name = "commentcreation")
     private Date creationDate;
 
     // Getters

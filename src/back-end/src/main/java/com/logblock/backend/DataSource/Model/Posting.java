@@ -15,17 +15,17 @@ public class Posting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
 
-    @Column(name = "originalAuthor")
+    @Column(name = "originalauthor")
     private int originalAuthor;
-    @Column(name = "postCaption")
+    @Column(name = "postcaption")
     private String caption;
 
-    @Column(name = "postCreation")
+    @Column(name = "postcreation")
     private Date creationDate;
-    @Column(name="postLastUpdate")
+    @Column(name="postlastupdate")
     private Date lastModifiedDate;
 
     // Getters

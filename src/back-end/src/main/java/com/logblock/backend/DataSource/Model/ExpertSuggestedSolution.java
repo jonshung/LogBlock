@@ -17,20 +17,20 @@ public class ExpertSuggestedSolution {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "solutionID")
+    @Column(name = "solutionid")
     private int solutionID;
 
     @Id
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
-    @Column(name = "solutionAuthor")
+    @Column(name = "solutionauthor")
     private int solutionAuthor;
-    @Column(name = "solutionCaption")
+    @Column(name = "solutioncaption")
     private String solutionCaption;
 
-    @Column(name = "solutionCreation")
+    @Column(name = "solutioncreation")
     private Date solutionCreationDate;
-    @Column(name = "solutionLastUpdate")
+    @Column(name = "solutionlastupdate")
     private Date solutionLastModifiedDate;
 
     // Getters

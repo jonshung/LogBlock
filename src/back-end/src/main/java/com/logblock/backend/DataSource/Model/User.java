@@ -13,18 +13,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userID")
+    @Column(name = "userid")
     private int userID;
 
-    @Column(name = "userEmail")
+    @Column(name = "useremail")
     private String userEmail;
-    @Column(name = "displayName")
+    @Column(name = "displayname")
     private String userName;
-    @Column(name = "biographyDesc")
+    @Column(name = "biographydesc")
     private String bioDesc;
-    @Column(name = "profileImage")
+    @Column(name = "profileimage")
     private String profileImg;
-    @Column(name = "privLevel")
+    @Column(name = "privlevel")
     private int privLevel;
 
     // Getters và Setters

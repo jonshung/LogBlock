@@ -14,13 +14,13 @@ import jakarta.persistence.Table;
 public class PinnedPosting {
     
     @Id
-    @Column(name = "userID")
+    @Column(name = "userid")
     private int userID;
 
     @Id
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
-    @Column(name = "pinnedDate")
+    @Column(name = "pinneddate")
     private Date pinnedDate;
 
     public Date getPinnedDate() {

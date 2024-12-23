@@ -12,10 +12,10 @@ import jakarta.persistence.Table;
 public class PostingTagging {
 
     @Id
-    @Column(name = "postID")
+    @Column(name = "postid")
     private int postID;
     @Id
-    @Column(name = "tagTargetID")
+    @Column(name = "tagTargetid")
     private int tagTargetID;
 
     public int getPostID() {
