@@ -1,10 +1,10 @@
-FROM node:22-slim AS base
+FROM node:23-slim AS base
 
 ARG PORT=3000
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-WORKDIR /app
+WORKDIR /logblock
 
 # deps installing
 FROM base AS dependencies
@@ -15,11 +15,12 @@ RUN npm ci
 # Building
 FROM base AS build
 
-COPY --from=dependencies /app/node_modules ./node_modules
+COPY --from=dependencies /logblock/node_modules ./node_modules
 COPY . .
 
 RUN npm run build
 
+# Production
 FROM base AS run
 
 ENV NODE_ENV=production
@@ -30,9 +31,9 @@ RUN adduser --system --uid 1001 logblock-fe
 RUN mkdir .next
 RUN chown logblock-fe:nodejs .next
 
-COPY --from=build /app/public ./public
-COPY --from=build --chown=logblock-fe:nodejs /app/.next/standalone ./
-COPY --from=build --chown=logblock-fe:nodejs /app/.next/static ./.next/static
+COPY --from=build /logblock/public ./public
+COPY --from=build --chown=logblock-fe:nodejs /logblock/.next/standalone ./
+COPY --from=build --chown=logblock-fe:nodejs /logblock/.next/static ./.next/static
 
 USER logblock-fe
 

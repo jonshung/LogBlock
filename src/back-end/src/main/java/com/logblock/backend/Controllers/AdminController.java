@@ -1,12 +1,17 @@
 package com.logblock.backend.Controllers;
 
-import com.logblock.backend.AdminService.AdminService;
-import com.logblock.backend.DataSource.Model.Report;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.logblock.backend.AdminService.AdminService;
+import com.logblock.backend.DataSource.Model.Reporting;
 
 @RestController
 @RequestMapping("/admin")
@@ -21,8 +26,8 @@ public class AdminController {
      * @return Response with the list of reports
      */
     @GetMapping("/reports")
-    public ResponseEntity<List<Report>> retrieveAllReports() {
-        List<Report> reports = adminService.retrieveAllReports();
+    public ResponseEntity<List<Reporting>> retrieveAllReports() {
+        List<Reporting> reports = adminService.retrieveAllReports();
         return ResponseEntity.ok(reports);
     }
 

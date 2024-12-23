@@ -1,5 +1,7 @@
 package com.logblock.backend.PostService;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,16 @@ public class ExpertSuggestedSolutionService {
 
     @Autowired
     private ExpertSuggestedSolutionRepository ESSRepository;
+
+    /**
+     * Find an Expert Suggested Solution, returning a present Optional if found.
+     * @param postID
+     * @param essID
+     * @return
+     */
+    public Optional<ExpertSuggestedSolution> getESS(int postID, int essID) {
+        return ESSRepository.findById(new ESSId(postID, essID));
+    }
 
     /**
      * Update an existing Expert Suggested Solution.
@@ -44,16 +56,5 @@ public class ExpertSuggestedSolutionService {
      */
     public int deleteESS(int postID, int ESSID) {
         return ESSRepository.removeESS(new ESSId(postID, ESSID)); // Call the remove method in repository
-    }
-
-    /**
-     * Retrieve Expert Suggested Solution information.
-     *
-     * @param postID ID of the post
-     * @param ESSID  ID of the Expert Suggested Solution
-     * @return ExpertSuggestedSolution object if found, otherwise null
-     */
-    public ExpertSuggestedSolution retrieveESSInfo(int postID, int ESSID) {
-        return ESSRepository.findById(new ESSId(postID, ESSID)).get(); // Call the retrieve method in repository
     }
 }

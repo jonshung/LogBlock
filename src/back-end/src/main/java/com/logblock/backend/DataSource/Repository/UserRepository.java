@@ -19,18 +19,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      *
      * @return List of all users
      */
-    @Query("SELECT p FROM Profile p")
-    List<User> retrieveAllUsers();
-
-    /**
-     * Retrieve a user by their ID.
-     *
-     * @param userID ID of the user
-     * @return User object if found, otherwise null
-     */
-    @Override
-    @Query("SELECT p FROM Profile p WHERE p.userID = :userID")
-    Optional<User> findById(Integer userID); // Make sure to use Optional<User>
+    @Query("SELECT p FROM User p")
+    List<User> findAllUsers();
 
     /**
      * Retrieve a user by their email.
@@ -38,8 +28,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @param email Email of the user
      * @return User object if found, otherwise null
      */
-    @Query("SELECT p FROM Profile p WHERE p.userEmail = :email")
-    User retrieveUserByEmail(String email);
+    @Query("SELECT p FROM User p WHERE p.userEmail = :email")
+    User findUserByUserEmail(String email);
 
     /**
      * Add a new user.

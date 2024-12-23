@@ -16,6 +16,16 @@ public class CommentService {
     private CommentRepository commentRepository;
 
     /**
+     * Get a comment, returning an Optional that present if the entry is found.
+     * 
+     * @param postID
+     * @param commentID
+     * @return
+     */
+    public Optional<Commenting> getComment(int postID, int commentID) {
+        return commentRepository.findById(new CommentingId(postID, commentID));
+    }
+    /**
      * Update an existing comment.
      *
      * @param postID      ID of the post to update
@@ -48,20 +58,5 @@ public class CommentService {
      */
     public int deleteComment(int postID, int commentID) {
         return commentRepository.removeCommenting(new CommentingId(postID, commentID));
-    }
-
-    /**
-     * Retrieve comment information.
-     *
-     * @param postID    ID of the post
-     * @param commentID ID of the comment
-     * @return Comment object if found, otherwise null
-     */
-    public Commenting retrievePostInfo(int postID, int commentID) {
-        Optional<Commenting> result = commentRepository.findById(new CommentingId(postID, commentID));
-        if(!result.isPresent()) {
-            return null;
-        }
-        return result.get();
     }
 }

@@ -29,7 +29,7 @@ public interface PostRepository extends JpaRepository<Posting, Integer> {
      * @return List of all posts
      */
     @Query("SELECT p FROM Posting p")
-    List<Posting> retrieveAllPostings();
+    List<Posting> findAllPostings();
 
     /**
      * Custom method to add a new post (using JpaRepository save method).

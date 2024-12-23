@@ -1,7 +1,7 @@
 package com.logblock.backend.Controllers;
 
 import com.logblock.backend.PostService.ReportService;
-import com.logblock.backend.DataSource.Model.Report;
+import com.logblock.backend.DataSource.Model.Reporting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +20,8 @@ public class ReportController {
      * @return Response with the report's information
      */
     @GetMapping("/{reportID}")
-    public ResponseEntity<Report> retrieveReportInfo(@PathVariable int reportID) {
-        Report report = reportService.retrieveReportInfo(reportID);
+    public ResponseEntity<Reporting> retrieveReportInfo(@PathVariable int reportID) {
+        Reporting report = reportService.retrieveReportInfo(reportID);
         return report != null ? ResponseEntity.ok(report) : ResponseEntity.notFound().build();
     }
 
@@ -32,7 +32,7 @@ public class ReportController {
      * @return Response with the newly created report ID
      */
     @PostMapping
-    public ResponseEntity<?> createReport(@RequestBody Report newReport) {
+    public ResponseEntity<?> createReport(@RequestBody Reporting newReport) {
         int result = reportService.createReport(newReport);
         return ResponseEntity.ok(result);
     }

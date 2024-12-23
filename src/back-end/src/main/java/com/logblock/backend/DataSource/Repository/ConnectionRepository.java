@@ -21,7 +21,7 @@ public interface ConnectionRepository extends JpaRepository<Connection, Connecti
      * @return List of all connections
      */
     @Query("SELECT c FROM Connection c")
-    List<Connection> retrieveAllConnections();
+    List<Connection> findAllConnections();
 
     /**
      * Find Connection
@@ -29,7 +29,7 @@ public interface ConnectionRepository extends JpaRepository<Connection, Connecti
      * @param connectorID ID of the connector
      * @return Connection object if found, otherwise null
      */
-    @Query("SELECT c FROM Connection c WHERE c.connector = :connectorID")
+    @Query("SELECT c FROM Connection c WHERE c.connectorID = :connectorID")
     List<Connection> findByConnectorID(Integer connectorID);
 
     /**
@@ -38,7 +38,7 @@ public interface ConnectionRepository extends JpaRepository<Connection, Connecti
      * @param connectedID ID of the connected to User
      * @return Connection object if found, otherwise null
      */
-    @Query("SELECT c FROM Connection c WHERE c.connectedTo = :connectedID")
+    @Query("SELECT c FROM Connection c WHERE c.connectedID = :connectedID")
     List<Connection> findByConnectedID(Integer connectedID);
 
     /**
@@ -48,7 +48,7 @@ public interface ConnectionRepository extends JpaRepository<Connection, Connecti
      * @param connectionID ID of the connection
      * @return Connection object if found, otherwise null
      */
-    @Query("SELECT c FROM Connection c WHERE c.connector = :connectorID AND c.connectedTo = :connectedID")
+    @Query("SELECT c FROM Connection c WHERE c.connectorID = :connectorID AND c.connectedID = :connectedID")
     List<Connection> findByConnectedIDAndConnectorID(Integer connectedID, Integer connectorID);
 
     /**

@@ -1,11 +1,21 @@
-FROM openjdk:17-oracle
-ARG RUNTIME_JAR=target/*.jar
+FROM openjdk:17-oracle AS base
 
-RUN mkdir -p /usr/local/app/
-WORKDIR /usr/local/app/
+WORKDIR /logblock
 
-COPY $RUNTIME_JAR ./app.jar
+# Building
+FROM base AS build
+COPY . /logblock
 
-RUN adduser logblock-be
-USER logblock-be
+RUN ./mvnw package -Dmaven.test.skip=true
+
+# Production
+FROM base AS run
+RUN mkdir -p /logblock
+WORKDIR /logblock
+
+RUN adduser --system logblock-be
+RUN chown logblock-be /logblock
+
+COPY --from=build --chown=logblock-be /logblock/target/*.jar /logblock/app.jar
+
 ENTRYPOINT [ "java", "-jar", "./app.jar" ]

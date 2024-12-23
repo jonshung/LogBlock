@@ -1,6 +1,6 @@
 package com.logblock.backend.AdminService;
 
-import com.logblock.backend.DataSource.Model.Report;
+import com.logblock.backend.DataSource.Model.Reporting;
 import com.logblock.backend.DataSource.Repository.PostRepository;
 import com.logblock.backend.DataSource.Repository.ReportRepository;
 import com.logblock.backend.AuthenticationService.AccountService;
@@ -26,8 +26,8 @@ public class AdminService {
      *
      * @return List of all reports
      */
-    public List<Report> retrieveAllReports() {
-        return reportRepository.retrieveAllReports(); // Retrieve all reports from the repository
+    public List<Reporting> retrieveAllReports() {
+        return reportRepository.findAllReports(); // Retrieve all reports from the repository
     }
 
     /**

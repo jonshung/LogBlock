@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.logblock.backend.DataSource.Model.Report;
+import com.logblock.backend.DataSource.Model.Reporting;
 
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface ReportRepository extends JpaRepository<Report, Integer> {
+public interface ReportRepository extends JpaRepository<Reporting, Integer> {
 
     /**
      * Retrieve all reports.
@@ -20,28 +20,7 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
      * @return List of all reports
      */
     @Query("SELECT r FROM Reporting r")
-    List<Report> retrieveAllReports();
-
-    /**
-     * Retrieve a report by its ID.
-     *
-     * @param reportID ID of the report
-     * @return Report object if found, otherwise null
-     */
-
-    default Report retrieveReport(int reportID) {
-        Optional<Report> reportOpt = findById(reportID);
-        return reportOpt.orElse(null); // Return the report if found, otherwise return null
-    }
-
-    /**
-     * Retrieve a report by its ID.
-     *
-     * @param reportID ID of the report
-     * @return Report object if found, otherwise null
-     */
-    @Query("SELECT r FROM Reporting r WHERE r.reportID = :reportID")
-    Optional<Report> findById(Integer reportID);
+    List<Reporting> findAllReports();
 
     /**
      * Add a new report.
@@ -50,9 +29,9 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
      * @return ID of the newly added report
      */
     @Transactional
-    default int addReport(Report newReport) {
+    default int addReport(Reporting newReport) {
         // JpaRepository's save method handles both adding and updating
-        Report savedReport = save(newReport);
+        Reporting savedReport = save(newReport);
         return savedReport.getReportID();
     }
 
@@ -64,10 +43,10 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
      * @return ID of the updated report
      */
     @Transactional
-    default int updateReport(int reportID, Report newReportContent) {
-        Optional<Report> existingReportOpt = findById(reportID);
+    default int updateReport(int reportID, Reporting newReportContent) {
+        Optional<Reporting> existingReportOpt = findById(reportID);
         if (existingReportOpt.isPresent()) {
-            Report existingReport = existingReportOpt.get();
+            Reporting existingReport = existingReportOpt.get();
             existingReport.setReporterID(newReportContent.getReporterID());
             existingReport.setReportedPostID(newReportContent.getReportedPostID());
             existingReport.setReportedDate(newReportContent.getReportedDate());
@@ -85,7 +64,7 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
      */
     @Transactional
     default int removeReport(int reportID) {
-        Optional<Report> reportOpt = findById(reportID);
+        Optional<Reporting> reportOpt = findById(reportID);
         if (reportOpt.isPresent()) {
             delete(reportOpt.get()); // Delete the report from the database
             return 1;

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.logblock.backend.DataSource.Model.Posting;
-import com.logblock.backend.DataSource.Model.Report;
+import com.logblock.backend.DataSource.Model.Reporting;
 import com.logblock.backend.DataSource.Repository.PostRepository;
 import com.logblock.backend.DataSource.Repository.ReportRepository;
 
@@ -93,7 +93,7 @@ public class PostService {
     public int reportPost(int postID, int userID) {
         Posting post = postRepository.findById(postID).orElse(null);
         if (post != null) {
-            Report report = new Report();
+            Reporting report = new Reporting();
             report.setReportedPostID(postID);
             report.setReporterID(userID);
             report.setReportedDate(new java.util.Date());
