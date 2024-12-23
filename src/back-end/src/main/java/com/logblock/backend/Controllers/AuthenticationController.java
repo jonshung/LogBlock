@@ -1,20 +1,14 @@
 package com.logblock.backend.Controllers;
 
-import com.logblock.backend.AuthenticationService.OAuthAuthenticator;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
-
-    @Autowired
-    private OAuthAuthenticator oauthAuthenticator;
 
     /**
      * OAuth 2.0 Authentication with Google.
@@ -23,8 +17,9 @@ public class AuthenticationController {
      * @param response The HTTP response
      * @return HTTP response with the authentication result
      */
-    @PostMapping("/oauth")
-    public ResponseEntity<?> OAuthAuthorizing(HttpServletRequest request, HttpServletResponse response) {
-        return oauthAuthenticator.authenticate(request, response);
+    @PostMapping("/oauth/google")
+    public void OAuthAuthorizing(HttpServletResponse response) {
+        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+        response.setHeader("Location", "/oauth2/authorization/google");
     }
 }

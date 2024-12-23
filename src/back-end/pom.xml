@@ -27,7 +27,7 @@
 		<!-- Spring Boot Starter for Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
 
 		<!-- Spring Boot DevTools -->
@@ -69,7 +69,8 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-  </dependencies>
+    
+    </dependencies>
 
 	<build>
 		<plugins>
