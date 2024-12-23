@@ -29,7 +29,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return User object if found, otherwise null
      */
     @Query("SELECT p FROM User p WHERE p.userEmail = :email")
-    User findUserByUserEmail(String email);
+    Optional<User> findUserByUserEmail(String email);
 
     /**
      * Add a new user.
@@ -57,7 +57,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         if (existingUserOpt.isPresent()) {
             User existingUser = existingUserOpt.get();
             existingUser.setUserEmail(userInfo.getUserEmail());
-            existingUser.setUserName(userInfo.getUserName());
+            existingUser.setDisplayName(userInfo.getDisplayName());
             existingUser.setBioDesc(userInfo.getBioDesc());
             existingUser.setProfileImg(userInfo.getProfileImg());
             existingUser.setPrivLevel(userInfo.getPrivLevel());

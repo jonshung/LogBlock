@@ -1,10 +1,18 @@
 package com.logblock.backend.Controllers;
 
-import com.logblock.backend.PostService.PostService;
-import com.logblock.backend.DataSource.Model.Posting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.logblock.backend.DataSource.Model.Posting;
+import com.logblock.backend.PostService.PostService;
 
 @RestController
 @RequestMapping("/posts")
@@ -58,7 +66,7 @@ public class PostController {
      */
     @GetMapping("/{postID}")
     public ResponseEntity<Posting> retrievePostInfo(@PathVariable int postID) {
-        Posting post = postService.retrievePostInfo(postID);
+        Posting post = postService.getPost(postID);
         return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
     }
 

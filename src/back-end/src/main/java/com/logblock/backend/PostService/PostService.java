@@ -61,7 +61,7 @@ public class PostService {
      * @param postID ID of the post
      * @return Post object if found, otherwise null
      */
-    public Posting retrievePostInfo(int postID) {
+    public Posting getPost(int postID) {
         // Use the repository's findById method
         return postRepository.findById(postID).orElse(null); // Return null if not found
     }

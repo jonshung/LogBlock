@@ -19,7 +19,7 @@ public class User {
     @Column(name = "useremail")
     private String userEmail;
     @Column(name = "displayname")
-    private String userName;
+    private String displayName;
     @Column(name = "biographydesc")
     private String bioDesc;
     @Column(name = "profileimage")
@@ -40,12 +40,12 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setDisplayName(String userName) {
+        this.displayName = userName;
     }
 
     public String getBioDesc() {

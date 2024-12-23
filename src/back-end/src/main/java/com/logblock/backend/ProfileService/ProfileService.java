@@ -13,6 +13,22 @@ public class ProfileService {
     private UserRepository profileRepository;
 
     /**
+     * Update user's display name.
+     * 
+     * @param userID
+     * @param newDisplayName
+     * @return
+     */
+    public int updateDisplayName(int userID, String newDisplayName) {
+        User profile = profileRepository.findById(userID).orElse(null);
+        if(profile == null) {
+            return 0;
+        }
+        profile.setDisplayName(newDisplayName);
+        profileRepository.save(profile);
+        return 0;
+    }
+    /**
      * Update user's biography.
      *
      * @param userID       ID of the user
@@ -47,12 +63,39 @@ public class ProfileService {
     }
 
     /**
+     * Update user's privilege level.
+     * 
+     * @param userID
+     * @param newPrivilegeLevel
+     * @return
+     */
+    public int updatePrivilegeLevel(int userID, int newPrivilegeLevel) {
+        User profile = profileRepository.findById(userID).orElse(null);
+        if (profile != null) {
+            profile.setPrivLevel(newPrivilegeLevel);
+            profileRepository.save(profile);
+            return 1; // Success
+        }
+        return 0; // Failure
+    }
+
+    /**
      * Retrieve the user's profile information.
      *
      * @param userID ID of the user
      * @return Profile object if found, otherwise null
      */
-    public User retrieveProfileInfo(int userID) {
+    public User getProfileByID(int userID) {
         return profileRepository.findById(userID).orElse(null);
+    }
+
+    /**
+     * Retrieve the user's profile information by email.
+     * 
+     * @param email
+     * @return
+     */
+    public User getProfileByEmail(String email) {
+        return profileRepository.findUserByUserEmail(email).orElse(null);
     }
 }
