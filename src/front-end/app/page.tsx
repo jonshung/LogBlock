@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Page() {
     return (
         <main>
-            <Header pageName="Home" />
+            <Header />
             <SideNav />
             <ConnectorsBox />
             <Link

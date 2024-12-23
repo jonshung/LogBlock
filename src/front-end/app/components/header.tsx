@@ -1,12 +1,29 @@
-import Logo from "@/app/components/logo";
+"use client";
 
-export default function Header({ pageName }: { pageName: string }) {
+import Logo from "@/app/components/logo";
+import { usePathname } from "next/navigation";
+
+const links = [
+    { name: "Home", href: "/" },
+    { name: "Explore", href: "/explore" },
+    { name: "Profile", href: "/profile" }
+]
+
+export default function Header() {
+    const currentLink = links.find((link) => link.href === usePathname());
+
+    if (!currentLink) {
+        return null;
+    }
+    
     return (
         <div className="fixed flex items-center text-black bg-white h-[90px] w-screen z-50">
             <div className="absolute ml-[40px]">
                 <Logo />
             </div>
-            <h1 className="mx-auto text-2xl font-bold">{pageName}</h1>
+            <h1 className="absolute left-[894px] text-2xl font-bold">
+                {currentLink.name}
+            </h1>
         </div>
     );
 }
