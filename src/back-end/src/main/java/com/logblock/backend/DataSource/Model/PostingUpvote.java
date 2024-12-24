@@ -23,6 +23,22 @@ public class PostingUpvote {
     @Column(name = "upvotedate")
     private Date upvoteDate;
 
+    /**
+     * 
+     * @param postID
+     * @param upvoterID
+     * @param upvoteDate
+     */
+    public PostingUpvote(int postID, int upvoterID, Date upvoteDate) {
+        this.postID = postID;
+        this.upvoterID = upvoterID;
+        this.upvoteDate = upvoteDate;
+    }
+
+    public PostingUpvote() {
+        
+    }
+
     public int getPostID() {
         return postID;
     }

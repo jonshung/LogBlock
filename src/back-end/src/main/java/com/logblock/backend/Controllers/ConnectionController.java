@@ -1,9 +1,16 @@
 package com.logblock.backend.Controllers;
 
-import com.logblock.backend.ProfileService.ConnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.logblock.backend.DataSource.DTO.ConnectionDTO;
+import com.logblock.backend.ProfileService.ConnectionService;
 
 @RestController
 @RequestMapping("/connections")
@@ -20,9 +27,9 @@ public class ConnectionController {
      * @return Response with the status of the connection creation
      */
     @PostMapping("/{connectorID}/{connectToID}")
-    public ResponseEntity<?> createConnection(@PathVariable int connectorID, @PathVariable int connectToID) {
-        int result = connectionService.createConnection(connectorID, connectToID);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    public ResponseEntity<?> createConnection(@RequestBody ConnectionDTO dto) {
+        int result = connectionService.createConnection(dto);
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -35,6 +42,6 @@ public class ConnectionController {
     @DeleteMapping("/{connectorID}/{connectToID}")
     public ResponseEntity<?> deleteConnection(@PathVariable int connectorID, @PathVariable int connectToID) {
         int result = connectionService.deleteConnection(connectorID, connectToID);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 }

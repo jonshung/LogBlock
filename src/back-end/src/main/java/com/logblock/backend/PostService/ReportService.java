@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.logblock.backend.DataSource.DTO.ReportingDTO;
 import com.logblock.backend.DataSource.Model.Reporting;
 import com.logblock.backend.DataSource.Repository.ReportRepository;
 
@@ -34,8 +35,8 @@ public class ReportService {
      * @param newReport The report information to create
      * @return ID of the created report
      */
-    public int createReport(Reporting newReport) {
-        return reportRepository.addReport(newReport);
+    public int createReport(ReportingDTO newReport) {
+        return reportRepository.addReport(ReportingDTO.toReporting(newReport));
     }
 
     /**

@@ -24,6 +24,22 @@ public class BlockedProfile {
     @Column(name = "blockeddate")
     private Date blockedDate;
 
+    /**
+     * 
+     * @param blockedDate
+     * @param targetUserID
+     * @param userID
+     */
+    public BlockedProfile(Date blockedDate, int targetUserID, int userID) {
+        this.blockedDate = blockedDate;
+        this.targetUserID = targetUserID;
+        this.userID = userID;
+    }
+
+    public BlockedProfile() {
+        
+    }
+
     public int getUserID() {
         return userID;
     }

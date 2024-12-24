@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.logblock.backend.DataSource.Model.User;
+import com.logblock.backend.DataSource.DTO.ProfileDTO;
+import com.logblock.backend.DataSource.Model.Profile;
 import com.logblock.backend.ProfileService.ProfileService;
 
 @RestController
@@ -29,7 +30,7 @@ public class ProfileController {
     @PutMapping("/{userID}/biography")
     public ResponseEntity<?> updateBiography(@PathVariable int userID, @RequestBody String newBiography) {
         int result = profileService.updateBiography(userID, newBiography);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -42,7 +43,7 @@ public class ProfileController {
     @PutMapping("/{userID}/profile-image")
     public ResponseEntity<?> updateProfileImg(@PathVariable int userID, @RequestBody String newProfileImg) {
         int result = profileService.updateProfileImg(userID, newProfileImg);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -52,8 +53,8 @@ public class ProfileController {
      * @return Response with the profile information
      */
     @GetMapping("/{userID}")
-    public ResponseEntity<User> retrieveProfileInfo(@PathVariable int userID) {
-        User profile = profileService.getProfileByID(userID);
-        return profile != null ? ResponseEntity.ok(profile) : ResponseEntity.notFound().build();
+    public ResponseEntity<ProfileDTO> retrieveProfileInfo(@PathVariable int userID) {
+        Profile profile = profileService.getProfileByID(userID);
+        return profile != null ? ResponseEntity.ok(ProfileDTO.toDTO(profile)) : ResponseEntity.noContent().build();
     }
 }

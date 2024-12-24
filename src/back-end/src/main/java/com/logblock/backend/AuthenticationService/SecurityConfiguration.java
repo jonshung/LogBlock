@@ -33,20 +33,42 @@ public class SecurityConfiguration {
 	}
 
 	@Bean 
-	@Order(1)
+	@Order(2)
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.cors(Customizer.withDefaults())
 			.authorizeHttpRequests((authorize) -> authorize
 				.anyRequest().authenticated()
-			)
-			.oauth2Login((oAuth2Login) -> {
-				oAuth2Login.successHandler(this.successHandler()).failureHandler(this.failureHandler());
-			});
+			);
 
 		return http.build();
 	}
 
+	/**
+	 * Catches authentication-related endpoints and proceed 
+	 * @param http
+	 * @return
+	 * @throws Exception
+	 */
+	@Bean 
+	@Order(1)
+	public SecurityFilterChain authenticationChain(HttpSecurity http) throws Exception {
+		String[] authentication_endpoint = {
+			"/oauth/google",
+			"/oauth2/authorization/google",
+			"/login/oauth2/code/google"
+		};
+		http
+			.cors(Customizer.withDefaults())
+			.securityMatcher(authentication_endpoint)
+			.authorizeHttpRequests((authorize) -> authorize 			// pre-authorizing authentication endpoints
+				.anyRequest().authenticated())
+			.oauth2Login((configurer) -> {
+				configurer.successHandler(this.successHandler()).failureHandler(this.failureHandler());
+			});
+
+		return http.build();
+	}
 
     @Bean
     OAuthSucessHandler successHandler() {

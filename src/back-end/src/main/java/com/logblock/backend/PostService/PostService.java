@@ -1,9 +1,13 @@
 package com.logblock.backend.PostService;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.logblock.backend.DataSource.DTO.PostingDTO;
+import com.logblock.backend.DataSource.DTO.ReportingDTO;
 import com.logblock.backend.DataSource.Model.Posting;
 import com.logblock.backend.DataSource.Model.Reporting;
 import com.logblock.backend.DataSource.Repository.PostRepository;
@@ -37,10 +41,11 @@ public class PostService {
      * @return ID of the created post
      */
     @Transactional
-    public int createPost(Posting postInfo) {
+    public int createPost(PostingDTO dto) {
         // The PostRepository's save method will handle both add and update
-        postRepository.save(postInfo);
-        return postInfo.getPostID(); // Return the generated ID of the created post
+        Posting p = PostingDTO.toPosting(dto);
+        postRepository.addPosting(p);
+        return p.getPostID(); // Return the generated ID of the created post
     }
 
     /**
@@ -90,13 +95,11 @@ public class PostService {
      * @return ID of the created report
      */
     @Transactional
-    public int reportPost(int postID, int userID) {
-        Posting post = postRepository.findById(postID).orElse(null);
+    public int reportPost(ReportingDTO dto) {
+        Posting post = postRepository.findById(dto.reportedPostID).orElse(null);
         if (post != null) {
-            Reporting report = new Reporting();
-            report.setReportedPostID(postID);
-            report.setReporterID(userID);
-            report.setReportedDate(new java.util.Date());
+            Reporting report = ReportingDTO.toReporting(dto);
+            report.setReportedDate(new Date());
             reportRepository.addReport(report); // Save the report in the repository
             return report.getReportID(); // Return the ID of the created report
         }

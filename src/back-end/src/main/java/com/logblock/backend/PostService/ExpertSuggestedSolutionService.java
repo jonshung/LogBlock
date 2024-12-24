@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.logblock.backend.DataSource.DTO.EssDTO;
 import com.logblock.backend.DataSource.Model.ESSId;
 import com.logblock.backend.DataSource.Model.ExpertSuggestedSolution;
 import com.logblock.backend.DataSource.Repository.ExpertSuggestedSolutionRepository;
@@ -43,8 +44,8 @@ public class ExpertSuggestedSolutionService {
      * @param ESSInfo The Expert Suggested Solution to create
      * @return ID of the created Expert Suggested Solution
      */
-    public int createESS(ExpertSuggestedSolution ESSInfo) {
-        return ESSRepository.addESS(ESSInfo); // Call the add method in repository
+    public int createESS(EssDTO ESSInfo) {
+        return ESSRepository.addESS(EssDTO.toESS(ESSInfo)); // Call the add method in repository
     }
 
     /**

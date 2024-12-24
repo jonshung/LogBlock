@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.logblock.backend.DataSource.DTO.EssDTO;
 import com.logblock.backend.DataSource.Model.ExpertSuggestedSolution;
 import com.logblock.backend.PostService.ExpertSuggestedSolutionService;
 
@@ -35,7 +36,7 @@ public class ESSController {
     public ResponseEntity<?> updateESS(@PathVariable int postID, @PathVariable int ESSID,
             @RequestBody ExpertSuggestedSolution ESSInfo) {
         int result = essService.updateESS(postID, ESSID, ESSInfo);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -45,9 +46,9 @@ public class ESSController {
      * @return Response with the newly created Expert Suggested Solution ID
      */
     @PostMapping
-    public ResponseEntity<?> createESS(@RequestBody ExpertSuggestedSolution ESSInfo) {
+    public ResponseEntity<?> createESS(@RequestBody EssDTO ESSInfo) {
         int result = essService.createESS(ESSInfo);
-        return ResponseEntity.ok(result);
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -60,7 +61,7 @@ public class ESSController {
     @DeleteMapping("/{postID}/{ESSID}")
     public ResponseEntity<?> deleteESS(@PathVariable int postID, @PathVariable int ESSID) {
         int result = essService.deleteESS(postID, ESSID);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -71,8 +72,8 @@ public class ESSController {
      * @return Response with the Expert Suggested Solution information
      */
     @GetMapping("/{postID}/{ESSID}")
-    public ResponseEntity<ExpertSuggestedSolution> retrieveESSInfo(@PathVariable int postID, @PathVariable int ESSID) {
+    public ResponseEntity<EssDTO> retrieveESSInfo(@PathVariable int postID, @PathVariable int ESSID) {
         Optional<ExpertSuggestedSolution> essInfo = essService.getESS(postID, ESSID);
-        return essInfo.isPresent() ? ResponseEntity.ok(essInfo.get()) : ResponseEntity.notFound().build();
+        return essInfo.isPresent() ? ResponseEntity.ok(EssDTO.toDTO(essInfo.get())) : ResponseEntity.noContent().build();
     }
 }
