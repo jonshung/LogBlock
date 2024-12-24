@@ -1,13 +1,22 @@
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
+export const dynamic = 'force-dynamic'
+
+interface ProfileData {
+    userEmail: string;
+    displayName: string;
+    userID: number;
+    bioDesc: string;
+    profileImage: string;
+    privLevel: number;
+};
 
 export default async function Page() {
-    const name = "ChocoCaro";
+    const data = await fetch("http://back-end:8080/profiles/1");
+    const parsed: ProfileData = await data.json();
+    const name = parsed.displayName;
     const connectors = 50;
-    const bio = "My passion for Python is boundless";
-    // const data = await fetch('back-end:8080/profiles/1');
-    // const parsing = await data.json();
-    // console.log(parsing);
+    const bio = parsed.bioDesc;
 
     return (
         <main>
