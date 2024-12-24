@@ -10,7 +10,8 @@ const links = [
 ]
 
 export default function Header() {
-    const currentLink = links.find((link) => link.href === usePathname());
+    const pathname = usePathname()
+    const currentLink = links.find((link) => link.href === pathname);
 
     if (!currentLink) {
         return null;
