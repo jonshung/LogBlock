@@ -24,6 +24,6 @@ public class ProfileDTO {
     }
 
     public static ProfileDTO toDTO(Profile p) {
-        return new ProfileDTO(p.getUserID(), p.getUserEmail(), p.getUserEmail(), p.getBioDesc(), p.getProfileImg());
+        return new ProfileDTO(p.getUserID(), p.getUserEmail(), p.getDisplayName(), p.getBioDesc(), p.getProfileImg());
     }
 }
