@@ -6,10 +6,7 @@ import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
 import ConnectorsBox from "@/app/components/connectors/connectors-box";
 import React from "react";
-import CreatePost,{ triggerOpenDialog  } from "@/app/components/posts/CreatePost";
-import Post from "@/app/components/posts/Post";
-
-import { inter } from "@/app/ui/fonts";
+import CreatePost,{ triggerOpenDialog  } from "@/app/components/home/create-post";
 
 interface Media {
     mediaID: number;
@@ -140,13 +137,13 @@ export default function Page() {
             {/* <div className="w-[750px] h-[1000px] bg-[#f4f4f4] rounded-[15px] absolute top-[200px] left-[558px]"></div> */}
             {/* Vùng hiển thị bài đăng */}
             <div className="absolute top-[200px] left-[558px] w-[750px]">
-                {posts.map((post) => (
+                {/* {posts.map((post) => (
                     <Post key={post.postID} post={post} 
                     addComment={(newComment: Comment) =>
                             addCommentToPost(post.postID, newComment)
                         }
                     />
-                ))}
+                ))} */}
             </div>
         </main>
     );
