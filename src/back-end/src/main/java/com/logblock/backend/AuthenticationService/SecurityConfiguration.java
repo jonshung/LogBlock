@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
@@ -35,6 +36,7 @@ public class SecurityConfiguration {
 	@Order(1)
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
+			.cors(Customizer.withDefaults())
 			.authorizeHttpRequests((authorize) -> authorize
 				.anyRequest().authenticated()
 			)
@@ -62,7 +64,7 @@ public class SecurityConfiguration {
 		CorsConfiguration config = new CorsConfiguration();
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
-		config.addAllowedOrigin("http://127.0.0.1:3000");
+		config.addAllowedOrigin("http://front-end:3000");
 		config.setAllowCredentials(true);
 		source.registerCorsConfiguration("/**", config);
 		return source;
