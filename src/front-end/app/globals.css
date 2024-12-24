@@ -83,18 +83,23 @@ body {
 
 .like {
   font-weight: bold;
-  width: 100px;
+  width: 120px;
   border-radius: 13px;
 
 }
 .not-like {
   font-weight: normal;
-  width: 100px;
+  width: 120px;
   border-radius: 13px;
 }
 
 .share{
-  width: 100px;
+  width: 120px;
+  border-radius: 13px;
+}
+
+.comments{
+  width: 120px;
   border-radius: 13px;
 }
 
