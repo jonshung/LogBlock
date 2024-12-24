@@ -1,10 +1,13 @@
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
 
-export default function Page() {
+export default async function Page() {
     const name = "ChocoCaro";
     const connectors = 50;
     const bio = "My passion for Python is boundless";
+    // const data = await fetch('back-end:8080/profiles/1');
+    // const parsing = await data.json();
+    // console.log(parsing);
 
     return (
         <main>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { armageda } from "@/app/ui/fonts";
+import { armageda } from "@/app/components/fonts";
 
 export default function Logo() {
     return (
