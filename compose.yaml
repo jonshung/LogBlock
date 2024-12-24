@@ -51,6 +51,6 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/usr/local/share/pgdata'
+      device: 'C:\Users\ACER\Desktop\db'
 networks: 
   app:

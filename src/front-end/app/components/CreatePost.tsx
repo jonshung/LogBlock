@@ -328,7 +328,7 @@ export default function CreatePost() {
           >
             <div style={{ marginTop: '20px', marginBottom: '10px', color: '#000000', fontWeight: 'bold', fontSize: '26px' }}
             >Discard post?</div>
-            <div style={{ color: '#000000', fontWeight: 'bold' }}>If you leave, your edits won't be saved.</div>
+            <div style={{ color: '#000000', fontWeight: 'bold' }}>If you leave, your edits won&apost be saved.</div>
             <hr style={{ border: '1px solid #ccc', marginTop: '40px' }} />
             <div style={{ textAlign: 'center' }}>
               <button

@@ -3,10 +3,9 @@
 import { useEffect, useState } from 'react';
 
 import Header from "@/app/components/header";
-import Navigator from "@/app/components/navigation-bar";
 import ConnectorsBox from "@/app/components/connectors/connectors-box";
 import React from "react";
-import CreatePost,{ triggerOpenDialog  } from "@/app/components/posts/CreatePost";
+import CreatePost, { triggerOpenDialog } from "@/app/components/posts/CreatePost";
 import Post from "@/app/components/posts/Post";
 
 import { inter } from "@/app/ui/fonts";
@@ -118,8 +117,7 @@ export default function Page() {
 
     return (
         <main className={`${inter.className} bg-white`}>
-            <Header pageName="Home" />
-            <Navigator />
+            <Header />
             <ConnectorsBox />
             <div className="absolute flex items-center left-[558px] top-[90px] w-[750px] h-[90px] bg-[#f4f4f4] rounded-[15px]">
                 <img
@@ -141,8 +139,8 @@ export default function Page() {
             {/* Vùng hiển thị bài đăng */}
             <div className="absolute top-[200px] left-[558px] w-[750px]">
                 {posts.map((post) => (
-                    <Post key={post.postID} post={post} 
-                    addComment={(newComment: Comment) =>
+                    <Post key={post.postID} post={post}
+                        addComment={(newComment: Comment) =>
                             addCommentToPost(post.postID, newComment)
                         }
                     />
