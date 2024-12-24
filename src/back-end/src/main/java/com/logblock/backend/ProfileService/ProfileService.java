@@ -1,16 +1,33 @@
 package com.logblock.backend.ProfileService;
 
-import com.logblock.backend.DataSource.Model.Profile;
-import com.logblock.backend.DataSource.Repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.logblock.backend.DataSource.Model.User;
+import com.logblock.backend.DataSource.Repository.UserRepository;
 
 @Service
 public class ProfileService {
 
     @Autowired
-    private ProfileRepository profileRepository;
+    private UserRepository profileRepository;
 
+    /**
+     * Update user's display name.
+     * 
+     * @param userID
+     * @param newDisplayName
+     * @return
+     */
+    public int updateDisplayName(int userID, String newDisplayName) {
+        User profile = profileRepository.findById(userID).orElse(null);
+        if(profile == null) {
+            return 0;
+        }
+        profile.setDisplayName(newDisplayName);
+        profileRepository.save(profile);
+        return 0;
+    }
     /**
      * Update user's biography.
      *
@@ -19,9 +36,9 @@ public class ProfileService {
      * @return 1 if update is successful, otherwise 0
      */
     public int updateBiography(int userID, String newBiography) {
-        Profile profile = profileRepository.findById(userID).orElse(null);
+        User profile = profileRepository.findById(userID).orElse(null);
         if (profile != null) {
-            profile.setBiography(newBiography);
+            profile.setBioDesc(newBiography);
             profileRepository.save(profile);
             return 1; // Success
         }
@@ -36,9 +53,26 @@ public class ProfileService {
      * @return 1 if update is successful, otherwise 0
      */
     public int updateProfileImg(int userID, String newProfileImg) {
-        Profile profile = profileRepository.findById(userID).orElse(null);
+        User profile = profileRepository.findById(userID).orElse(null);
         if (profile != null) {
             profile.setProfileImg(newProfileImg);
+            profileRepository.save(profile);
+            return 1; // Success
+        }
+        return 0; // Failure
+    }
+
+    /**
+     * Update user's privilege level.
+     * 
+     * @param userID
+     * @param newPrivilegeLevel
+     * @return
+     */
+    public int updatePrivilegeLevel(int userID, int newPrivilegeLevel) {
+        User profile = profileRepository.findById(userID).orElse(null);
+        if (profile != null) {
+            profile.setPrivLevel(newPrivilegeLevel);
             profileRepository.save(profile);
             return 1; // Success
         }
@@ -51,7 +85,17 @@ public class ProfileService {
      * @param userID ID of the user
      * @return Profile object if found, otherwise null
      */
-    public Profile retrieveProfileInfo(int userID) {
+    public User getProfileByID(int userID) {
         return profileRepository.findById(userID).orElse(null);
+    }
+
+    /**
+     * Retrieve the user's profile information by email.
+     * 
+     * @param email
+     * @return
+     */
+    public User getProfileByEmail(String email) {
+        return profileRepository.findUserByUserEmail(email).orElse(null);
     }
 }

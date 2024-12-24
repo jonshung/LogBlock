@@ -1,13 +1,15 @@
 package com.logblock.backend.DataSource.Repository;
 
-import com.logblock.backend.DataSource.Model.User;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.logblock.backend.DataSource.Model.User;
+
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -17,17 +19,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      *
      * @return List of all users
      */
-    @Query("SELECT u FROM User u")
-    List<User> retrieveAllUsers();
-
-    /**
-     * Retrieve a user by their ID.
-     *
-     * @param userID ID of the user
-     * @return User object if found, otherwise null
-     */
-    @Override
-    Optional<User> findById(Integer userID); // Make sure to use Optional<User>
+    @Query("SELECT p FROM User p")
+    List<User> findAllUsers();
 
     /**
      * Retrieve a user by their email.
@@ -35,8 +28,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @param email Email of the user
      * @return User object if found, otherwise null
      */
-    @Query("SELECT u FROM User u WHERE u.userEmail = :email")
-    User retrieveUserByEmail(String email);
+    @Query("SELECT p FROM User p WHERE p.userEmail = :email")
+    Optional<User> findUserByUserEmail(String email);
 
     /**
      * Add a new user.
@@ -64,13 +57,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         if (existingUserOpt.isPresent()) {
             User existingUser = existingUserOpt.get();
             existingUser.setUserEmail(userInfo.getUserEmail());
-            existingUser.setUserName(userInfo.getUserName());
+            existingUser.setDisplayName(userInfo.getDisplayName());
             existingUser.setBioDesc(userInfo.getBioDesc());
             existingUser.setProfileImg(userInfo.getProfileImg());
             existingUser.setPrivLevel(userInfo.getPrivLevel());
-            existingUser.setPinnedPosts(userInfo.getPinnedPosts());
-            existingUser.setBlockedProfiles(userInfo.getBlockedProfiles());
-            existingUser.setRecentlyViewedPosts(userInfo.getRecentlyViewedPosts());
             save(existingUser); // Save the updated user
             return existingUser.getUserID();
         }

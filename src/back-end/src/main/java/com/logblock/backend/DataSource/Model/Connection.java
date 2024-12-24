@@ -1,16 +1,26 @@
 package com.logblock.backend.DataSource.Model;
 
-import jakarta.persistence.*;
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+
 @Entity
+@Table(name = "Connection")
+@IdClass(ConnectionId.class)
 public class Connection {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "connector")
     private int connectorID;
 
+    @Id
+    @Column(name = "connectedto")
     private int connectedID;
+    @Column(name = "connectiondate")
     private Date connectionDate;
 
     // Getters
@@ -27,15 +37,15 @@ public class Connection {
     }
 
     // Setters
-    public void setConnectorID(int newConnectorID) {
-        this.connectorID = newConnectorID;
+    public void setConnectedDate(Date newConnectedDate) {
+        this.connectionDate = newConnectedDate;
     }
 
     public void setConnectedID(int newConnectedID) {
         this.connectedID = newConnectedID;
     }
 
-    public void setConnectedDate(Date newConnectedDate) {
-        this.connectionDate = newConnectedDate;
+    public void setConnectorID(int newConnectorID) {
+        this.connectorID = newConnectorID;
     }
 }

@@ -1,22 +1,24 @@
 package com.logblock.backend.FeedsGenerationService;
 
-import com.logblock.backend.DataSource.Model.Post;
-import com.logblock.backend.DataSource.Model.User;
-import com.logblock.backend.DataSource.Repository.UserRepository;
-import com.logblock.backend.DataSource.Repository.PostRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.logblock.backend.DataSource.Model.Connection;
+import com.logblock.backend.DataSource.Model.Posting;
+import com.logblock.backend.DataSource.Repository.ConnectionRepository;
+import com.logblock.backend.DataSource.Repository.PostRepository;
 
 @Service
 public class NewFeedService {
 
     @Autowired
-    private UserRepository userRepository;
+    private PostRepository postRepository;
 
     @Autowired
-    private PostRepository postRepository;
+    private ConnectionRepository connectionRepository;
 
     /**
      * Generate the News Feed for a user based on their connections.
@@ -24,15 +26,14 @@ public class NewFeedService {
      * @param userID ID of the user
      * @return List of posts generated for the user's News Feed
      */
-    public List<Post> generate(int userID) {
-        // Retrieve the user by ID
-        User user = userRepository.findById(userID)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+    public List<Posting> generate(int userID) {
         // Get the list of connected user IDs
-        List<Integer> connectedUserIDs = user.getConnections(); // Assuming 'Connections' is a list of User IDs
-
-        // Retrieve all posts from the connected users
-        return postRepository.findPostsByUserIDs(connectedUserIDs);
+        List<Connection> connectionEntries = connectionRepository.findByConnectorID(userID);
+        List<Posting> results = new ArrayList<>();
+        for(Connection c : connectionEntries) {
+            List<Posting> posts = postRepository.findPostingsByUserID(c.getConnectedID());
+            results.addAll(posts);
+        }
+        return results;
     }
 }

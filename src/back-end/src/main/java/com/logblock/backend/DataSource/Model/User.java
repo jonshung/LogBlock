@@ -1,41 +1,35 @@
 package com.logblock.backend.DataSource.Model;
 
-import jakarta.persistence.*;
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Profile")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userid")
     private int userID;
 
+    @Column(name = "useremail")
     private String userEmail;
-    private String userName;
+    @Column(name = "displayname")
+    private String displayName;
+    @Column(name = "biographydesc")
     private String bioDesc;
+    @Column(name = "profileimage")
     private String profileImg;
+    @Column(name = "privlevel")
     private int privLevel;
-    private List<Integer> connections; // List of connected user IDs
-    @ElementCollection
-    private List<Integer> pinnedPosts;
-
-    @ElementCollection
-    private List<Integer> blockedProfiles;
-
-    @ElementCollection
-    private List<Integer> recentlyViewedPosts;
 
     // Getters và Setters
     public int getUserID() {
         return userID;
-    }
-
-    public List<Integer> getConnections() {
-        return connections;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public String getUserEmail() {
@@ -46,12 +40,12 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setDisplayName(String userName) {
+        this.displayName = userName;
     }
 
     public String getBioDesc() {
@@ -76,29 +70,5 @@ public class User {
 
     public void setPrivLevel(int privLevel) {
         this.privLevel = privLevel;
-    }
-
-    public List<Integer> getPinnedPosts() {
-        return pinnedPosts;
-    }
-
-    public void setPinnedPosts(List<Integer> pinnedPosts) {
-        this.pinnedPosts = pinnedPosts;
-    }
-
-    public List<Integer> getBlockedProfiles() {
-        return blockedProfiles;
-    }
-
-    public void setBlockedProfiles(List<Integer> blockedProfiles) {
-        this.blockedProfiles = blockedProfiles;
-    }
-
-    public List<Integer> getRecentlyViewedPosts() {
-        return recentlyViewedPosts;
-    }
-
-    public void setRecentlyViewedPosts(List<Integer> recentlyViewedPosts) {
-        this.recentlyViewedPosts = recentlyViewedPosts;
     }
 }

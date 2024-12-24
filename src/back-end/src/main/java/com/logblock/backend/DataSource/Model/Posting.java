@@ -1,30 +1,32 @@
 package com.logblock.backend.DataSource.Model;
 
-import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Post {
+@Table(name = "Posting")
+public class Posting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "postid")
     private int postID;
 
-    private int authorID;
+    @Column(name = "originalauthor")
+    private int originalAuthor;
+    @Column(name = "postcaption")
     private String caption;
 
-    @ElementCollection
-    private List<String> media;
-
+    @Column(name = "postcreation")
     private Date creationDate;
+    @Column(name="postlastupdate")
     private Date lastModifiedDate;
-
-    @ElementCollection
-    private List<Integer> tags;
-
-    @ElementCollection
-    private List<Integer> upvoters;
 
     // Getters
     public int getPostID() {
@@ -32,15 +34,11 @@ public class Post {
     }
 
     public int getAuthorID() {
-        return authorID;
+        return originalAuthor;
     }
 
     public String getCaption() {
         return caption;
-    }
-
-    public List<String> getMedia() {
-        return media;
     }
 
     public Date getCreationDate() {
@@ -51,25 +49,9 @@ public class Post {
         return lastModifiedDate;
     }
 
-    public List<Integer> getTags() {
-        return tags;
-    }
-
-    public List<Integer> getUpvoters() {
-        return upvoters;
-    }
-
     // Setters
-    public void setPAuthorID(int newAuthorID) {
-        this.authorID = newAuthorID;
-    }
-
     public void setCaption(String newCaption) {
         this.caption = newCaption;
-    }
-
-    public void setMedia(List<String> newMedia) {
-        this.media = newMedia;
     }
 
     public void setCreationDate(Date newCreationDate) {
@@ -78,13 +60,5 @@ public class Post {
 
     public void setLastModifiedDate(Date newLastModifiedDate) {
         this.lastModifiedDate = newLastModifiedDate;
-    }
-
-    public void setTags(List<Integer> tagsList) {
-        this.tags = tagsList;
-    }
-
-    public void setUpvoters(List<Integer> newUpvotersList) {
-        this.upvoters = newUpvotersList;
     }
 }
