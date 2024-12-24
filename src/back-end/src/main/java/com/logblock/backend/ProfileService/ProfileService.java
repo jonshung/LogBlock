@@ -1,5 +1,7 @@
 package com.logblock.backend.ProfileService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,6 +98,8 @@ public class ProfileService {
      * @return
      */
     public User getProfileByEmail(String email) {
-        return profileRepository.findUserByUserEmail(email).orElse(null);
+        List<User> results = profileRepository.findUserByUserEmail(email);
+        if(results.isEmpty()) return null;
+        return results.get(0);
     }
 }
