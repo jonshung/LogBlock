@@ -27,10 +27,11 @@ public class OAuthSucessHandler implements AuthenticationSuccessHandler {
             Authentication authentication) throws IOException, ServletException {
         DefaultOidcUser user = (DefaultOidcUser) authentication.getPrincipal();
         
-        accountService.createAccount(user.getEmail());
+        if(!accountService.accountExistsByEmail(user.getEmail())) {
+            accountService.createAccount(user.getEmail());
+        }
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
         response.setHeader("Location", 
-            "http://" + 
             env.getProperty("logblock.front-end-integration.hostname") + 
             ":" +
             env.getProperty("logblock.front-end-integration.port")

@@ -1,6 +1,9 @@
 package com.logblock.backend.ProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Service;
 
 import com.logblock.backend.DataSource.Model.Profile;
@@ -67,7 +70,7 @@ public class ProfileService {
      * 
      * @param userID
      * @param newPrivilegeLevel
-     * @return
+     * @return int
      */
     public int updatePrivilegeLevel(int userID, int newPrivilegeLevel) {
         Profile profile = profileRepository.findById(userID).orElse(null);
@@ -96,9 +99,26 @@ public class ProfileService {
      * Retrieve the user's profile information by email.
      * 
      * @param email
-     * @return
+     * @return Profile
      */
     public Profile getProfileByEmail(String email) {
         return profileRepository.findUserByUserEmail(email).orElse(null);
+    }
+
+    /**
+     * Get the current user requesting this service endpoint if exists, else return null.
+     * 
+     * @return Profile
+     */
+    public Profile getMe() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(!auth.isAuthenticated()) {
+            return null;
+        }
+        DefaultOidcUser u = (DefaultOidcUser) auth.getPrincipal();
+        if(u == null) {
+            return null;
+        }
+        return getProfileByEmail(u.getEmail());
     }
 }

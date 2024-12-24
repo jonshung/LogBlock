@@ -1,5 +1,7 @@
 package com.logblock.backend.AuthenticationService;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,17 @@ public class AccountService {
         Profile newUser = new Profile(email, email.split("@")[0], "New user bio.", "defaultProfilePic.png", 0);
         userRepository.addUser(newUser);
         return newUser.getUserID();
+    }
+
+    /**
+     * Check if an account exists by email.
+     * 
+     * @param email
+     * @return
+     */
+    public boolean accountExistsByEmail(String email) {
+        Optional<Profile> u = userRepository.findUserByUserEmail(email);
+        return u.isPresent();
     }
 
     /**

@@ -6,39 +6,7 @@ import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
 import ConnectorsBox from "@/app/components/connectors/connectors-box";
 import CreatePost, { triggerOpenDialog } from "@/app/components/home/create-post";
-
-interface Media {
-    mediaID: number;
-    mediaURI: string;
-}
-
-interface Tag {
-    userID: number;
-    username: string;
-}
-
-interface PostData {
-    postID: number;
-    originalAuthor: number;
-    authorName: string;
-    authorAvatar: string;
-    postCaption: string;
-    postCreation: string;
-    postLastUpdate: string;
-    media: Media[];
-    upvoteCount: number;
-    tags: Tag[];
-    comments: Comment[];
-}
-
-interface Comment {
-    commentID: number;
-    commentAuthor: number;
-    commentCaption: string;
-    commentCreation: string;
-    authorName: string;
-    authorAvatar: string;
-}
+import { PostData, Comment } from "./interfaces/common-interfaces";
 
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
