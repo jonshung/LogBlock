@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logblock.backend.DataSource.Model.Connection;
+import com.logblock.backend.DataSource.Model.ConnectionId;
 import com.logblock.backend.DataSource.Repository.ConnectionRepository;
 
 @Service
@@ -36,7 +37,6 @@ public class ConnectionService {
      * @return 1 if connection is deleted successfully, otherwise 0
      */
     public int deleteConnection(int connectorID, int connectToID) {
-        throw new UnsupportedOperationException("Feature incomplete. Contact assistance.");
-        //return deleteConnection(connectorID, connectToID);
+        return connectionRepository.removeConnection(new ConnectionId(connectorID, connectToID));
     }
 }

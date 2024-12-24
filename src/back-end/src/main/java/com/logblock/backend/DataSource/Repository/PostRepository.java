@@ -32,6 +32,14 @@ public interface PostRepository extends JpaRepository<Posting, Integer> {
     List<Posting> findAllPostings();
 
     /**
+     * Retrieve all of the trending posts.
+     *
+     * @return List of posts with the highest upvotes within 2 weeks.
+     */
+    @Query("SELECT p FROM Posting p INNER JOIN PostingUpvote up WHERE CURRENT_DATE - p.creationDate <= 14 GROUP BY p.postID ORDER BY COUNT(up.upvoterID) DESC")
+    List<Posting> findTrendingPosts();
+
+    /**
      * Custom method to add a new post (using JpaRepository save method).
      *
      * @param newPost Post object to be added

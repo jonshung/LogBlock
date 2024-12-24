@@ -15,10 +15,9 @@ public class ProfileService {
     /**
      * Update user's display name.
      * 
-     * @param userID
-     * @param newDisplayName
-     * @return
-     */
+     * @param userID          ID of the user
+     * @param newDisplayName  The new display name
+     * @return 1 if update is successgful, otherwise 0
     public int updateDisplayName(int userID, String newDisplayName) {
         User profile = profileRepository.findById(userID).orElse(null);
         if(profile == null) {
@@ -26,7 +25,7 @@ public class ProfileService {
         }
         profile.setDisplayName(newDisplayName);
         profileRepository.save(profile);
-        return 0;
+        return 1;
     }
     /**
      * Update user's biography.
@@ -65,9 +64,9 @@ public class ProfileService {
     /**
      * Update user's privilege level.
      * 
-     * @param userID
-     * @param newPrivilegeLevel
-     * @return
+     * @param userID              ID of the user
+     * @param newPrivilegeLevel   the updated priviledge
+     * @return  1 if update is successful, otherwise 0
      */
     public int updatePrivilegeLevel(int userID, int newPrivilegeLevel) {
         User profile = profileRepository.findById(userID).orElse(null);
@@ -92,8 +91,8 @@ public class ProfileService {
     /**
      * Retrieve the user's profile information by email.
      * 
-     * @param email
-     * @return
+     * @param email email of the user
+     * @return Profile object if found, otherwise null
      */
     public User getProfileByEmail(String email) {
         return profileRepository.findUserByUserEmail(email).orElse(null);
