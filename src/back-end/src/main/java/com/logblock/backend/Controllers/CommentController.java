@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.logblock.backend.DataSource.DTO.CommentingDTO;
 import com.logblock.backend.DataSource.Model.Commenting;
 import com.logblock.backend.PostService.CommentService;
 
@@ -35,7 +36,7 @@ public class CommentController {
     public ResponseEntity<?> updateComment(@PathVariable int postID, @PathVariable int commentID,
             @RequestBody Commenting commentInfo) {
         int result = commentService.updateComment(postID, commentID, commentInfo);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -60,7 +61,7 @@ public class CommentController {
     @DeleteMapping("/{postID}/{commentID}")
     public ResponseEntity<?> deleteComment(@PathVariable int postID, @PathVariable int commentID) {
         int result = commentService.deleteComment(postID, commentID);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -71,8 +72,8 @@ public class CommentController {
      * @return Response with the comment information
      */
     @GetMapping("/{postID}/{commentID}")
-    public ResponseEntity<Commenting> retrievePostInfo(@PathVariable int postID, @PathVariable int commentID) {
+    public ResponseEntity<CommentingDTO> retrievePostInfo(@PathVariable int postID, @PathVariable int commentID) {
         Optional<Commenting> comment = commentService.getComment(postID, commentID);
-        return comment.isPresent() ? ResponseEntity.ok(comment.get()) : ResponseEntity.notFound().build();
+        return comment.isPresent() ? ResponseEntity.ok(CommentingDTO.toDTO(comment.get())) : ResponseEntity.noContent().build();
     }
 }

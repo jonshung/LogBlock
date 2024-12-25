@@ -7,20 +7,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.logblock.backend.DataSource.Model.User;
+import com.logblock.backend.DataSource.Model.Profile;
 
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 
     /**
      * Retrieve all users.
      *
      * @return List of all users
      */
-    @Query("SELECT p FROM User p")
-    List<User> findAllUsers();
+    @Query("SELECT p FROM Profile p")
+    List<Profile> findAllUsers();
 
     /**
      * Retrieve a user by their email.
@@ -28,8 +28,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @param email Email of the user
      * @return User object if found, otherwise null
      */
-    @Query("SELECT p FROM User p WHERE p.userEmail = :email")
-    Optional<User> findUserByUserEmail(String email);
+    Optional<Profile> findUserByUserEmail(String email);
 
     /**
      * Add a new user.
@@ -38,9 +37,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return ID of the newly added user
      */
     @Transactional
-    default int addUser(User newUser) {
+    default int addUser(Profile newUser) {
         // Save the user and return the user's ID
-        User savedUser = save(newUser);
+        Profile savedUser = save(newUser);
         return savedUser.getUserID();
     }
 
@@ -52,10 +51,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return ID of the updated user
      */
     @Transactional
-    default int updateUser(int userID, User userInfo) {
-        Optional<User> existingUserOpt = findById(userID);
+    default int updateUser(int userID, Profile userInfo) {
+        Optional<Profile> existingUserOpt = findById(userID);
         if (existingUserOpt.isPresent()) {
-            User existingUser = existingUserOpt.get();
+            Profile existingUser = existingUserOpt.get();
             existingUser.setUserEmail(userInfo.getUserEmail());
             existingUser.setDisplayName(userInfo.getDisplayName());
             existingUser.setBioDesc(userInfo.getBioDesc());
@@ -75,7 +74,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      */
     @Transactional
     default int removeUser(int userID) {
-        Optional<User> userOpt = findById(userID);
+        Optional<Profile> userOpt = findById(userID);
         if (userOpt.isPresent()) {
             delete(userOpt.get()); // Delete the user from the database
             return 1;

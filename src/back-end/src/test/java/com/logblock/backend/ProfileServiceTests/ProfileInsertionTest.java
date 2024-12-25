@@ -12,8 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.logblock.backend.AuthenticationService.AccountService;
-import com.logblock.backend.DataSource.Model.User;
-import com.logblock.backend.DataSource.Repository.UserRepository;
+import com.logblock.backend.DataSource.Model.Profile;
+import com.logblock.backend.DataSource.Repository.ProfileRepository;
 import com.logblock.backend.ProfileService.ProfileService;
 
 import jakarta.transaction.Transactional;
@@ -35,7 +35,7 @@ public class ProfileInsertionTest {
     private AccountService accountService;
 
     @Autowired
-    private UserRepository userRepo;
+    private ProfileRepository userRepo;
     
     @Test
     void testScenarioInsertionStandard() {
@@ -46,7 +46,7 @@ public class ProfileInsertionTest {
                 "John Doe", // Display Name
                 "This is John Doe", // Biography description
                 "https://google.com", // Profile image
-                "0" // Privilege level
+                "2" // Privilege level
             ),
             List.of(
                 "willsmith@mail.com", // User Email
@@ -71,7 +71,7 @@ public class ProfileInsertionTest {
         // Checking
         for(int i = 0; i < test_inputs.size(); i++) {
             List<String> tcase = test_inputs.get(i);
-            User u = this.profileService.getProfileByEmail(tcase.get(0));
+            Profile u = this.profileService.getProfileByEmail(tcase.get(0));
             assertNotNull(u);
             assertEquals(ids.get(i), Integer.valueOf(u.getUserID()));
             assertEquals(tcase.get(0), u.getUserEmail());

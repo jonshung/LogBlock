@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Profile")
-public class User {
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,26 @@ public class User {
     private String profileImg;
     @Column(name = "privlevel")
     private int privLevel;
+
+    /**
+     * 
+     * @param userEmail
+     * @param displayName
+     * @param bioDesc
+     * @param profileImg
+     * @param privLevel
+     */
+    public Profile(String userEmail, String displayName, String bioDesc, String profileImg, int privLevel) {
+        this.userEmail = userEmail;
+        this.displayName = displayName;
+        this.bioDesc = bioDesc;
+        this.profileImg = profileImg;
+        this.privLevel = privLevel;
+    }
+
+    public Profile() {
+        
+    }
 
     // Getters và Setters
     public int getUserID() {
@@ -70,5 +90,9 @@ public class User {
 
     public void setPrivLevel(int privLevel) {
         this.privLevel = privLevel;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

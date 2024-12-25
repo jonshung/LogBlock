@@ -28,6 +28,24 @@ public class Posting {
     @Column(name="postlastupdate")
     private Date lastModifiedDate;
 
+    /**
+     * 
+     * @param originalAuthor
+     * @param caption
+     * @param creationDate
+     * @param lastModifiedDate
+     */
+    public Posting(int originalAuthor, String caption, Date creationDate, Date lastModifiedDate) {
+        this.originalAuthor = originalAuthor;
+        this.caption = caption;
+        this.creationDate = creationDate;
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Posting() {
+        
+    }
+
     // Getters
     public int getPostID() {
         return postID;
@@ -50,6 +68,14 @@ public class Posting {
     }
 
     // Setters
+    public void setAuthorID(int id) {
+        this.originalAuthor = id;
+    }
+    
+    public void setPostID(int postID) {
+        this.postID = postID;
+    }
+
     public void setCaption(String newCaption) {
         this.caption = newCaption;
     }

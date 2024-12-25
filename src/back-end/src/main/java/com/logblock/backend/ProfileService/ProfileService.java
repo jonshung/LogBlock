@@ -1,16 +1,19 @@
 package com.logblock.backend.ProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Service;
 
-import com.logblock.backend.DataSource.Model.User;
-import com.logblock.backend.DataSource.Repository.UserRepository;
+import com.logblock.backend.DataSource.Model.Profile;
+import com.logblock.backend.DataSource.Repository.ProfileRepository;
 
 @Service
 public class ProfileService {
 
     @Autowired
-    private UserRepository profileRepository;
+    private ProfileRepository profileRepository;
 
     /**
      * Update user's display name.
@@ -20,7 +23,7 @@ public class ProfileService {
      * @return
      */
     public int updateDisplayName(int userID, String newDisplayName) {
-        User profile = profileRepository.findById(userID).orElse(null);
+        Profile profile = profileRepository.findById(userID).orElse(null);
         if(profile == null) {
             return 0;
         }
@@ -36,7 +39,7 @@ public class ProfileService {
      * @return 1 if update is successful, otherwise 0
      */
     public int updateBiography(int userID, String newBiography) {
-        User profile = profileRepository.findById(userID).orElse(null);
+        Profile profile = profileRepository.findById(userID).orElse(null);
         if (profile != null) {
             profile.setBioDesc(newBiography);
             profileRepository.save(profile);
@@ -53,7 +56,7 @@ public class ProfileService {
      * @return 1 if update is successful, otherwise 0
      */
     public int updateProfileImg(int userID, String newProfileImg) {
-        User profile = profileRepository.findById(userID).orElse(null);
+        Profile profile = profileRepository.findById(userID).orElse(null);
         if (profile != null) {
             profile.setProfileImg(newProfileImg);
             profileRepository.save(profile);
@@ -67,10 +70,13 @@ public class ProfileService {
      * 
      * @param userID
      * @param newPrivilegeLevel
-     * @return
+     * @return int
      */
     public int updatePrivilegeLevel(int userID, int newPrivilegeLevel) {
-        User profile = profileRepository.findById(userID).orElse(null);
+        Profile profile = profileRepository.findById(userID).orElse(null);
+        if(newPrivilegeLevel < 0 || newPrivilegeLevel > 2) {
+            return 0; // privlege only from 0 to 2.
+        }
         if (profile != null) {
             profile.setPrivLevel(newPrivilegeLevel);
             profileRepository.save(profile);
@@ -85,7 +91,7 @@ public class ProfileService {
      * @param userID ID of the user
      * @return Profile object if found, otherwise null
      */
-    public User getProfileByID(int userID) {
+    public Profile getProfileByID(int userID) {
         return profileRepository.findById(userID).orElse(null);
     }
 
@@ -93,9 +99,26 @@ public class ProfileService {
      * Retrieve the user's profile information by email.
      * 
      * @param email
-     * @return
+     * @return Profile
      */
-    public User getProfileByEmail(String email) {
+    public Profile getProfileByEmail(String email) {
         return profileRepository.findUserByUserEmail(email).orElse(null);
+    }
+
+    /**
+     * Get the current user requesting this service endpoint if exists, else return null.
+     * 
+     * @return Profile
+     */
+    public Profile getMe() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(!auth.isAuthenticated()) {
+            return null;
+        }
+        DefaultOidcUser u = (DefaultOidcUser) auth.getPrincipal();
+        if(u == null) {
+            return null;
+        }
+        return getProfileByEmail(u.getEmail());
     }
 }

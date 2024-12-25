@@ -2,6 +2,7 @@ FROM openjdk:17-oracle AS base
 
 WORKDIR /logblock
 
+ENV IS_COMPOSE="false"
 # Building
 FROM base AS build
 COPY . /logblock

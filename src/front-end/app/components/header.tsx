@@ -11,20 +11,17 @@ const links = [
 
 export default function Header() {
     const pathname = usePathname()
-    const currentLink = links.find((link) => link.href === pathname);
-
-    if (!currentLink) {
-        return null;
-    }
-    
+    const currentLink = links.find((link) => pathname.startsWith(link.href));
     return (
         <div className="fixed flex items-center text-black bg-white h-[90px] w-screen z-50">
             <div className="absolute ml-[40px]">
                 <Logo />
             </div>
-            <h1 className="absolute left-[894px] text-2xl font-bold">
-                {currentLink.name}
-            </h1>
+            {currentLink ?
+                <h1 className="absolute left-[894px] text-2xl font-bold">
+                    {currentLink.name}
+                </h1> : <></>
+            }
         </div>
     );
 }

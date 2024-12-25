@@ -23,12 +23,31 @@ public class Commenting {
     @Id
     @Column(name = "postid")
     private int postID;
+
     @Column(name = "commentauthor")
     private int authorID;
     @Column(name = "commentcaption")
     private String caption;
     @Column(name = "commentcreation")
     private Date creationDate;
+    
+    /**
+     * 
+     * @param postID
+     * @param authorID
+     * @param caption
+     * @param creationDate
+     */
+    public Commenting(int postID, int authorID, String caption, Date creationDate) {
+        this.postID = postID;
+        this.authorID = authorID;
+        this.caption = caption;
+        this.creationDate = creationDate;
+    }
+
+    public Commenting() {
+        
+    }
 
     // Getters
     public int getCommentID() {
@@ -66,5 +85,9 @@ public class Commenting {
 
     public void setCreationDate(Date newCreationDate) {
         this.creationDate = newCreationDate;
+    }
+
+    public void setCommentID(int commentID) {
+        this.commentID = commentID;
     }
 }

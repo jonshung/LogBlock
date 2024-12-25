@@ -1,16 +1,18 @@
 package com.logblock.backend.AuthenticationService;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.logblock.backend.DataSource.Model.User;
-import com.logblock.backend.DataSource.Repository.UserRepository;
+import com.logblock.backend.DataSource.Model.Profile;
+import com.logblock.backend.DataSource.Repository.ProfileRepository;
 
 @Service
 public class AccountService {
 
     @Autowired
-    private UserRepository userRepository;
+    private ProfileRepository userRepository;
 
     /**
      * Create a new user account.
@@ -20,15 +22,20 @@ public class AccountService {
      */
     public int createAccount(String email) {
         // Create a new user with default or provided values
-        User newUser = new User();
-        newUser.setUserEmail(email);
-        newUser.setDisplayName(email.split("@")[0]); // Example of setting a username based on the email
-        newUser.setBioDesc("New user bio.");
-        newUser.setProfileImg("defaultProfilePic.png");
-        newUser.setPrivLevel(1); // Default user privilege level
-
+        Profile newUser = new Profile(email, email.split("@")[0], "New user bio.", "defaultProfilePic.png", 0);
         userRepository.addUser(newUser);
         return newUser.getUserID();
+    }
+
+    /**
+     * Check if an account exists by email.
+     * 
+     * @param email
+     * @return
+     */
+    public boolean accountExistsByEmail(String email) {
+        Optional<Profile> u = userRepository.findUserByUserEmail(email);
+        return u.isPresent();
     }
 
     /**

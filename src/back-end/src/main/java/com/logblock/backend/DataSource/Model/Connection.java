@@ -23,6 +23,22 @@ public class Connection {
     @Column(name = "connectiondate")
     private Date connectionDate;
 
+    /**
+     * 
+     * @param connectorID
+     * @param connectedID
+     * @param connectionDate
+     */
+    public Connection(int connectorID, int connectedID, Date connectionDate) {
+        this.connectorID = connectorID;
+        this.connectedID = connectedID;
+        this.connectionDate = connectionDate;
+    }
+
+    public Connection() {
+        
+    }
+
     // Getters
     public int getConnectorID() {
         return connectorID;

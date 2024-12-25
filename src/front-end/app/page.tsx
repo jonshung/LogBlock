@@ -1,46 +1,12 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
 import ConnectorsBox from "@/app/components/connectors/connectors-box";
-import React from "react";
-import CreatePost,{ triggerOpenDialog  } from "@/app/components/home/create-post";
-import Post from "@/app/components/posts/post"
-
-interface Media {
-    mediaID: number;
-    mediaURI: string;
-}
-
-interface Tag {
-    userID: number;
-    username: string;
-}
-
-interface PostData {
-    postID: number;
-    originalAuthor: number;
-    authorName: string;
-    authorAvatar: string;
-    postCaption: string;
-    postCreation: string;
-    postLastUpdate: string;
-    media: Media[];
-    upvoteCount: number;
-    tags: Tag[];
-    comments: Comment[];
-}
-
-interface Comment {
-    commentID: number;
-    commentAuthor: number;
-    commentCaption: string;
-    commentCreation: string;
-    authorName: string;
-    authorAvatar: string;
-}
+import CreatePost, { triggerOpenDialog } from "@/app/components/home/create-post";
+import { PostData, Comment } from "./interfaces/common-interfaces";
 
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
@@ -122,7 +88,6 @@ export default function Page() {
                     <CreatePost/>
                 </div>
             </div>
-            {/* <div className="w-[750px] h-[1000px] bg-[#f4f4f4] rounded-[15px] absolute top-[200px] left-[558px]"></div> */}
             {/* Vùng hiển thị bài đăng */}
             <div className="absolute top-[200px] left-[558px] w-[750px]">
                 {posts.map((post) => (

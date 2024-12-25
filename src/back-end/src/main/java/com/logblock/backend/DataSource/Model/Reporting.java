@@ -25,6 +25,22 @@ public class Reporting {
     @Column(name="reportdate")
     private Date reportedDate;
 
+    /**
+     * 
+     * @param reporterID
+     * @param reportedPostID
+     * @param reportedDate
+     */
+    public Reporting(int reporterID, int reportedPostID, Date reportedDate) {
+        this.reporterID = reporterID;
+        this.reportedPostID = reportedPostID;
+        this.reportedDate = reportedDate;
+    }
+
+    public Reporting() {
+        
+    }
+
     // Getters
     public int getReportID() {
         return reportID;
@@ -53,5 +69,9 @@ public class Reporting {
 
     public void setReportedPostID(int newReportedPostID) {
         this.reportedPostID = newReportedPostID;
+    }
+
+    public void setReportID(int reportID) {
+        this.reportID = reportID;
     }
 }
