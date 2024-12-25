@@ -3,31 +3,31 @@ import ConnectorsSearch from "@/app/components/connectors/connectors-search";
 
 export default function ConnectorsBox() {
     return (
-        <div className="fixed w-[505px] h-[846px] left-[1336px] top-[90px] bg-[#f4f4f4] rounded-[15px]">
-            <div className="relative flex items-center w-[465px] h-[64px] left-[20px]">
-                <p className="text-black text-xl font-normal">Connectors</p>
-                <span className="w-[105px]" />
-                {/* Search box */}
-                <ConnectorsSearch />
-            </div>
-            {/* Connectors */}
-            <div className="relative w-[470px] h-[772px] left-[20px] overflow-x-hidden overflow-y-auto">
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
-                <ConnectorsCard />
+        <div className="relative w-full top-[90px] mx-[20px] mb-[20px] bg-[#f4f4f4] rounded-[15px]">
+            <div className="mx-[20px]">
+                <div className="flex items-center grid grid-cols-2 w-full h-[64px] left-[20px]">
+                    <p className="text-black text-xl font-normal">Connectors</p>
+                    <ConnectorsSearch />
+                </div>
+                <div className="relative w-full overflow-x-hidden overflow-y-auto">
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                    <ConnectorsCard />
+                </div>
+                <div className="w-full h-[10px] bg-[#f4f4f4]" />
             </div>
         </div>
     );

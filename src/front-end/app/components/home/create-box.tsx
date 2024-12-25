@@ -1,44 +1,195 @@
 "use client";
 
-import { triggerOpenDialog } from "./create-post";
-import CreatePost from "@/app/components/home/create-post";
-// import CreatePostTemp from "@/app/components/home/create-post-temp";
-
-// import { useState } from "react";
+import { useState } from "react";
 
 export default function CreateBox() {
-    // const [state, setPopup] = useState(false);
+    const [dialogue, setDialogue] = useState(false);
+    const [confirmDialogue, setConfirmDialogue] = useState(false);
+    const [create, setCreate] = useState(false);
+    const [media, setMedia] = useState<FileList | null>(null);
 
-    // const togglePopup = () => {
-    //     setPopup(!state);
-    // }
+    const toggleUp = () => {
+        setCreate(false);
+        setDialogue(!dialogue);
+    }
+
+    const handleCancel = () => {
+        setConfirmDialogue(!confirmDialogue);
+    }
+
+    const handleCreate = () => {
+        setCreate(!create);
+        setConfirmDialogue(false);
+        setDialogue(false);
+    }
+
+    const handleDiscard = () => {
+        setConfirmDialogue(!confirmDialogue);
+        setDialogue(!dialogue);
+    }
+
+    const handleCancelConfirmDialogue = () => {
+        setConfirmDialogue(!confirmDialogue);
+    }
+
+    const handleMediaUploaded = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setMedia(e.target.files);
+        }
+    }
+
+    const handleMediaRemoved = (file: File) => {
+        if (media) {
+            const newMedia = Array.from(media).filter(f => f !== file);
+            const dataTransfer = new DataTransfer();
+            newMedia.forEach(file => dataTransfer.items.add(file));
+            setMedia(dataTransfer.files.length ? dataTransfer.files : null);
+        }
+    }
 
     return (
         <>
-            <div
-                onClick={triggerOpenDialog}
-                style={{ cursor: "pointer" }}
-                className="absolute flex items-center left-[558px] top-[90px] w-[750px] h-[90px] bg-[#f4f4f4] rounded-[15px]"
-            >
-                <img
-                    src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/chocoCaro_mmmpkq.png"
-                    width={50}
-                    height={50}
-                    className="ml-[25px]"
-                />
-                <span className="w-[15px]" />
-                <p className="text-xl text-[#3a3a3a]">What do you think?</p>
-                <CreatePost />
+            <div className="absolute flex items-start w-full h-full top-[90px]">
+                <div
+                    onClick={toggleUp}
+                    style={{ cursor: "pointer" }}
+                    className="flex items-center w-full h-[90px] bg-[#f4f4f4] rounded-[15px]"
+                >
+                    <img
+                        src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/chocoCaro_mmmpkq.png"
+                        width={50}
+                        height={50}
+                        className="ml-[25px]"
+                    />
+                    <span className="w-[15px]" />
+                    <p className="text-xl text-[#3a3a3a]">What do you think?</p>
+                </div>
             </div>
 
-            {/* {state && (
+            {dialogue && (
                 <div className="fixed h-screen w-screen left-0 top-0 bg-[#a6a6a6] bg-opacity-70 z-50">
-                    <CreatePostTemp />
-                    <button onClick={togglePopup} className="absolute top-[50px] right-[50px] text-black bg-[#f4f4f4] rounded-[15px] p-[10px]">
-                        Close
-                    </button>
+                    <div className="flex items-center justify-center h-screen w-screen left-0 top-0">
+                        <div className="relative w-[1000px] h-[856px] bg-white rounded-[15px]">
+                            <div className="flex items-center justify-between h-[50px] mx-[10px]">
+                                <p
+                                    onClick={handleCancel}
+                                    className="text-xl text-[#b0b0b0] font-bold hover:cursor-pointer"
+                                >
+                                    Cancel
+                                </p>
+                                <p className="text-[1.625rem] text-black font-bold">Create new post</p>
+                                <p
+                                    onClick={handleCreate}
+                                    className="text-xl text-[#0195F7] font-bold hover:cursor-pointer"
+                                >
+                                    Create
+                                </p>
+                            </div>
+                            <hr className="border border-[#b0b0b0]" />
+                            <div className="grid w-[960px] h-[771px] ml-[20px] mt-[15px]">
+                                <div>
+                                    <p className="ml-[7px] text-[1.1875rem] text-black font-bold">Content</p>
+                                    <textarea
+                                        name="content"
+                                        placeholder="Type something here..."
+                                        className="w-full h-[350px] p-[10px] text-black border border-[#b0b0b0] rounded-[15px] resize-none"
+                                    />
+                                </div>
+                                <div>
+                                    <p className="ml-[7px] text-[1.1875rem] text-black font-bold">Tags</p>
+                                    <textarea
+                                        name="tags"
+                                        placeholder="Tag someone here..."
+                                        className="w-full h-[40px] px-[10px] py-[7px] text-black border border-[#b0b0b0] rounded-[15px] resize-none"
+                                    />
+                                </div>
+                                <div>
+                                    <p className="ml-[7px] text-[1.1875rem] text-black font-bold">Media</p>
+                                    <div className="w-full h-[270px] text-black border border-[#b0b0b0] rounded-[15px] resize-none">
+                                        {media ? (
+                                            <div className="flex grid-cols-3 gap-[15px] p-[15px]">
+                                                {Array.from(media).map((file) => (
+                                                    <div className="relative">
+                                                        <img
+                                                            src={URL.createObjectURL(file)}
+                                                            alt={file.name}
+                                                            width={300}
+                                                            height={300}
+                                                            className="object-cover rounded-[15px]"
+                                                        />
+                                                        <img
+                                                            src="https://img.icons8.com/?size=18&id=81432&format=png&color=000000"
+                                                            onClick={() => handleMediaRemoved(file)}
+                                                            className="absolute right-[5px] top-[5px] cursor-pointer"
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <div className="relative flex items-center justify-center w-full h-full">
+                                                <div className="flex grid gap-[15px] justify-center w-full h-full">
+                                                    <img
+                                                        src="https://img.icons8.com/?size=100&id=cD26kdwTbCzt&format=png&color=000000"
+                                                        className="absolute left-[408px] top-[40px] transform scale-x-[-1] rotate-[-5deg]"
+                                                    />
+                                                    <img
+                                                        src="https://img.icons8.com/?size=80&id=11322&format=png&color=000000"
+                                                        className="absolute left-[483px] top-[42px] transform rotate-[-10deg]"
+                                                    />
+                                                    <div className="absolute w-[75px] h-[75.5px] left-[454.5px] top-[73px] rounded-[15px] bg-white rotate-[5deg]" />
+                                                    <img
+                                                        src="https://img.icons8.com/?size=100&id=7qnxH7kdZG9g&format=png&color=000000"
+                                                        className="absolute left-[442px] top-[55px] rotate-[5deg]"
+                                                    />
+                                                    <p className="absolute left-[305px] top-[155px] text-[1.5rem] font-bold">Drag photos/videos/files here</p>
+                                                    <button className="absolute left-[375px] top-[200px] w-[200px] h-[35px] text-white font-bold bg-[#0195f7] rounded-[15px]">
+                                                        Select from computer
+                                                    </button>
+                                                </div>
+                                                <input
+                                                    name="media"
+                                                    type="file"
+                                                    accept="image/*, video/*"
+                                                    onChange={handleMediaUploaded}
+                                                    multiple
+                                                    className="absolute w-full h-full left-0 top-0 opacity-0"
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            )} */}
+            )}
+
+            {(confirmDialogue && !create) && (
+                <div className="fixed h-screen w-screen left-0 top-0 bg-[#a6a6a6] bg-opacity-70 z-50">
+                    <div className="flex items-center justify-center h-screen w-screen left-0 top-0">
+                        <div className="w-[600px] h-[300px] bg-white rounded-[15px]">
+                            <div className="flex flex-col items-center justify-center w-full h-[180px] text-black">
+                                <p className="text-3xl font-bold">Discard post?</p>
+                                <p className="text-xl font-medium">If you leave, your edits will not be saved.</p>
+                            </div>
+                            <hr className="border border-[#d0d0d0]" />
+                            <button
+                                onClick={handleDiscard}
+                                className="w-full h-[58px] text-xl text-[#ff0000] font-medium hover:bg-[#f9f9f9]"
+                            >
+                                Discard
+                            </button>
+                            <hr className="border border-[#d0d0d0]" />
+                            <button
+                                onClick={handleCancelConfirmDialogue}
+                                className="w-full h-[58px] text-xl text-black font-medium rounded-b-[15px] hover:bg-[#f9f9f9]"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
