@@ -10,6 +10,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -36,5 +37,8 @@ public class OAuthSucessHandler implements AuthenticationSuccessHandler {
             ":" +
             env.getProperty("logblock.front-end-integration.port")
         );
+        Cookie session_id = new Cookie("JSESSIONID", request.getSession().getId());
+        session_id.setHttpOnly(true);
+        response.addCookie(session_id);
     }
 }
