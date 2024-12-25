@@ -120,7 +120,7 @@ export default function Page() {
             <CreateBox />
         
             {/* Vùng hiển thị bài đăng */}
-            <div className="absolute top-[200px] left-[558px] w-[750px]">
+            <div className="absolute top-[200px] w-[750px]">
                 {posts.map((post) => (
                     <Post
                         key={post.postID}
