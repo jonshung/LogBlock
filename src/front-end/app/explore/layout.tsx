@@ -13,19 +13,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <div>
-          <Header />
-          <div className="flex grid grid-cols-3 h-screen">
-            <SideNav />
-            <div>{children}</div>
-            <div className="relative flex justify-center">
-              <SearchBox />
-            </div>
-          </div>
+      <>
+        <div>{children}</div>
+        <div className="relative flex justify-center">
+            <SearchBox />
         </div>
-      </body>
-    </html>
+      </>
   );
 }

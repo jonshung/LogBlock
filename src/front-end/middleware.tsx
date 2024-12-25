@@ -10,7 +10,12 @@ export async function middleware(request: NextRequest) {
     const isInProtected = protectedRoutes.includes(path);
     if(isInProtected && USE_AUTH == "1") {
         try {
-            const authorization_test = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME}:${process.env.BACKEND_PORT}`);
+            let authorization_test = null;
+            try {
+                authorization_test = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME}:${process.env.BACKEND_PORT}`);
+            } catch(e) {
+                // nothing
+            }
             if(authorization_test != null && authorization_test.status == HttpStatusCode.FORBIDDEN_403) {
                 return NextResponse.redirect(new URL("/auth", request.nextUrl));
             }

@@ -4,7 +4,6 @@ import "@/app/globals.css";
 
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
-import ConnectorsBox from "@/app/components/connectors/connectors-box";
 
 export const metadata: Metadata = {
   title: "LogBlock",
@@ -19,10 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <div className="flex grid grid-cols-3 h-screen">
             <SideNav />
-            <div>{children}</div>
-            <div className="relative flex justify-center">
-              <ConnectorsBox />
-            </div>
+            {children}
           </div>
         </div>}
       </body>

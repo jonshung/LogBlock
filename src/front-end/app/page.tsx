@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { PostData, Comment } from "./interfaces/common-interfaces";
 //import Post from "./components/posts/post";
 import CreateBox from "./components/home/create-box";
+import ConnectorsBox from "./components/connectors/connectors-box";
 
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
@@ -90,22 +91,28 @@ export default function Page() {
 
     
     return (
-        <main className="relative w-full h-full">
-            <CreateBox />
-        
-            {/* Vùng hiển thị bài đăng */}
-            <div className="absolute top-[200px] w-[750px]">
-                {/*posts.map((post) => (
-                    <Post
-                        key={post.postID}
-                        post={post}
-                        addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
-                        deletePost={deletePost}
-                        onSave={handleSaveEditPost}
-                        onSave={handleSaveEditPost}
-                    />
-                ))*/}
+        <>
+            <div className="relative w-full h-full">
+                <CreateBox />
+            
+                {/* Vùng hiển thị bài đăng */}
+                <div className="absolute top-[200px] w-[750px]">
+                    {/*posts.map((post) => (
+                        <Post
+                            key={post.postID}
+                            post={post}
+                            addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
+                            deletePost={deletePost}
+                            onSave={handleSaveEditPost}
+                            onSave={handleSaveEditPost}
+                        />
+                    ))*/}
+                </div>
             </div>
-        </main>
+
+            <div className="relative flex justify-center">
+                <ConnectorsBox />
+            </div>
+        </>
     );
 }
