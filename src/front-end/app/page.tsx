@@ -3,10 +3,8 @@
 import React, { useEffect, useState } from "react";
 
 import { PostData, Comment } from "./interfaces/common-interfaces";
-import Post from "./components/posts/post";
-
-import { PostData, Comment} from '@/app/interfaces/common-interfaces';
-
+//import Post from "./components/posts/post";
+import CreateBox from "./components/home/create-box";
 
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
@@ -91,20 +89,13 @@ export default function Page() {
     };
 
     
-    const handleSaveEditPost = (updatedPost: PostData) => {
-        setPosts(prevPosts =>
-            prevPosts.map(post => (post.postID === updatedPost.postID ? updatedPost : post))
-        );
-    };
-
-    
     return (
         <main className="relative w-full h-full">
             <CreateBox />
         
             {/* Vùng hiển thị bài đăng */}
             <div className="absolute top-[200px] w-[750px]">
-                {posts.map((post) => (
+                {/*posts.map((post) => (
                     <Post
                         key={post.postID}
                         post={post}
@@ -113,7 +104,7 @@ export default function Page() {
                         onSave={handleSaveEditPost}
                         onSave={handleSaveEditPost}
                     />
-                ))}
+                ))*/}
             </div>
         </main>
     );
