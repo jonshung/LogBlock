@@ -18,6 +18,20 @@ public class PostingTagging {
     @Column(name = "tagTargetid")
     private int tagTargetID;
 
+    /**
+     * 
+     * @param postID
+     * @param tagTargetID
+     */
+    public PostingTagging(int postID, int tagTargetID) {
+        this.postID = postID;
+        this.tagTargetID = tagTargetID;
+    }
+
+    public PostingTagging() {
+        
+    }
+
     public int getPostID() {
         return postID;
     }

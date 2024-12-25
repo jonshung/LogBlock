@@ -1,13 +1,17 @@
 package com.logblock.backend.Controllers;
 
-import com.logblock.backend.FeedsGenerationService.NewFeedService;
-import com.logblock.backend.FeedsGenerationService.ExplorationFeedService;
-import com.logblock.backend.DataSource.Model.Posting;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.logblock.backend.DataSource.Model.Posting;
+import com.logblock.backend.FeedsGenerationService.ExplorationFeedService;
+import com.logblock.backend.FeedsGenerationService.NewFeedService;
 
 @RestController
 @RequestMapping("/feeds")
@@ -28,7 +32,7 @@ public class FeedsController {
     @GetMapping("/news/{userID}")
     public ResponseEntity<List<Posting>> generateNewsFeed(@PathVariable int userID) {
         List<Posting> posts = newsFeedService.generate(userID);
-        return posts != null ? ResponseEntity.ok(posts) : ResponseEntity.noContent().build();
+        return posts != null ? ResponseEntity.ok(posts) : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -39,6 +43,6 @@ public class FeedsController {
     @GetMapping("/exploration")
     public ResponseEntity<List<Posting>> generateExplorationFeed() {
         List<Posting> posts = explorationFeedService.generate();
-        return posts != null ? ResponseEntity.ok(posts) : ResponseEntity.noContent().build();
+        return posts != null ? ResponseEntity.ok(posts) : ResponseEntity.internalServerError().build();
     }
 }

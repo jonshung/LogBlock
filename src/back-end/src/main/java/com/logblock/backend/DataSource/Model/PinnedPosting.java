@@ -23,6 +23,22 @@ public class PinnedPosting {
     @Column(name = "pinneddate")
     private Date pinnedDate;
 
+    /**
+     * 
+     * @param userID
+     * @param postID
+     * @param pinnedDate
+     */
+    public PinnedPosting(int userID, int postID, Date pinnedDate) {
+        this.userID = userID;
+        this.postID = postID;
+        this.pinnedDate = pinnedDate;
+    }
+
+    public PinnedPosting() {
+        
+    }
+
     public Date getPinnedDate() {
         return pinnedDate;
     }

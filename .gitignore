@@ -1,3 +1,8 @@
 docs/
 pa/
 src/database/postgresql/
+pgdata
+
+compose.yaml
+src/back-end/test.mv.db
+src/back-end/test.trace.db

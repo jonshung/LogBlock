@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.logblock.backend.DataSource.DTO.PostingDTO;
+import com.logblock.backend.DataSource.DTO.ReportingDTO;
 import com.logblock.backend.DataSource.Model.Posting;
 import com.logblock.backend.PostService.PostService;
 
@@ -29,9 +31,9 @@ public class PostController {
      * @return Response with the status of the operation
      */
     @PutMapping("/{postID}")
-    public ResponseEntity<?> updatePost(@PathVariable int postID, @RequestBody Posting postInfo) {
-        int result = postService.updatePost(postID, postInfo);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    public ResponseEntity<?> updatePost(@PathVariable int postID, @RequestBody PostingDTO postInfo) {
+        int result = postService.updatePost(postID, PostingDTO.toPosting(postInfo));
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -41,9 +43,9 @@ public class PostController {
      * @return Response with the newly created post ID
      */
     @PostMapping
-    public ResponseEntity<?> createPost(@RequestBody Posting postInfo) {
+    public ResponseEntity<Integer> createPost(@RequestBody PostingDTO postInfo) {
         int result = postService.createPost(postInfo);
-        return ResponseEntity.ok(result);
+        return result > 0 ? ResponseEntity.ok(result) : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -55,7 +57,7 @@ public class PostController {
     @DeleteMapping("/{postID}")
     public ResponseEntity<?> deletePost(@PathVariable int postID) {
         int result = postService.deletePost(postID);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -65,9 +67,9 @@ public class PostController {
      * @return Response with the post information
      */
     @GetMapping("/{postID}")
-    public ResponseEntity<Posting> retrievePostInfo(@PathVariable int postID) {
+    public ResponseEntity<PostingDTO> retrievePostInfo(@PathVariable int postID) {
         Posting post = postService.getPost(postID);
-        return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
+        return post != null ? ResponseEntity.ok(PostingDTO.toDTO(post)) : ResponseEntity.noContent().build();
     }
 
     /**
@@ -80,7 +82,7 @@ public class PostController {
     @PostMapping("/{postID}/upvote/{userID}")
     public ResponseEntity<?> upvotePost(@PathVariable int postID, @PathVariable int userID) {
         int result = postService.upvotePost(postID, userID);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 
     /**
@@ -90,9 +92,9 @@ public class PostController {
      * @param userID ID of the user reporting the post
      * @return Response with the status of the report
      */
-    @PostMapping("/{postID}/report/{userID}")
-    public ResponseEntity<?> report(@PathVariable int postID, @PathVariable int userID) {
-        int result = postService.reportPost(postID, userID);
-        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    @PostMapping("/report/")
+    public ResponseEntity<?> report(@RequestBody ReportingDTO dto) {
+        int result = postService.reportPost(dto);
+        return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
     }
 }

@@ -1,8 +1,11 @@
 package com.logblock.backend.ProfileService;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.logblock.backend.DataSource.DTO.ConnectionDTO;
 import com.logblock.backend.DataSource.Model.Connection;
 import com.logblock.backend.DataSource.Repository.ConnectionRepository;
 
@@ -19,11 +22,9 @@ public class ConnectionService {
      * @param connectToID ID of the user to connect with
      * @return 1 if connection is created successfully, otherwise 0
      */
-    public int createConnection(int connectorID, int connectToID) {
-        Connection connection = new Connection();
-        connection.setConnectorID(connectorID);
-        connection.setConnectedID(connectToID);
-        connection.setConnectedDate(new java.util.Date());
+    public int createConnection(ConnectionDTO dto) {
+        Connection connection = ConnectionDTO.toConnection(dto);
+        connection.setConnectedDate(new Date());
         connectionRepository.addConnection(connection);
         return 1; // Success
     }

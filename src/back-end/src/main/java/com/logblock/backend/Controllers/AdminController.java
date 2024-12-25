@@ -1,5 +1,6 @@
 package com.logblock.backend.Controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logblock.backend.AdminService.AdminService;
+import com.logblock.backend.DataSource.DTO.ReportingDTO;
 import com.logblock.backend.DataSource.Model.Reporting;
 
 @RestController
@@ -26,9 +28,13 @@ public class AdminController {
      * @return Response with the list of reports
      */
     @GetMapping("/reports")
-    public ResponseEntity<List<Reporting>> retrieveAllReports() {
+    public ResponseEntity<List<ReportingDTO>> retrieveAllReports() {
         List<Reporting> reports = adminService.retrieveAllReports();
-        return ResponseEntity.ok(reports);
+        List<ReportingDTO> ret = new ArrayList<>();
+        for(Reporting r : reports) {
+            ret.add(ReportingDTO.toDTO(r));
+        }
+        return ResponseEntity.ok(ret);
     }
 
     /**

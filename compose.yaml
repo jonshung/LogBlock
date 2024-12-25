@@ -13,6 +13,8 @@ services:
       - app
     depends_on:
       - db
+    environment:
+      - IS_COMPOSE="true"
     restart: always
   
   db:

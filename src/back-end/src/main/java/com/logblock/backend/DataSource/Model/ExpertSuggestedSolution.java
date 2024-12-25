@@ -33,6 +33,27 @@ public class ExpertSuggestedSolution {
     @Column(name = "solutionlastupdate")
     private Date solutionLastModifiedDate;
 
+    /**
+     * 
+     * @param postID
+     * @param solutionAuthor
+     * @param solutionCaption
+     * @param solutionCreationDate
+     * @param solutionLastModifiedDate
+     */
+    public ExpertSuggestedSolution(int postID, int solutionAuthor, String solutionCaption,
+            Date solutionCreationDate, Date solutionLastModifiedDate) {
+        this.postID = postID;
+        this.solutionAuthor = solutionAuthor;
+        this.solutionCaption = solutionCaption;
+        this.solutionCreationDate = solutionCreationDate;
+        this.solutionLastModifiedDate = solutionLastModifiedDate;
+    }
+
+    public ExpertSuggestedSolution() {
+        
+    }
+
     // Getters
     public int getSolID() {
         return solutionID;
@@ -61,6 +82,10 @@ public class ExpertSuggestedSolution {
     // Setters
     public void setSolAuthor(int newSolAuthor) {
         this.solutionAuthor = newSolAuthor;
+    }
+
+    public void setSolutionID(int solutionID) {
+        this.solutionID = solutionID;
     }
 
     public void setSolCaption(String newSolCaption) {

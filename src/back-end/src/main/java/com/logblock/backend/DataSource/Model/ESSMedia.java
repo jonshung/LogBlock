@@ -27,6 +27,22 @@ public class ESSMedia {
     @Column(name = "solutionmediauri")
     private String solutionMediaURI;
 
+    /**
+     * 
+     * @param postID
+     * @param solutionID
+     * @param solutionMediaURI
+     */
+    public ESSMedia(int postID, int solutionID, String solutionMediaURI) {
+        this.postID = postID;
+        this.solutionID = solutionID;
+        this.solutionMediaURI = solutionMediaURI;
+    }
+
+    public ESSMedia() {
+        
+    }
+
     public int getPostID() {
         return postID;
     }
@@ -41,6 +57,18 @@ public class ESSMedia {
 
     public String getSolutionMediaURI() {
         return solutionMediaURI;
+    }
+
+    public void setPostID(int postID) {
+        this.postID = postID;
+    }
+
+    public void setSolutionID(int solutionID) {
+        this.solutionID = solutionID;
+    }
+
+    public void setSolutionMediaID(int solutionMediaID) {
+        this.solutionMediaID = solutionMediaID;
     }
 
     public void setSolutionMediaURI(String solutionMediaURI) {
