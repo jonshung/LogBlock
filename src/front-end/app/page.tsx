@@ -17,14 +17,14 @@ export default function Page() {
                 postID: 1,
                 originalAuthor: 101,
                 authorName: 'Nguyễn Văn A',
-                authorAvatar: 'https://via.placeholder.com/50',
+                authorAvatar: 'https://img.icons8.com/?size=100&id=23264&format=png&color=000000',
                 postCaption: 'Đây là bài đăng đầu tiên của tôi!',
                 postCreation: '2024-12-23',
                 postLastUpdate: '2024-12-23',
                 media: [
                     {
                         mediaID: 1,
-                        mediaURI: 'https://via.placeholder.com/500',
+                        mediaURI: 'https://img.icons8.com/?size=100&id=c4coyqckQ4EU&format=png&color=000000',
                     },
                 ],
                 upvoteCount: 10,
@@ -41,7 +41,7 @@ export default function Page() {
                         commentCaption: 'Bài đăng thú vị quá!',
                         commentCreation: '2024-12-23T12:00:00',
                         authorName: 'Lê Văn C',
-                        authorAvatar: 'https://via.placeholder.com/50',
+                        authorAvatar: 'https://img.icons8.com/?size=100&id=23240&format=png&color=000000',
                     },
                     {
                         commentID: 2,
@@ -49,9 +49,22 @@ export default function Page() {
                         commentCaption: 'Tôi đồng ý!',
                         commentCreation: '2024-12-23T13:00:00',
                         authorName: 'Nguyễn Thị D',
-                        authorAvatar: 'https://via.placeholder.com/50',
+                        authorAvatar: 'https://img.icons8.com/?size=100&id=2zX81vvl75DJ&format=png&color=000000',
                     },
                 ],
+            },
+            {
+                postID: 2,
+                originalAuthor: 102,
+                authorName: "Trần Thị B",
+                authorAvatar: "https://img.icons8.com/?size=100&id=23264&format=png&color=000000",
+                postCaption: "Đây là bài đăng thứ hai của tôi!",
+                postCreation: "2024-12-24",
+                postLastUpdate: "2024-12-24",
+                media: [],
+                upvoteCount: 20,
+                tags: [],
+                comments: [],
             },
         ];
 
@@ -67,6 +80,11 @@ export default function Page() {
             )
         );
     };
+
+    const deletePost = (postID: number) => {
+        setPosts((prevPosts) => prevPosts.filter((post) => post.postID !== postID));
+    };
+
 
     return (
         <main>
@@ -96,6 +114,7 @@ export default function Page() {
                         key={post.postID}
                         post={post}
                         addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
+                        deletePost={deletePost}
                     />
                 ))}
             </div>
