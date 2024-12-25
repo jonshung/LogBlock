@@ -13,6 +13,7 @@ import com.logblock.backend.DataSource.DTO.ProfileDTO;
 import com.logblock.backend.DataSource.Model.Profile;
 import com.logblock.backend.ProfileService.ProfileService;
 
+
 @RestController
 @RequestMapping("/profiles")
 public class ProfileController {
@@ -57,4 +58,14 @@ public class ProfileController {
         Profile profile = profileService.getProfileByID(userID);
         return profile != null ? ResponseEntity.ok(ProfileDTO.toDTO(profile)) : ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/")
+    public ResponseEntity<Integer> getMe() {
+        Profile u = profileService.getMe();
+        if(u == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(u.getUserID());
+    }
+    
 }

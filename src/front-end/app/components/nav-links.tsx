@@ -17,7 +17,12 @@ const links = [
 
 export default function NavLinks() {
     const pathname = usePathname();
-
+    let current = "";
+    links.map((link) => {
+        if(pathname.startsWith(link.href) && link.href.length > current.length) {
+            current = link.href;
+        }
+    });
     return (
         <>
             {links.map((link) => {
@@ -26,7 +31,7 @@ export default function NavLinks() {
                         key={link.name}
                         href={link.href}
                     >
-                        {pathname === link.href ? <img src={link.icon_main} /> : <img src={link.icon_sub} />}
+                        {link.href === current ? <img src={link.icon_main} /> : <img src={link.icon_sub} />}
                     </Link>
                 )
             })}

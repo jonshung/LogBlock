@@ -2,9 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 
-import Header from "@/app/components/header";
-import SideNav from "@/app/components/sidenav";
-import ConnectorsBox from "@/app/components/connectors/connectors-box";
 import CreateBox from "@/app/components/home/create-box";
 
 interface Media {
