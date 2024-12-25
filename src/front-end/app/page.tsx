@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 import { PostData, Comment } from "./interfaces/common-interfaces";
 import Post from "./components/posts/post";
 
+import { PostData, Comment} from '@/app/interfaces/common-interfaces';
+
+
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
     useEffect(() => {
@@ -88,6 +91,13 @@ export default function Page() {
     };
 
     
+    const handleSaveEditPost = (updatedPost: PostData) => {
+        setPosts(prevPosts =>
+            prevPosts.map(post => (post.postID === updatedPost.postID ? updatedPost : post))
+        );
+    };
+
+    
     return (
         <main className="relative w-full h-full">
             <CreateBox />
@@ -100,6 +110,7 @@ export default function Page() {
                         post={post}
                         addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
                         deletePost={deletePost}
+                        onSave={handleSaveEditPost}
                         onSave={handleSaveEditPost}
                     />
                 ))}
