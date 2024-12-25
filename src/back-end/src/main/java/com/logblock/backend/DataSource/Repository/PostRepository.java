@@ -36,7 +36,7 @@ public interface PostRepository extends JpaRepository<Posting, Integer> {
      *
      * @return List of trending votes
      */
-    @Query("SELECT p FROM Posting p INNER JOIN PostingUpvote up ON p.postID == up.postID WHERE CURRENT_DATE - up.upvoteDate <= 14 GROUP BY p.postID ORDER BY COUNT(up.upvoterID) DESC")
+    @Query("SELECT p FROM Posting p INNER JOIN PostingUpvote up ON p.postID = up.postID WHERE CURRENT_DATE - up.upvoteDate <= 14 GROUP BY p.postID ORDER BY COUNT(up.upvoterID) DESC")
     List<Posting> findTrendingPosts();
 
     /**
