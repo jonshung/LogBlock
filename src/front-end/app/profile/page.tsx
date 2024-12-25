@@ -1,5 +1,3 @@
-import Header from "@/app/components/header";
-import SideNav from "@/app/components/sidenav";
 export const dynamic = 'force-dynamic'
 
 interface ProfileData {
@@ -12,16 +10,17 @@ interface ProfileData {
 };
 
 export default async function Page() {
-    const data = await fetch("http://back-end:8080/profiles/1");
-    const parsed: ProfileData = await data.json();
-    const name = parsed.displayName;
+    // const data = await fetch("http://back-end:8080/profiles/1");
+    // const parsed: ProfileData = await data.json();
+    // const name = parsed.displayName;
+    // const connectors = 50;
+    // const bio = parsed.bioDesc;
+    const name = "chocoCaro";
     const connectors = 50;
-    const bio = parsed.bioDesc;
+    const bio = "My passion for Python is boundless";
 
     return (
         <main>
-            <Header />
-            <SideNav />
             <div className="fixed w-[750px] h-[1000px] left-[558px] top-[90px]">
                 <div className="relative flex flex-col items-center h-[190px] px-[25px] bg-[#f4f4f4] rounded-[15px]">
                     <div className="flex items-start h-[100px] my-[20px]">

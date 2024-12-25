@@ -4,7 +4,7 @@ import "@/app/globals.css";
 
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
-import ConnectorsBox from "@/app/components/connectors/connectors-box";
+import SearchBox from "@/app/components/search/search-box";
 
 export const metadata: Metadata = {
   title: "LogBlock",
@@ -15,18 +15,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        {<div>
+        <div>
           <Header />
           <div className="flex grid grid-cols-3 h-screen">
             <SideNav />
             <div>{children}</div>
             <div className="relative flex justify-center">
-              <ConnectorsBox />
+              <SearchBox />
             </div>
           </div>
-        </div>}
+        </div>
       </body>
     </html>
-
   );
 }

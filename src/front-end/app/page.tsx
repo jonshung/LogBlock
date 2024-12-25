@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
 import ConnectorsBox from "@/app/components/connectors/connectors-box";
-import CreatePost, { triggerOpenDialog } from "@/app/components/home/create-post";
+import CreateBox from "@/app/components/home/create-box";
 
 interface Media {
     mediaID: number;
@@ -113,28 +113,10 @@ export default function Page() {
     };
 
     return (
-        <main>
-            <Header />
-            <SideNav />
-            <ConnectorsBox />
-            <div className="absolute flex items-center left-[558px] top-[90px] w-[750px] h-[90px] bg-[#f4f4f4] rounded-[15px]">
-                <img
-                    src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/chocoCaro_mmmpkq.png"
-                    width={50}
-                    height={50}
-                    className="ml-[25px]"
-                />
-                <span className="w-[15px]" />
-                <div>
-                    <button
-                        className="text-xl text-[#3a3a3a]"
-                        onClick={triggerOpenDialog}
-                    >What do you think?</button>
-                    <CreatePost />
-                </div>
-            </div>
+        <main className="relative w-full h-full">
+            <CreateBox />
             {/* Vùng hiển thị bài đăng */}
-            <div className="absolute top-[200px] left-[558px] w-[750px]">
+            <div className="w-full">
                 {/* {posts.map((post) => (
                     <Post key={post.postID} post={post} 
                     addComment={(newComment: Comment) =>
