@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import { fetchAuthorized, getSession, session_token_name } from "../utils/AuthorizationCode";
+import { fetchAuthorized } from "../utils/AuthorizationCode";
 import HttpStatusCode from "../utils/HTTPStatusCode";
 
 export default async function Page() {

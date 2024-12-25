@@ -3,7 +3,7 @@ import SideNav from "@/app/components/sidenav";
 import { ProfileData } from "../../interfaces/common-interfaces";
 import { notFound } from 'next/navigation'
 import HttpStatusCode from "@/app/utils/HTTPStatusCode";
-import { fetchAuthorized, getSession, session_token_name } from "@/app/utils/AuthorizationCode";
+import { fetchAuthorized } from "@/app/utils/AuthorizationCode";
 
 export const dynamic = 'force-dynamic'
 

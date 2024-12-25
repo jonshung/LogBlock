@@ -2,11 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 
-import CreateBox from "@/app/components/home/create-box";
+import { PostData, Comment } from "./interfaces/common-interfaces";
 import Post from "./components/posts/post";
-
-import { PostData, Comment} from '@/app/interfaces/common-interfaces';
-
 
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
