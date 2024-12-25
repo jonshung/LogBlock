@@ -5,38 +5,8 @@ import React, { useEffect, useState } from "react";
 import CreateBox from "@/app/components/home/create-box";
 import Post from "./components/posts/post";
 
-interface Media {
-    mediaID: number;
-    mediaURI: string;
-}
+import { PostData, Comment} from '@/app/interfaces/common-interfaces';
 
-interface Tag {
-    userID: number;
-    username: string;
-}
-
-interface PostData {
-    postID: number;
-    originalAuthor: number;
-    authorName: string;
-    authorAvatar: string;
-    postCaption: string;
-    postCreation: string;
-    postLastUpdate: string;
-    media: Media[];
-    upvoteCount: number;
-    tags: Tag[];
-    comments: Comment[];
-}
-
-interface Comment {
-    commentID: number;
-    commentAuthor: number;
-    commentCaption: string;
-    commentCreation: string;
-    authorName: string;
-    authorAvatar: string;
-}
 
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
@@ -114,7 +84,13 @@ export default function Page() {
         setPosts((prevPosts) => prevPosts.filter((post) => post.postID !== postID));
     };
 
+    const handleSaveEditPost = (updatedPost: PostData) => {
+        setPosts(prevPosts =>
+            prevPosts.map(post => (post.postID === updatedPost.postID ? updatedPost : post))
+        );
+    };
 
+    
     return (
         <main className="relative w-full h-full">
             <CreateBox />
@@ -127,6 +103,7 @@ export default function Page() {
                         post={post}
                         addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
                         deletePost={deletePost}
+                        onSave={handleSaveEditPost}
                     />
                 ))}
             </div>
