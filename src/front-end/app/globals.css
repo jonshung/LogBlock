@@ -99,7 +99,13 @@ body {
 }
 
 .comments{
-  width: 120px;
   border-radius: 13px;
+  color: #000000;
+  width: 120px;
 }
 
+.comments-Dialog{
+  width: 100%;
+  border-radius: 13px;
+  color: #000000;
+}

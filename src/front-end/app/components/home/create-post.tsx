@@ -85,6 +85,7 @@ export default function CreatePost() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            zIndex: 1000
           }}
         >
           <div

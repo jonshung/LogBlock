@@ -4,7 +4,7 @@ import { triggerOpenDialog } from "./create-post";
 import CreatePost from "@/app/components/home/create-post";
 // import CreatePostTemp from "@/app/components/home/create-post-temp";
 
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function CreateBox() {
     // const [state, setPopup] = useState(false);

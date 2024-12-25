@@ -7,6 +7,7 @@ import SideNav from "@/app/components/sidenav";
 import ConnectorsBox from "@/app/components/connectors/connectors-box";
 import React from "react";
 import CreatePost,{ triggerOpenDialog  } from "@/app/components/home/create-post";
+import Post from "@/app/components/posts/post"
 
 interface Media {
     mediaID: number;
@@ -85,19 +86,6 @@ export default function Page() {
                     },
                 ],
             },
-            {
-                postID: 2,
-                originalAuthor: 102,
-                authorName: 'Trần Thị B',
-                authorAvatar: 'https://via.placeholder.com/50',
-                postCaption: 'Hôm nay thật tuyệt vời!',
-                postCreation: '2024-12-24',
-                postLastUpdate: '2024-12-24',
-                media: [],
-                upvoteCount: 15,
-                tags: [],
-                comments: []
-            },
         ];
 
         setPosts(mockPosts);
@@ -115,7 +103,7 @@ export default function Page() {
 
     return (
         <main>
-            <Header />
+            <Header/>
             <SideNav />
             <ConnectorsBox />
             <div className="absolute flex items-center left-[558px] top-[90px] w-[750px] h-[90px] bg-[#f4f4f4] rounded-[15px]">
@@ -131,19 +119,19 @@ export default function Page() {
                         className="text-xl text-[#3a3a3a]"
                         onClick={triggerOpenDialog}
                     >What do you think?</button>
-                    <CreatePost />
+                    <CreatePost/>
                 </div>
             </div>
             {/* <div className="w-[750px] h-[1000px] bg-[#f4f4f4] rounded-[15px] absolute top-[200px] left-[558px]"></div> */}
             {/* Vùng hiển thị bài đăng */}
             <div className="absolute top-[200px] left-[558px] w-[750px]">
-                {/* {posts.map((post) => (
-                    <Post key={post.postID} post={post} 
-                    addComment={(newComment: Comment) =>
-                            addCommentToPost(post.postID, newComment)
-                        }
+                {posts.map((post) => (
+                    <Post
+                        key={post.postID}
+                        post={post}
+                        addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
                     />
-                ))} */}
+                ))}
             </div>
         </main>
     );
