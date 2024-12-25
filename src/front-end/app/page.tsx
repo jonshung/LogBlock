@@ -7,6 +7,7 @@ import SideNav from "@/app/components/sidenav";
 import ConnectorsBox from "@/app/components/connectors/connectors-box";
 import CreatePost, { triggerOpenDialog } from "@/app/components/home/create-post";
 import { PostData, Comment } from "./interfaces/common-interfaces";
+import Post from "./components/posts/post";
 
 export default function Page() {
     const [posts, setPosts] = useState<PostData[]>([]);
