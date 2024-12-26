@@ -86,7 +86,10 @@ public class SecurityConfiguration {
 		CorsConfiguration config = new CorsConfiguration();
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
-		config.addAllowedOrigin("http://front-end:3000");
+		config.addAllowedOrigin(
+			env.getProperty("logblock.front-end-integration.server-hostname") + 
+			":" + 
+			env.getProperty("logblock.front-end-integration.server-port"));
 		config.setAllowCredentials(true);
 		source.registerCorsConfiguration("/**", config);
 		return source;

@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from "react";
 
 import CreateBox from "@/app/components/create-box";
-// import Post from "@/app/components/posts/post";
+import Post from "@/app/components/posts/post";
 
-import { PostData, Comment } from '@/app/interfaces/common-interfaces';
+import { PostData, Comment, ProfileData } from '@/app/interfaces/common-interfaces';
+import ConnectorsBox from "../components/connectors/connectors-box";
 
 
 export default function Page() {
@@ -70,6 +71,15 @@ export default function Page() {
         setPosts(mockPosts);
     }, []);
 
+    const mockProfile: ProfileData = {
+        userEmail: "johndoe@gmail.com",
+        displayName: "John Doe",
+        userID: 0,
+        bioDesc: "Hello world",
+        privLevel: 0,
+        profileImage: "https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/Henry_Clauss_hq9ijp.png"
+    };
+
     const addCommentToPost = (postID: number, newComment: Comment) => {
         setPosts((prevPosts) =>
             prevPosts.map((post) =>
@@ -91,21 +101,26 @@ export default function Page() {
     };
 
     return (
-        <main className="relative top-[90px]">
-            <CreateBox />
+        <>
+            <main className="relative top-[90px]">
+                <CreateBox />
 
-            {/* Vùng hiển thị bài đăng */}
-            <div className="w-full">
-                {/* {posts.map((post) => (
-                <Post
-                    key={post.postID}
-                    post={post}
-                    addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
-                    deletePost={deletePost}
-                    onSave={handleSaveEditPost}
-                />
-            ))} */}
-            </div>
-        </main>
+                {/* Vùng hiển thị bài đăng */}
+                <div className="w-full">
+                    { posts.map((post: PostData) => (
+                    <Post
+                        user={mockProfile}
+                        key={post.postID}
+                        post={post}
+                        addComment={(newComment: Comment) => addCommentToPost(post.postID, newComment)}
+                        deletePost={deletePost}
+                        onSave={handleSaveEditPost}
+                    />
+                )) }
+                </div>
+            </main>
+            <ConnectorsBox />
+        </>
+        
     );
 }

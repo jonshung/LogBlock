@@ -53,7 +53,6 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
     };
 
     const handleDeletePost = () => {
-        console.log('Delete post:', post.postID);
         deletePost(post.postID);
         setEditMenuOpen(false);
         setIsEditing(true);

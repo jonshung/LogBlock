@@ -33,9 +33,9 @@ public class OAuthSucessHandler implements AuthenticationSuccessHandler {
         }
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
         response.setHeader("Location", 
-            env.getProperty("logblock.front-end-integration.hostname") + 
+            env.getProperty("logblock.front-end-integration.client-hostname") + 
             ":" +
-            env.getProperty("logblock.front-end-integration.port")
+            env.getProperty("logblock.front-end-integration.client-port")
         );
         Cookie session_id = new Cookie("JSESSIONID", request.getSession().getId());
         session_id.setHttpOnly(true);

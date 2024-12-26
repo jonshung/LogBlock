@@ -9,9 +9,7 @@ export const dynamic = 'force-dynamic'
 
 function ProfileComponent(name: string, bio: string, connectors: number) {
     return (
-        <main>
-            <Header />
-            <SideNav />
+        <>
             <div className="fixed w-[750px] h-[1000px] left-[558px] top-[90px]">
                 <div className="relative flex flex-col items-center h-[190px] px-[25px] bg-[#f4f4f4] rounded-[15px]">
                     <div className="flex items-start h-[100px] my-[20px]">
@@ -32,7 +30,7 @@ function ProfileComponent(name: string, bio: string, connectors: number) {
                     </button>
                 </div>
             </div>
-        </main>
+        </>
     );
 }
 
@@ -44,7 +42,7 @@ async function Page({
     const id = (await params).id;
     let data = null;
     try {
-        data = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME}:${process.env.BACKEND_PORT}/profiles/${id}`);
+        data = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME_SERVER}:${process.env.BACKEND_PORT_SERVER}/profiles/${id}`);
     } catch(e) {
         // nothing
     }

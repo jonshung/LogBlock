@@ -13,8 +13,8 @@ services:
       - app
     depends_on:
       - db
-    environment:
-      - IS_COMPOSE="true"
+    env_file:
+      - ./src/back-end/.env
     restart: always
   
   db:
@@ -45,6 +45,8 @@ services:
       - "3000:3000"
     networks: 
       - app
+    env_file:
+      - ./src/front-end/.env
     restart: always
 
 volumes:
