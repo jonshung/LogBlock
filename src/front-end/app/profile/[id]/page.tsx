@@ -1,9 +1,9 @@
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
 import { ProfileData } from "../../interfaces/common-interfaces";
-import { notFound } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import HttpStatusCode from "@/app/utils/HTTPStatusCode";
-import { fetchAuthorized, getSession, session_token_name } from "@/app/utils/AuthorizationCode";
+import { fetchAuthorized } from "@/app/utils/AuthorizationCode";
 
 export const dynamic = 'force-dynamic'
 
@@ -42,9 +42,14 @@ async function Page({
     params: Promise<{ id: string }>
   }) {
     const id = (await params).id;
-    let data = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME}:${process.env.BACKEND_PORT}/profiles/${id}`);
+    let data = null;
+    try {
+        data = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME}:${process.env.BACKEND_PORT}/profiles/${id}`);
+    } catch(e) {
+        // nothing
+    }
     if(data == null || data.status != HttpStatusCode.OK_200) {
-        return notFound();
+        redirect('/404');
     }
     const parsed: ProfileData = await data.json();
     const name = parsed.displayName;

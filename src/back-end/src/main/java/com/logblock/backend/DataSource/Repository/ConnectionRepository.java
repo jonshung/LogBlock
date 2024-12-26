@@ -91,11 +91,7 @@ public interface ConnectionRepository extends JpaRepository<Connection, Connecti
      */
     @Transactional
     default int removeConnection(ConnectionId connectionID) {
-        Optional<Connection> connectionOpt = findById(connectionID);
-        if (connectionOpt.isPresent()) {
-            delete(connectionOpt.get()); // Delete the connection from the database
-            return 1;
-        }
-        return 0; // Return 0 if connection does not exist
+        this.deleteById(connectionID);
+        return 1;
     }
 }
