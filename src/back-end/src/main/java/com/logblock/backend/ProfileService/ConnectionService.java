@@ -37,7 +37,7 @@ public class ConnectionService {
      * @return 1 if connection is deleted successfully, otherwise 0
      */
     public int deleteConnection(int connectorID, int connectToID) {
-        throw new UnsupportedOperationException("Feature incomplete. Contact assistance.");
-        //return deleteConnection(connectorID, connectToID);
+        throw new UnsupportedOperationException("Feature incomplete. Contactassistance.");
+        // return deleteConnection(connectorID, connectToID);
     }
 }

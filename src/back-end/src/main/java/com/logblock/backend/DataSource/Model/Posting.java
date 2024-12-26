@@ -25,11 +25,11 @@ public class Posting {
 
     @Column(name = "postcreation")
     private Date creationDate;
-    @Column(name="postlastupdate")
+    @Column(name = "postlastupdate")
     private Date lastModifiedDate;
 
     /**
-     * 
+     *
      * @param originalAuthor
      * @param caption
      * @param creationDate
@@ -42,8 +42,16 @@ public class Posting {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public Posting(int postID, String caption, int originalAuthor) {
+        this.postID = postID;
+        this.caption = caption;
+        this.originalAuthor = originalAuthor;
+        this.creationDate = new Date();
+        this.lastModifiedDate = new Date();
+    }
+
     public Posting() {
-        
+
     }
 
     // Getters
@@ -71,7 +79,7 @@ public class Posting {
     public void setAuthorID(int id) {
         this.originalAuthor = id;
     }
-    
+
     public void setPostID(int postID) {
         this.postID = postID;
     }
