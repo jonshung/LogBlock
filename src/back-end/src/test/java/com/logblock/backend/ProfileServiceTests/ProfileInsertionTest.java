@@ -26,7 +26,6 @@ import jakarta.transaction.Transactional;
 @Transactional
 @ActiveProfiles("test")
 public class ProfileInsertionTest {
-   
     // Start from here.
     @Autowired
     private ProfileService profileService;
@@ -36,29 +35,28 @@ public class ProfileInsertionTest {
 
     @Autowired
     private ProfileRepository userRepo;
-    
+
     @Test
     void testScenarioInsertionStandard() {
         // Insertion
         List<List<String>> test_inputs = List.of(
-            List.of(
-                "johndoe@mail.com", // User Email
-                "John Doe", // Display Name
-                "This is John Doe", // Biography description
-                "https://google.com", // Profile image
-                "2" // Privilege level
-            ),
-            List.of(
-                "willsmith@mail.com", // User Email
-                "Will Smith", // Display Name
-                "Will Smith was here", // Biography description
-                "https://example.com/", // Profile image
-                "1" // Privilege level
-            )
-        );
+                List.of(
+                        "johndoe@mail.com", // User Email
+                        "John Doe", // Display Name
+                        "This is John Doe", // Biography description
+                        "https://google.com", // Profile image
+                        "2" // Privilege level
+                ),
+                List.of(
+                        "willsmith@mail.com", // User Email
+                        "Will Smith", // Display Name
+                        "Will Smith was here", // Biography description
+                        "https://example.com/", // Profile image
+                        "1" // Privilege level
+                ));
 
         List<Integer> ids = new ArrayList<>(test_inputs.size());
-        for(List<String> tcase : test_inputs) {
+        for (List<String> tcase : test_inputs) {
             int id = this.accountService.createAccount(tcase.get(0));
             ids.add(id);
             this.profileService.updateDisplayName(id, tcase.get(1));
@@ -69,7 +67,7 @@ public class ProfileInsertionTest {
 
         assertEquals(this.userRepo.findAllUsers().size(), test_inputs.size());
         // Checking
-        for(int i = 0; i < test_inputs.size(); i++) {
+        for (int i = 0; i < test_inputs.size(); i++) {
             List<String> tcase = test_inputs.get(i);
             Profile u = this.profileService.getProfileByEmail(tcase.get(0));
             assertNotNull(u);
