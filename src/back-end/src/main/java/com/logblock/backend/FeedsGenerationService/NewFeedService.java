@@ -2,7 +2,7 @@ package com.logblock.backend.FeedsGenerationService;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +29,30 @@ public class NewFeedService {
     public List<Posting> generate(int userID) {
         // Get the list of connected user IDs
         List<Connection> connectionEntries = connectionRepository.findByConnectorID(userID);
+
+        // Xử lý trường hợp connectionEntries là null
+        if (connectionEntries == null) {
+            return new ArrayList<Posting>(); // Trả về danh sách rỗng nếu không có kết nối
+        }
+
         List<Posting> results = new ArrayList<>();
-        for(Connection c : connectionEntries) {
+        for (Connection c : connectionEntries) {
             List<Posting> posts = postRepository.findPostingsByUserID(c.getConnectedID());
             results.addAll(posts);
         }
         return results;
     }
+
+    // public List<Posting> generate(int userID) {
+    // // Get the list of connected user IDs
+    // List<Connection> connectionEntries =
+    // connectionRepository.findByConnectorID(userID);
+    // List<Posting> results = new ArrayList<>();
+    // for(Connection c : connectionEntries) {
+    // List<Posting> posts =
+    // postRepository.findPostingsByUserID(c.getConnectedID());
+    // results.addAll(posts);
+    // }
+    // return results;
+    // }
 }
