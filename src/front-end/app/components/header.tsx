@@ -21,7 +21,7 @@ export default function Header() {
 
             {currentLink ?
                 <div className="flex justify-center w-full">
-                    <h1 className="absolute left-[894px] text-2xl font-bold">
+                    <h1 className="text-2xl font-bold">
                         {currentLink.name}
                     </h1>
                 </div> : <></>

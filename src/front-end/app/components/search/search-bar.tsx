@@ -1,8 +1,8 @@
 export default function SearchBar() {
     return (
-        <div className="flex w-full h-[50px] bg-[#e8e8e8] rounded-[15px]">
+        <div className="flex items-center w-full h-[50px] bg-[#e8e8e8] rounded-[15px]">
             <img
-                src="https://img.icons8.com/?size=30&id=XU3XKgdpT0qG&format=png&color=000000"
+                src="https://img.icons8.com/?size=30&id=59878&format=png&color=000000"
                 className="ml-[10px]"
             />
             <input

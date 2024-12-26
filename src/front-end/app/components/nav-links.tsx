@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-    { name: "Home", href: "/",
+    { name: "Home", href: "/home",
       icon_main: "https://img.icons8.com/?size=50&id=1iF9PyJ2Thzo&format=png&color=000000",
       icon_sub: "https://img.icons8.com/?size=50&id=1iF9PyJ2Thzo&format=png&color=C4C4C4C4" },
     { name: "Explore", href: "/explore",
