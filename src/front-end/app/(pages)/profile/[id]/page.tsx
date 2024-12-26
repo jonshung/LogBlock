@@ -1,6 +1,6 @@
 import Header from "@/app/components/header";
 import SideNav from "@/app/components/sidenav";
-import { ProfileData } from "../../interfaces/common-interfaces";
+import { ProfileData } from "../../../interfaces/common-interfaces";
 import { redirect } from 'next/navigation'
 import HttpStatusCode from "@/app/utils/HTTPStatusCode";
 import { fetchAuthorized } from "@/app/utils/AuthorizationCode";

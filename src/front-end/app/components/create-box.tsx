@@ -49,7 +49,7 @@ export default function CreateBox() {
 
     return (
         <>
-            <div className="absolute flex items-start w-full h-full top-[90px]">
+            <div className="absolute flex items-start w-full h-full">
                 <div
                     onClick={toggleUp}
                     style={{ cursor: "pointer" }}

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { fetchAuthorized } from "../utils/AuthorizationCode";
-import HttpStatusCode from "../utils/HTTPStatusCode";
+import { fetchAuthorized } from "../../utils/AuthorizationCode";
+import HttpStatusCode from "../../utils/HTTPStatusCode";
 
 export default async function Page() {
     let data = null;

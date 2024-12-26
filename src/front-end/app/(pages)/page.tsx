@@ -90,13 +90,12 @@ export default function Page() {
         );
     };
 
-
     return (
-        <main className="relative w-full h-full">
+        <main className="relative top-[90px]">
             <CreateBox />
 
             {/* Vùng hiển thị bài đăng */}
-            <div className="absolute top-[200px] w-[750px]">
+            <div className="w-full">
                 {/* {posts.map((post) => (
                 <Post
                     key={post.postID}
