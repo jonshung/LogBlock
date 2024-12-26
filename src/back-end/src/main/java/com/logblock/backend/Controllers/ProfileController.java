@@ -59,6 +59,18 @@ public class ProfileController {
         return profile != null ? ResponseEntity.ok(ProfileDTO.toDTO(profile)) : ResponseEntity.noContent().build();
     }
 
+    /**
+     * Retrieve the profile information of a user.
+     *
+     * @param userID ID of the user
+     * @return Response with the profile information
+     */
+    @GetMapping("/email/{userEmail}")
+    public ResponseEntity<ProfileDTO> retrieveProfileInfo(@PathVariable String userEmail) {
+        Profile profile = profileService.getProfileByEmail(userEmail);
+        return profile != null ? ResponseEntity.ok(ProfileDTO.toDTO(profile)) : ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/")
     public ResponseEntity<Integer> getMe() {
         Profile u = profileService.getMe();
@@ -67,5 +79,4 @@ public class ProfileController {
         }
         return ResponseEntity.ok(u.getUserID());
     }
-    
 }

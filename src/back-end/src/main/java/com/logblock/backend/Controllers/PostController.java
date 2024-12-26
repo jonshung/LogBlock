@@ -1,6 +1,10 @@
 package com.logblock.backend.Controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,6 +74,22 @@ public class PostController {
     public ResponseEntity<PostingDTO> retrievePostInfo(@PathVariable int postID) {
         Posting post = postService.getPost(postID);
         return post != null ? ResponseEntity.ok(PostingDTO.toDTO(post)) : ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Retrieve post information.
+     *
+     * @param userID ID of the post to retrieve
+     * @return Response with the post information
+     */
+    @GetMapping("/by/{userID}")
+    public ResponseEntity<?> retrievePostInfoByUser(@PathVariable int userID) {
+        List<Posting> posts = postService.getPostByUser(userID);
+        List<PostingDTO> result = new ArrayList<>();
+        for(Posting p : posts) {
+            result.add(PostingDTO.toDTO(p));
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**

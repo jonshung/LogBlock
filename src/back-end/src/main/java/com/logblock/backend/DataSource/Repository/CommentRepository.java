@@ -38,6 +38,14 @@ public interface CommentRepository extends JpaRepository<Commenting, CommentingI
     }
 
     /**
+     * Retrieve all comments.
+     *
+     * @return List of all comments
+     */
+    @Query("SELECT c FROM Commenting c WHERE c.postID = :postID")
+    List<Commenting> findAllCommentingsOf(int postID);
+
+    /**
      * Update an existing comment.
      *
      * @param postID         ID of the post

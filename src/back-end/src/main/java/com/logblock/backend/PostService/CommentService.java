@@ -1,5 +1,6 @@
 package com.logblock.backend.PostService;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,18 @@ public class CommentService {
     public Optional<Commenting> getComment(int postID, int commentID) {
         return commentRepository.findById(new CommentingId(postID, commentID));
     }
+
+    /**
+     * Get a comment, returning an Optional that present if the entry is found.
+     * 
+     * @param postID
+     * @param commentID
+     * @return
+     */
+    public List<Commenting> getAllCommentsOfPost(int postID) {
+        return commentRepository.findAllCommentingsOf(postID);
+    }
+
     /**
      * Update an existing comment.
      *

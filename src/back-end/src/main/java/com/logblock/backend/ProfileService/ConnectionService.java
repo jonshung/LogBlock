@@ -1,6 +1,7 @@
 package com.logblock.backend.ProfileService;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,25 @@ public class ConnectionService {
      */
     public int deleteConnection(int connectorID, int connectToID) {
         return connectionRepository.removeConnection(new ConnectionId(connectorID, connectToID));
+    }
+
+    /**
+     * Get all connections from a user
+     * 
+     * @param connectorID
+     * @return
+     */
+    public List<Connection> getAllFrom(int connectorID) {
+        return connectionRepository.findByConnectorID(connectorID);
+    }
+
+    /**
+     * Get all connections to a user
+     * 
+     * @param connectorID
+     * @return
+     */
+    public List<Connection> getAllTo(int connectedToID) {
+        return connectionRepository.findByConnectedID(connectedToID);
     }
 }

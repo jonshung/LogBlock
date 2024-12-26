@@ -2,58 +2,46 @@
 
 import { useState } from 'react';
 import EditPost from './edit-post';
-import { PostData, Media, Tag, Comment, ProfileData, } from '@/app/interfaces/common-interfaces';
+import { PostMediaData, TagData, CommentingDataExtended, ProfileData, PostDataExtended, } from '@/app/interfaces/common-interfaces';
 
 interface PostProps {
-    post: PostData;
-    addComment: (newComment: Comment) => void;
-    deletePost: (postID: number) => void;
-    onSave: (updatedPost: PostData) => void;
-    user : ProfileData | null;
+    post: PostDataExtended;
+    user : ProfileData;
+    comments: CommentingDataExtended[]
 }
 
-const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user }) => {
-    if (!user) {
-        return <div>Loading user information...</div>;
-    }
-
-
-    const [isLiked, setIsLiked] = useState(false);
+const Post: React.FC<PostProps> = ({ post, user, comments }) => {
+    const [isUpvoted, setIsUpvoted] = useState(false);
     const [isSharedDialogOpen, setSharedDialogOpen] = useState(false);
-    const [comments, setComments] = useState<Comment[]>(post.comments || []);
+    //const [comments, setComments] = useState<CommentingData[]>(post.comments || []);
     const [newComment, setNewComment] = useState('');
     const [showComments, setShowComments] = useState(false);
     const [visibleComments, setVisibleComments] = useState(2);
     const [editMenuOpen, setEditMenuOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
-
     const handleLike = () => {
-        setIsLiked((prev) => !prev);
-        post.upvoteCount += isLiked ? -1 : 1;
+        //setIsUpvoted((prev) => !prev);
+        //post.upvoteCount += isUpvoted ? -1 : 1;
     };
 
     const toggleComments = () => setShowComments((prev) => !prev);
 
     const handleAddComment = () => {
         if (newComment.trim()) {
-            const newCommentData: Comment = {
-                commentID: Date.now(),
+            /*
+            const newCommentData: CommentingDataExtended = {
+                commentID: 0,
                 commentAuthor: 1, // Mock user ID
                 commentCaption: newComment,
                 commentCreation: new Date().toISOString(),
-                authorName: user.displayName, // Mock user name
-                authorAvatar : user.profileImage, // Mock user avatar
             };
-
-            addComment(newCommentData); // Add comment via prop function
-            setComments((prev) => [...prev, newCommentData]); // Update local comments
+            */
             setNewComment(''); // Clear input
         }
     };
 
     const handleDeletePost = () => {
-        deletePost(post.postID);
         setEditMenuOpen(false);
         setIsEditing(true);
     };
@@ -72,10 +60,10 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
         <div className="post">
             {/* Header */}
             <div className="post-header">
-                <img src={post.authorAvatar} alt={post.authorName} className="avatar" />
+                <img src={post.authorImage} alt={post.authorDisplayName} className="avatar" />
                 <div>
-                    <p className="name">{post.authorName}</p>
-                    <p className="date">{post.postCreation}</p>
+                    <p className="name">{post.authorDisplayName}</p>
+                    <p className="date">{post.postData.creationDate}</p>
                 </div>
 
                 <div className='edit-button'>
@@ -115,9 +103,9 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
                     )}
                     {isEditing && (
                         <EditPost
-                            post={post}
+                            post={post.postData}
                             onSave={(updatedPost) => {
-                                onSave(updatedPost);
+                                // save Post
                                 setIsEditing(false);
                             }}
                             onCancel={handleCancelEdit}
@@ -127,18 +115,18 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
             </div>
 
             {/* Content */}
-            <div className="post-content">{post.postCaption}</div>
+            <div className="post-content">{post.postData.caption}</div>
 
             {/* Media */}
             <div>
-                {post.media.map((media) => (
+                {/*post.media.map((media) => (
                     <img
                         className="post-image"
                         key={media.mediaID}
                         src={media.mediaURI}
                         alt={`media-${media.mediaID}`}
                     />
-                ))}
+                ))*/}
             </div>
 
             {/* Actions */}
@@ -153,7 +141,7 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
             >
                 <button
                     onClick={handleLike}
-                    className={isLiked ? 'like' : 'not-like'}
+                    className={isUpvoted ? 'like' : 'not-like'}
                     onMouseEnter={(e) => (e.currentTarget.style.background = '#d6d4d4')}
                     onMouseLeave={(e) => (e.currentTarget.style.background = '#f1f1f1')}
                     style={{
@@ -172,7 +160,7 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
                         src='https://img.icons8.com/?size=100&id=KpwukvSgSCZ8&format=png&color=000000'
                         alt='Commenting icon'
                         style={{ width: '20px', height: '20px' }}
-                    /> {post.upvoteCount}
+                    /> {/*post.upvoteCount*/}
                 </button>
 
 
@@ -222,7 +210,6 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
                 </button>
             </div>
 
-
             {/* Comments Section */}
             {showComments && (
                 <div className="comments-Dialog">
@@ -230,7 +217,7 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
                     <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                         {/* Avatar */}
                         <img
-                            src={user.profileImage}
+                            src={user.profileImg}
                             alt={user.displayName}
                             style={{
                                 width: '50px',
@@ -275,17 +262,16 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
                     {/* Comments Section */}
                     {comments.slice(0, visibleComments).map((comment) => (
                         <div
-                            key={comment.commentID}
+                            key={comment.commentData.commentID}
                             style={{
                                 display: 'flex',
                                 alignItems: 'flex-start',
                                 marginBottom: '15px',
                             }}
                         >
-                            {/* Avatar */}
                             <img
-                                src={comment.authorAvatar || 'https://via.placeholder.com/50'}
-                                alt={comment.authorName}
+                                src={comment.authorImage || 'https://via.placeholder.com/50'}
+                                alt={comment.authorDisplayName}
                                 style={{
                                     width: '50px',
                                     height: '50px',
@@ -294,15 +280,12 @@ const Post: React.FC<PostProps> = ({ post, addComment, deletePost, onSave, user 
                                 }}
                             />
 
-                            {/* Nội dung comment */}
                             <div style={{ flex: 1 }}>
-                                {/* Tên người dùng */}
                                 <p style={{ margin: '0', fontWeight: 'bold', color: '#000' }}>
-                                    {comment.authorName}
+                                    {comment.authorDisplayName}
                                 </p>
-                                {/* Nội dung comment */}
                                 <p style={{ margin: '5px 0 0', color: '#555' }}>
-                                    {comment.commentCaption}
+                                    {comment.commentData.caption}
                                 </p>
                             </div>
                         </div>

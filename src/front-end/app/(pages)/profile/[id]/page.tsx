@@ -1,9 +1,6 @@
-import Header from "@/app/components/header";
-import SideNav from "@/app/components/sidenav";
-import { ProfileData } from "../../../interfaces/common-interfaces";
-import { redirect } from 'next/navigation'
-import HttpStatusCode from "@/app/utils/HTTPStatusCode";
-import { fetchAuthorized } from "@/app/utils/AuthorizationCode";
+import { notFound } from 'next/navigation'
+import { getProfileData } from "@/app/utils/ProfileAPI";
+import { getConnectionsTo } from "@/app/utils/ConnectionAPI";
 
 export const dynamic = 'force-dynamic'
 
@@ -37,23 +34,22 @@ function ProfileComponent(name: string, bio: string, connectors: number) {
 async function Page({
     params,
   }: {
-    params: Promise<{ id: string }>
+    params: Promise<{ id: number }>
   }) {
     const id = (await params).id;
-    let data = null;
-    try {
-        data = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME_SERVER}:${process.env.BACKEND_PORT_SERVER}/profiles/${id}`);
-    } catch(e) {
-        // nothing
+    const profile_data = await getProfileData(id.toString());
+    if(profile_data == null) {
+        return notFound();
     }
-    if(data == null || data.status != HttpStatusCode.OK_200) {
-        redirect('/404');
+
+    const name = profile_data.displayName;
+    const bio = profile_data.bioDesc;
+
+    let connectors = await getConnectionsTo(id.toString());
+    if(connectors == null) {
+        connectors = [];
     }
-    const parsed: ProfileData = await data.json();
-    const name = parsed.displayName;
-    const connectors = 50;
-    const bio = parsed.bioDesc;
-    return ProfileComponent(name, bio, connectors);
+    return ProfileComponent(name, bio, connectors.length);
 }
 
 export default Page;

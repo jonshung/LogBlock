@@ -1,9 +1,9 @@
-interface Media {
+interface PostMediaData {
     mediaID: number;
     mediaURI: string;
 }
 
-interface Tag {
+interface TagData {
     userID: number;
     username: string;
 }
@@ -11,39 +11,52 @@ interface Tag {
 interface PostData {
     postID: number;
     originalAuthor: number;
-    authorName: string;
-    authorAvatar: string;
-    postCaption: string;
-    postCreation: string;
-    postLastUpdate: string;
-    media: Media[];
-    upvoteCount: number;
-    tags: Tag[];
-    comments: Comment[];
+    caption: string;
+    creationDate: string;
+    lastModifiedDate: string;
+}
+
+interface PostDataExtended {
+    postData: PostData;
+    authorImage: string;
+    authorDisplayName: string;
 }
 
 interface ProfileData {
+    userID: number;
     userEmail: string;
     displayName: string;
-    userID: number;
     bioDesc: string;
-    profileImage: string;
-    privLevel: number;
+    profileImg: string;
 };
 
-interface Comment {
+interface ConnectionData {
+    connectorID: number;
+    connectedID: number;
+    connectionDate: Date;
+}
+
+interface CommentingData {
     commentID: number;
-    commentAuthor: number;
-    commentCaption: string;
-    commentCreation: string;
-    authorName: string;
-    authorAvatar: string;
+    postID: number;
+    authorID: number;
+    caption: string;
+    creationDate: Date;
+}
+
+interface CommentingDataExtended {
+    commentData: CommentingData
+    authorImage: string;
+    authorDisplayName: string;
 }
 
 export type {
-    Media,
-    Tag,
+    PostMediaData,
+    TagData,
     PostData,
-    Comment,
-    ProfileData
+    CommentingData,
+    ProfileData,
+    ConnectionData,
+    CommentingDataExtended,
+    PostDataExtended
 }

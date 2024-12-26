@@ -5,7 +5,7 @@ import { fetchAuthorized } from './app/utils/AuthorizationCode';
 const USE_AUTH = process.env.ENABLE_AUTH_GUARD;
 
 export async function middleware(request: NextRequest) {
-    if(!USE_AUTH) {
+    if(USE_AUTH == "0") {
         return NextResponse.next();
     }
 
@@ -19,7 +19,6 @@ export async function middleware(request: NextRequest) {
     } catch(error) {
         return NextResponse.redirect(new URL("/auth", request.nextUrl));
     }
-    
 
     return NextResponse.next();
 }

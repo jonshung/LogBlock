@@ -1,8 +1,11 @@
 package com.logblock.backend.Controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,8 +75,25 @@ public class CommentController {
      * @return Response with the comment information
      */
     @GetMapping("/{postID}/{commentID}")
-    public ResponseEntity<CommentingDTO> retrievePostInfo(@PathVariable int postID, @PathVariable int commentID) {
+    public ResponseEntity<?> retrieveCommentInfo(@PathVariable int postID, @PathVariable int commentID) {
         Optional<Commenting> comment = commentService.getComment(postID, commentID);
         return comment.isPresent() ? ResponseEntity.ok(CommentingDTO.toDTO(comment.get())) : ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Retrieve all comments information of a post.
+     *
+     * @param postID    ID of the post
+     * @param commentID ID of the comment
+     * @return Response with the comment information
+     */
+    @GetMapping("/{postID}")
+    public ResponseEntity<?> retrieveAllCommentInfo(@PathVariable int postID) {
+        List<Commenting> comments = commentService.getAllCommentsOfPost(postID);
+        List<CommentingDTO> result = new ArrayList<>();
+        for(Commenting c : comments) {
+            result.add(CommentingDTO.toDTO(c));
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

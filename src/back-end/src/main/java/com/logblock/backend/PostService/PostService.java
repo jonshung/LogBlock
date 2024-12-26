@@ -1,6 +1,7 @@
 package com.logblock.backend.PostService;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,17 @@ public class PostService {
     public Posting getPost(int postID) {
         // Use the repository's findById method
         return postRepository.findById(postID).orElse(null); // Return null if not found
+    }
+
+    /**
+     * Retrieve posts information by User `userID`.
+     *
+     * @param userID ID of the post
+     * @return Posting list.
+     */
+    public List<Posting> getPostByUser(int userID) {
+        // Use the repository's findById method
+        return postRepository.findPostingsByUserID(userID);
     }
 
     /**

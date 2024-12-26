@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PostData, Media } from '@/app/interfaces/common-interfaces';
+import { PostData, PostMediaData } from '@/app/interfaces/common-interfaces';
 
 interface EditPostProps {
     post: PostData;
@@ -10,9 +10,9 @@ interface EditPostProps {
 }
 
 export default function EditPost({ post, onSave, onCancel }: EditPostProps) {
-    const [content, setContent] = useState(post.postCaption);
-    const [tags, setTags] = useState(post.tags.map(tag => tag.username).join(', '));
-    const [media, setMedia] = useState<Media[]>(post.media);
+    const [content, setContent] = useState(post.caption);
+    //const [tags, setTags] = useState(post.tags.map(tag => tag.username).join(', '));
+    //const [media, setMedia] = useState<PostMediaData[]>(post.media);
 
     const handleMediaUploaded = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -20,20 +20,20 @@ export default function EditPost({ post, onSave, onCancel }: EditPostProps) {
                 mediaID: Date.now(),
                 mediaURI: URL.createObjectURL(file),
             }));
-            setMedia([...media, ...newMedia]);
+            //setMedia([...media, ...newMedia]);
         }
     };
 
     const handleMediaRemoved = (mediaID: number) => {
-        setMedia(media.filter(item => item.mediaID !== mediaID));
+        //setMedia(media.filter(item => item.mediaID !== mediaID));
     };
 
     const handleSave = () => {
         const updatedPost: PostData = {
             ...post,
-            postCaption: content,
-            tags: tags.split(',').map(tag => ({ userID: Date.now(), username: tag.trim() })),
-            media,
+            caption: content,
+            //tags: tags.split(',').map(tag => ({ userID: Date.now(), username: tag.trim() })),
+            //media,
         };
         onSave(updatedPost); // Gọi hàm lưu bài viết với dữ liệu mới
     };
@@ -75,8 +75,8 @@ export default function EditPost({ post, onSave, onCancel }: EditPostProps) {
                             <p className="ml-[7px] text-[1.1875rem] text-black font-bold">Tags</p>
                             <textarea
                                 name="tags"
-                                value={tags}
-                                onChange={(e) => setTags(e.target.value)}
+                                //value={tags}
+                                //onChange={(e) => setTags(e.target.value)}
                                 placeholder="Edit tags here..."
                                 className="w-full h-[40px] px-[10px] py-[7px] text-black border border-[#b0b0b0] rounded-[15px] resize-none"
                             />
@@ -85,7 +85,7 @@ export default function EditPost({ post, onSave, onCancel }: EditPostProps) {
                         <div>
                             <p className="ml-[7px] text-[1.1875rem] text-black font-bold">Media</p>
                             <div className="w-full h-[270px] text-black border border-[#b0b0b0] rounded-[15px] resize-none">
-                                {media.length > 0 ? (
+                                {/*media.length > 0 ? (
                                     <div className="flex grid-cols-3 gap-[15px] p-[15px]">
                                         {media.map(item => (
                                             <div key={item.mediaID} className="relative">
@@ -116,7 +116,7 @@ export default function EditPost({ post, onSave, onCancel }: EditPostProps) {
                                             className="absolute w-full h-full left-0 top-0 opacity-0"
                                         />
                                     </div>
-                                )}
+                                )*/}
                             </div>
                         </div>
                     </div>
