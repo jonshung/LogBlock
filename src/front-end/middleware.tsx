@@ -8,12 +8,11 @@ export async function middleware(request: NextRequest) {
     if (USE_AUTH == "0") {
         return NextResponse.next();
     }
-
+    
     try {
         let authorization_test = null;
         authorization_test = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME_SERVER}:${process.env.BACKEND_PORT_SERVER}`);
-
-        if (authorization_test == null || authorization_test.status == HttpStatusCode.FORBIDDEN_403) {
+        if(authorization_test == null || authorization_test.status == HttpStatusCode.FORBIDDEN_403) {
             return NextResponse.redirect(new URL("/auth", request.nextUrl));
         }
     } catch (error) {

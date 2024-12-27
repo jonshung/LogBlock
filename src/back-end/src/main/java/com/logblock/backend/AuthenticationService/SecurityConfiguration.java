@@ -1,12 +1,13 @@
 package com.logblock.backend.AuthenticationService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
@@ -18,6 +19,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 
 @Configuration
 @EnableWebSecurity
@@ -36,7 +38,7 @@ public class SecurityConfiguration {
 	@Order(2)
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
-			.cors(Customizer.withDefaults())
+			.csrf((csrf) -> csrf.disable())
 			.authorizeHttpRequests((authorize) -> authorize
 				.anyRequest().authenticated()
 			);
@@ -59,7 +61,7 @@ public class SecurityConfiguration {
 			"/login/oauth2/code/google"
 		};
 		http
-			.cors(Customizer.withDefaults())
+			.csrf((csrf) -> csrf.disable())
 			.securityMatcher(authentication_endpoint)
 			.authorizeHttpRequests((authorize) -> authorize 			// pre-authorizing authentication endpoints
 				.anyRequest().authenticated())
@@ -85,7 +87,7 @@ public class SecurityConfiguration {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.addAllowedHeader("*");
-		config.addAllowedMethod("*");
+		config.setAllowedMethods(List.of("GET", "POST", "DELETE", "QUERY"));
 		config.addAllowedOrigin(
 			env.getProperty("logblock.front-end-integration.server-hostname") + 
 			":" + 

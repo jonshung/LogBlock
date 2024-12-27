@@ -50,6 +50,11 @@ interface CommentingDataExtended {
     authorDisplayName: string;
 }
 
+interface PostDataBundle {
+    postData: PostDataExtended;
+    comments: CommentingDataExtended[];
+};
+
 export type {
     PostMediaData,
     TagData,
@@ -58,5 +63,6 @@ export type {
     ProfileData,
     ConnectionData,
     CommentingDataExtended,
-    PostDataExtended
+    PostDataExtended,
+    PostDataBundle
 }

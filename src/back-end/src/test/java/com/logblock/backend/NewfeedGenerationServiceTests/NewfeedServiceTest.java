@@ -1,7 +1,22 @@
 package com.logblock.backend.NewfeedGenerationServiceTests;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.logblock.backend.DataSource.Model.Connection;
 import com.logblock.backend.DataSource.Model.Posting;
@@ -9,18 +24,7 @@ import com.logblock.backend.DataSource.Repository.ConnectionRepository;
 import com.logblock.backend.DataSource.Repository.PostRepository;
 import com.logblock.backend.FeedsGenerationService.NewFeedService;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import jakarta.transaction.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
 
 @SpringBootTest
 @Transactional
@@ -59,7 +63,7 @@ public class NewfeedServiceTest {
         when(postRepository.findPostingsByUserID(3)).thenReturn(postsFromUser3);
 
         // Act: Gọi phương thức generate
-        List<Posting> result = newFeedService.generate(userID);
+        List<Posting> result = newFeedService.generate(userID, new ArrayList<>(), 10);
 
         // Assert: Kiểm tra kết quả
         assertEquals(2, result.size());
@@ -77,7 +81,7 @@ public class NewfeedServiceTest {
         when(connectionRepository.findByConnectorID(userID)).thenReturn(new ArrayList<>());
 
         // Act: Gọi phương thức generate
-        List<Posting> result = newFeedService.generate(userID);
+        List<Posting> result = newFeedService.generate(userID, new ArrayList<>(), 10);
 
         // Assert: Kết quả phải rỗng
         assertEquals(0, result.size());
@@ -94,7 +98,7 @@ public class NewfeedServiceTest {
         when(postRepository.findPostingsByUserID(2)).thenReturn(new ArrayList<>());
 
         // Act: Gọi phương thức generate
-        List<Posting> result = newFeedService.generate(userID);
+        List<Posting> result = newFeedService.generate(userID, new ArrayList<>(), 10);
 
         // Assert: Kết quả phải rỗng
         assertEquals(0, result.size());
@@ -108,7 +112,7 @@ public class NewfeedServiceTest {
         when(connectionRepository.findByConnectorID(userID)).thenReturn(null);
 
         // Act: Gọi phương thức generate
-        List<Posting> result = newFeedService.generate(userID);
+        List<Posting> result = newFeedService.generate(userID, new ArrayList<>(), 10);
 
         // Assert: Kết quả phải rỗng
         assertNotNull(result, "The result should not be null even if connections are null");

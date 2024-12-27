@@ -1,3 +1,5 @@
+'use server'
+
 import { ConnectionData } from "../interfaces/common-interfaces";
 import { fetchAuthorized } from "./AuthorizationCode";
 import HttpStatusCode from "./HTTPStatusCode";

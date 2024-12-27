@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="grid grid-cols-3 h-screen">
                 <SideNav />
                 <div>{children}</div>
-                {pathname.startsWith("/") ? (
+                {pathname == "/" ? (
                     <ConnectorsBox />
                 ) : pathname.startsWith("/explore") ? (
                     <SearchBox />

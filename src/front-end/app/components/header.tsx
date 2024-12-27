@@ -3,15 +3,20 @@
 import Logo from "@/app/components/logo";
 import { usePathname } from "next/navigation";
 
-const links = [
+const abs_links = [
     { name: "Home", href: "/" },
     { name: "Explore", href: "/explore" },
+]
+const dyn_links = [
     { name: "Profile", href: "/profile" }
 ]
 
 export default function Header() {
     const pathname = usePathname()
-    const currentLink = links.find((link) => pathname.startsWith(link.href));
+    let currentLink = dyn_links.find((link) => pathname.startsWith(link.href));
+    if(currentLink === undefined) {
+        currentLink = abs_links.find((link) => pathname == link.href);
+    }
 
     return (
         <div className="fixed flex items-center text-black bg-white h-[90px] w-screen z-50">

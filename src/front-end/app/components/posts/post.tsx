@@ -6,7 +6,7 @@ import { PostMediaData, TagData, CommentingDataExtended, ProfileData, PostDataEx
 
 interface PostProps {
     post: PostDataExtended;
-    user : ProfileData;
+    user : ProfileData | null;
     comments: CommentingDataExtended[]
 }
 
@@ -211,7 +211,7 @@ const Post: React.FC<PostProps> = ({ post, user, comments }) => {
             </div>
 
             {/* Comments Section */}
-            {showComments && (
+            {showComments && user != null && (
                 <div className="comments-Dialog">
                     {/* Add Comment */}
                     <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>

@@ -68,12 +68,12 @@ export default function CreateBox() {
 
     return (
         <>
-            <div className="absolute flex items-start w-full h-full">
-                <div
-                    onClick={toggleUp}
-                    style={{ cursor: "pointer" }}
-                    className="flex items-center w-full h-[90px] bg-[#f4f4f4] rounded-[15px]"
-                >
+            <div
+                onClick={toggleUp}
+                style={{ cursor: "pointer" }}
+                className="flex-none items-center place-content-center w-full h-[90px] bg-[#f4f4f4] rounded-[15px] mb-8"
+            >
+                <div className="flex items-center w-full">
                     <img
                         src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/chocoCaro_mmmpkq.png"
                         width={50}

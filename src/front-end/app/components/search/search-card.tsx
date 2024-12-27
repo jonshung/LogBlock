@@ -3,7 +3,7 @@ export default function SearchCard() {
     const connectors = 53;
 
     return (
-        <div className="flex items-center w-full h-[70px]">
+        <div className="flex items-center w-full h-[65px] text-black tetx-lg font-medium">
             <img
                 src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/Henry_Clauss_hq9ijp.png"
                 width={50}
@@ -11,8 +11,8 @@ export default function SearchCard() {
                 className="ml-[10px]"
             />
             <div className="flex flex-col w-full mx-[15px] text-black">
-                <p className="text-xl font-medium">{name}</p>
-                <p className="text-lg">{connectors} connectors</p>
+                <p className="w-full">{name}</p>
+                <p className="">{connectors} connectors</p>
             </div>
             <button className="w-[130px] h-[30px] text-black border border-[#b0b0b0] rounded-[15px]">
                 Connect

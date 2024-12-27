@@ -1,3 +1,5 @@
+'use server'
+
 import { CommentingData, PostData } from "../interfaces/common-interfaces";
 import { fetchAuthorized } from "./AuthorizationCode";
 import HttpStatusCode from "./HTTPStatusCode";
@@ -24,7 +26,7 @@ export const getCommentingsDataOf = async (postID: string) => {
         // nothing
     }
     if(data == null || data.status != HttpStatusCode.OK_200) {
-        return null;
+        return [];
     }
     const parsed: CommentingData[] = await data.json();
     return parsed;

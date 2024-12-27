@@ -3,7 +3,7 @@ import SearchCard from "@/app/components/search/search-card";
 
 export default function SearchBox() {
     return (
-        <div className="relative w-full top-[90px] mx-[20px] mb-[20px] bg-[#f4f4f4] rounded-[15px]">
+        <div className="relative top-[90px] ml-[20px] mr-[100px] mb-[20px] bg-[#f4f4f4] rounded-[15px]">
             <div className="mx-[20px] mt-[20px] mb-[10px]">
                 <SearchBar />
                 <p className="my-[10px] text-lg text-black font-medium">Connect suggestion</p>
