@@ -28,7 +28,7 @@ export default function NavLinks() {
         }
     });
 
-    const isAdmin = false;
+    const isAdmin = true;
 
     return (
         <>

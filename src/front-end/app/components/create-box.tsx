@@ -89,17 +89,17 @@ export default function CreateBox() {
                 <div className="fixed h-screen w-screen left-0 top-0 bg-[#a6a6a6] bg-opacity-70 z-50">
                     <div className="flex items-center justify-center h-screen w-screen left-0 top-0">
                         <div className="relative w-[1000px] h-[856px] bg-white rounded-[15px]">
-                            <div className="flex items-center justify-between h-[50px] mx-[10px]">
+                            <div className="flex items-center justify-between h-[50px] mx-[10px] font-bold">
                                 <p
                                     onClick={handleCancel}
-                                    className="text-xl text-[#b0b0b0] font-bold hover:cursor-pointer"
+                                    className="text-xl text-[#b0b0b0] hover:cursor-pointer"
                                 >
                                     Cancel
                                 </p>
-                                <p className="text-[1.625rem] text-black font-bold">Create new post</p>
+                                <p className="text-[1.625rem] text-black">Create new post</p>
                                 <p
                                     onClick={handleCreate}
-                                    className="text-xl text-[#0195F7] font-bold hover:cursor-pointer"
+                                    className="text-xl text-[#0195F7] hover:cursor-pointer"
                                 >
                                     Create
                                 </p>

@@ -1,8 +1,8 @@
 import CreateBox from "@/app/components/create-box";
 
 import { InfiniteScrollingContainer } from "./infinite-scrolling";
-import { newsFeedGenerate } from "../utils/feed-generation/news-feed-generator";
-import { getCurrentProfileData } from "../utils/ProfileAPI";
+import { newsFeedGenerate } from "@/app/utils/feed-generation/news-feed-generator";
+import { getCurrentProfileData } from "@/app/utils/ProfileAPI";
 
 export default async function Page() {
     const cUser = await getCurrentProfileData();

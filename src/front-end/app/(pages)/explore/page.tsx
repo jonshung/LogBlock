@@ -1,5 +1,5 @@
 import { explorationFeedGenerate } from "@/app/utils/feed-generation/exploration-feed-generator";
-import { InfiniteScrollingContainer } from "../infinite-scrolling";
+import { InfiniteScrollingContainer } from "@/app/(pages)/infinite-scrolling";
 import { getCurrentProfileData } from "@/app/utils/ProfileAPI";
 
 export default async function Page() {

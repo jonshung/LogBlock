@@ -8,6 +8,7 @@ const abs_links = [
     { name: "Explore", href: "/explore" },
 ]
 const dyn_links = [
+    { name: "Report", href: "/report" },
     { name: "Profile", href: "/profile" }
 ]
 
