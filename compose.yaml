@@ -55,6 +55,6 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: 'C:/Users/NHAT CUONG/Documents/HCMUS/Sem VII/ISE/Project/LogBlock/pgdata'
+      device: '/usr/local/share/pgdata'
 networks: 
   app:

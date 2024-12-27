@@ -36,15 +36,15 @@ public class NewFeedService {
         List<Posting> results = new ArrayList<>();
         for (Connection c : connectionEntries) {
             List<Posting> posts = postRepository.findPostingsByUserID(c.getConnectedID());
-            posts.removeIf(
-                p -> exclusion_ids.contains(p.getPostID())
-            );
-            for(int i = 0; i < posts.size(); i++) {
-                if(limit <= 0) {
-                    return results;
-                }
-                results.add(posts.get(i));
-                --limit;
+            for (Posting p : posts) {
+              if (limit <= 0) {
+                  return results;
+              }
+              if (exclusion_ids.contains(p.getPostID())) {
+                  continue;
+              }
+              results.add(p);
+              --limit;
             }
         }
         return results;

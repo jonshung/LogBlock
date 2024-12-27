@@ -55,8 +55,8 @@ public class NewfeedServiceTest {
                 new Connection(userID, 2, new Date()),
                 new Connection(userID, 3, new Date()));
 
-        List<Posting> postsFromUser2 = List.of(new Posting(101, "Post by User 2", new Date(), new Date()));
-        List<Posting> postsFromUser3 = List.of(new Posting(102, "Post by User 3", new Date(), new Date()));
+        List<Posting> postsFromUser2 = List.of(new Posting(2, "Post by User 2", new Date(), new Date()));
+        List<Posting> postsFromUser3 = List.of(new Posting(3, "Post by User 3", new Date(), new Date()));
 
         when(connectionRepository.findByConnectorID(userID)).thenReturn(connections);
         when(postRepository.findPostingsByUserID(2)).thenReturn(postsFromUser2);
