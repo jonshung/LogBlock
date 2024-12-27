@@ -1,5 +1,6 @@
 package com.logblock.backend.FeedsGenerationService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,22 @@ public class ExplorationFeedService {
      *
      * @return List of trending posts
      */
-    public List<Posting> generate() {
+    public List<Posting> generate(List<Integer> exclusion_ids, Integer limit) {
         // Retrieve all posts ordered by the number of upvotes within 2 weeks
         // trending posts
-        return postRepository.findTrendingPosts(); // Assuming there is a method to get trending posts
+        List<Posting> pre = postRepository.findTrendingPosts(limit);
+        List<Posting> results = new ArrayList<>();
+        pre.removeIf(
+            p -> exclusion_ids.contains(p.getPostID())
+        );
+        
+        for (Posting p : pre) {
+            if(limit <= 0) {
+                return results;
+            }
+            results.add(p);
+            --limit;
+        }
+        return results;
     }
 }

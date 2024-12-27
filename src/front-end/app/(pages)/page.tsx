@@ -1,6 +1,5 @@
 import CreateBox from "@/app/components/create-box";
 
-import ConnectorsBox from "../components/connectors/connectors-box";
 import { InfiniteScrollingContainer } from "./infinite-scrolling";
 import { newsFeedGenerate } from "../utils/feed-generation/news-feed-generator";
 import { getCurrentProfileData } from "../utils/ProfileAPI";

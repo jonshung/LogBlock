@@ -9,7 +9,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ESSMedia")
+@Table(name = "essmedia")
 @IdClass(ESSMediaId.class)
 public class ESSMedia {
 

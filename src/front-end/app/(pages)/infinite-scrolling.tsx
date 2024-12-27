@@ -16,7 +16,9 @@ export const InfiniteScrollingContainer = ({ generatingFunction, profileContext 
     const [generatedPosts, addGeneratedPosts] = useState<number[]>([]);
     const [postsBundle, setPostsBundle] = useState<PostDataBundle[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(true);
-    const [scrollTrigger, isInView] = useInView();
+    const [scrollTrigger, isInView] = useInView({
+        threshold: 1
+    });
     useEffect(() => {
         if (isInView && hasMore) {
           loadMorePosts();
@@ -33,6 +35,7 @@ export const InfiniteScrollingContainer = ({ generatingFunction, profileContext 
         posts.forEach((post) => {
             generatedPosts.push(post.postData.postData.postID);
         })
+        console.log(posts.length);
         setPostsBundle((prev) => [...prev, ...posts] )
     };
 

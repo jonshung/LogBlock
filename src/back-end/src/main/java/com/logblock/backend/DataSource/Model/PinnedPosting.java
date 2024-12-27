@@ -9,7 +9,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "PinnedPosting")
+@Table(name = "pinnedposting")
 @IdClass(PinnedPostingId.class)
 public class PinnedPosting {
     

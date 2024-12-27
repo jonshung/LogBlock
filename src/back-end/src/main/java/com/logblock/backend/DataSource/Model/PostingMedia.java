@@ -9,7 +9,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "PostingMedia")
+@Table(name = "postingmedia")
 @IdClass(PostingMediaId.class)
 public class PostingMedia {
     

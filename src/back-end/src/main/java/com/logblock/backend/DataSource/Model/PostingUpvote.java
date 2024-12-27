@@ -9,7 +9,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "PostingUpvote")
+@Table(name = "postingupvote")
 @IdClass(PostingUpvoteId.class)
 public class PostingUpvote {
 

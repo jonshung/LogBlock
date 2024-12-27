@@ -9,7 +9,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="BlockedProfile")
+@Table(name="blockedprofile")
 @IdClass(BlockedProfileId.class)
 public class BlockedProfile {
 

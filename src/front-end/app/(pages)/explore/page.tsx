@@ -1,9 +1,15 @@
-export default function Page() {
+import { explorationFeedGenerate } from "@/app/utils/feed-generation/exploration-feed-generator";
+import { InfiniteScrollingContainer } from "../infinite-scrolling";
+import { getCurrentProfileData } from "@/app/utils/ProfileAPI";
+
+export default async function Page() {
+    const cUser = await getCurrentProfileData();
     return (
-        <>
-            <div className="relative w-full h-full">
-                {/* <div className="w-[750px] h-[1000px] bg-[#f4f4f4] rounded-[15px] absolute top-[200px] left-[558px]"></div> */}   
+        <main className="relative flex top-[90px]">
+            <div className="absolute flex flex-col w-full h-full">
+                {/* Vùng hiển thị bài đăng */}
+                <InfiniteScrollingContainer generatingFunction={explorationFeedGenerate} profileContext={cUser}/>
             </div>
-        </>
+        </main>
     );
 }

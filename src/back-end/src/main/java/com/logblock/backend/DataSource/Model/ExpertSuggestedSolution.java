@@ -11,7 +11,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "ESS")
+@Table(name = "ess")
 @IdClass(ESSId.class)
 public class ExpertSuggestedSolution {
 

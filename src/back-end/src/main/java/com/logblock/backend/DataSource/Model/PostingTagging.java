@@ -7,7 +7,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "PostingTagging")
+@Table(name = "postingtagging")
 @IdClass(PostingTaggingId.class)
 public class PostingTagging {
 

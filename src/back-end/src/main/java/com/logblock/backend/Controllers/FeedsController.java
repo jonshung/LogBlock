@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +28,7 @@ public class FeedsController {
     @Autowired
     private ExplorationFeedService explorationFeedService;
 
-    public static class NewsFeedFilter {
+    public static class FeedGenerationFilter {
         public List<Integer> exclude;
         public Integer limit;
 
@@ -49,14 +48,14 @@ public class FeedsController {
      * @return Response with the generated news feed posts
      */
     @PostMapping( path = "/news/{userID}", headers = "Accept=application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PostingDTO>> generateNewsFeed(@PathVariable int userID, @RequestBody NewsFeedFilter body) {
+    public ResponseEntity<List<PostingDTO>> generateNewsFeed(@PathVariable int userID, @RequestBody FeedGenerationFilter filter) {
         List<Posting> posts;
         Integer limit = 5;
-        if(body.getLimit() != null) {
-            limit = body.getLimit();
+        if(filter.getLimit() != null) {
+            limit = filter.getLimit();
         }
-        if(body.getExcluding() != null) {
-            posts = newsFeedService.generate(userID, body.getExcluding(), limit);
+        if(filter.getExcluding() != null) {
+            posts = newsFeedService.generate(userID, filter.getExcluding(), limit);
         } else {
             posts = newsFeedService.generate(userID, new ArrayList<>(), limit);
         }
@@ -72,9 +71,22 @@ public class FeedsController {
      *
      * @return Response with the generated exploration feed posts
      */
-    @GetMapping("/exploration")
-    public ResponseEntity<List<Posting>> generateExplorationFeed() {
-        List<Posting> posts = explorationFeedService.generate();
-        return posts != null ? ResponseEntity.ok(posts) : ResponseEntity.internalServerError().build();
+    @PostMapping( path = "/exploration/", headers = "Accept=application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PostingDTO>> generateExplorationFeed(@RequestBody FeedGenerationFilter filter) {
+        List<Posting> posts;
+        Integer limit = 5;
+        if(filter.getLimit() != null) {
+            limit = filter.getLimit();
+        }
+        if(filter.getExcluding() != null) {
+            posts = explorationFeedService.generate(filter.getExcluding(), limit);
+        } else {
+            posts = explorationFeedService.generate(new ArrayList<>(), limit);
+        }
+        List<PostingDTO> res = new ArrayList<>();
+        for(Posting p : posts) {
+            res.add(PostingDTO.toDTO(p));
+        }
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
