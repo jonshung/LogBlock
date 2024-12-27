@@ -17,10 +17,29 @@ export default function CreateBox() {
         setConfirmDialogue(!confirmDialogue);
     }
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         setCreate(!create);
         setConfirmDialogue(false);
         setDialogue(false);
+
+        if (media) {
+            for (let i = 0; i < media.length; i++) {
+                const data = new FormData();
+
+                data.append("file", media[i]);
+                data.append("upload_preset", "logblock");
+
+                const res = await fetch("https://api.cloudinary.com/v1_1/dumr9ghyv/image/upload", {
+                    method: "POST",
+                    body: data
+                });
+
+                const file = await res.json();
+                console.log(file.url); // file.url is the URL of the uploaded media
+            }
+
+            setMedia(null);
+        }
     }
 
     const handleDiscard = () => {
@@ -108,8 +127,11 @@ export default function CreateBox() {
                                     <div className="w-full h-[270px] text-black border border-[#b0b0b0] rounded-[15px] resize-none overflow-x-hidden overflow-y-scroll">
                                         {media ? (
                                             <div className="flex grid-cols-3 gap-[15px] p-[15px]">
-                                                {Array.from(media).map((file) => (
-                                                    <div className="relative">
+                                                {Array.from(media).map((file, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="relative"
+                                                    >
                                                         <img
                                                             src={URL.createObjectURL(file)}
                                                             alt={file.name}

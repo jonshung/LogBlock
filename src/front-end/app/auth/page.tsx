@@ -11,6 +11,7 @@ export default function SignIn() {
           >
             <img src="https://img.icons8.com/?size=35&id=17949&format=png&color=000000" />
             <span className="w-[6px]" />
+            <p>Continue with Google</p>
           </button>
         </Link>
       </div>
