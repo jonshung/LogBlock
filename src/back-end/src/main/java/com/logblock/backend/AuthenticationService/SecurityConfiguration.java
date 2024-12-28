@@ -1,6 +1,8 @@
 package com.logblock.backend.AuthenticationService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +13,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
@@ -64,9 +69,13 @@ public class SecurityConfiguration {
 			.csrf((csrf) -> csrf.disable())
 			.securityMatcher(authentication_endpoint)
 			.authorizeHttpRequests((authorize) -> authorize 			// pre-authorizing authentication endpoints
+				.requestMatchers("/admin/**").hasAuthority("LB_ADMIN")
 				.anyRequest().authenticated())
 			.oauth2Login((configurer) -> {
-				configurer.successHandler(this.successHandler()).failureHandler(this.failureHandler());
+				configurer.successHandler(this.successHandler()).failureHandler(this.failureHandler())
+				.userInfoEndpoint(userInfo -> userInfo
+			        .userAuthoritiesMapper(this.userAuthoritiesMapper())
+			    );
 			});
 
 		return http.build();
@@ -81,6 +90,15 @@ public class SecurityConfiguration {
     SimpleUrlAuthenticationFailureHandler failureHandler() {
         return new SimpleUrlAuthenticationFailureHandler();
     }
+
+	@Bean
+	GrantedAuthoritiesMapper userAuthoritiesMapper() {
+		return (authorities) -> {
+			Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+			mappedAuthorities.add(new SimpleGrantedAuthority("LB_USER"));
+			return mappedAuthorities;
+		};
+	}
 
     @Bean
 	public CorsConfigurationSource corsConfigurationSource() {

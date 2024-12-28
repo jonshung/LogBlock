@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.logblock.backend.DataSource.DTO.CommentingDTO;
 import com.logblock.backend.DataSource.Model.Commenting;
 import com.logblock.backend.DataSource.Model.CommentingId;
 import com.logblock.backend.DataSource.Repository.CommentRepository;
@@ -53,13 +54,14 @@ public class CommentService {
     /**
      * Create a new comment.
      *
-     * @param commentInfo The comment information to create
+     * @param dto The comment information to create
      * @return ID of the created comment
      */
-    public int createComment(Commenting commentInfo) {
-        // Assuming the postID is part of the commentInfo, otherwise, you would need to
-        // pass postID separately
-        return commentRepository.addCommenting(commentInfo.getPostID(), commentInfo);
+    public int createComment(CommentingDTO dto) {
+        // The PostRepository's save method will handle both add and update
+        Commenting p = CommentingDTO.toCommenting(dto);
+        commentRepository.addCommenting(p);
+        return p.getPostID(); // Return the generated ID of the created post
     }
 
     /**

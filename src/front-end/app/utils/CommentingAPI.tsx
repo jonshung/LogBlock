@@ -31,3 +31,19 @@ export const getCommentingsDataOf = async (postID: string) => {
     const parsed: CommentingData[] = await data.json();
     return parsed;
 }
+
+export const addCommentingTo = async (commentData: CommentingData) => {
+    let data = null;
+    try {
+        data = await fetchAuthorized(`${process.env.BACKEND_HOSTNAME_SERVER}:${process.env.BACKEND_PORT_SERVER}/comments/add/`, 
+            JSON.stringify(commentData)
+        );
+    } catch(e) {
+        // nothing
+    }
+    if(data == null || data.status != HttpStatusCode.OK_200) {
+        return [];
+    }
+    const parsed: CommentingData[] = await data.json();
+    return parsed;
+}

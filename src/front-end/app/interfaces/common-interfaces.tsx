@@ -1,5 +1,6 @@
 interface PostMediaData {
     mediaID: number;
+    postID: number;
     mediaURI: string;
 }
 
@@ -33,7 +34,7 @@ interface ProfileData {
 interface ConnectionData {
     connectorID: number;
     connectedID: number;
-    connectionDate: Date;
+    connectionDate: string;
 }
 
 interface CommentingData {
@@ -41,7 +42,7 @@ interface CommentingData {
     postID: number;
     authorID: number;
     caption: string;
-    creationDate: Date;
+    creationDate: string;
 }
 
 interface CommentingDataExtended {
@@ -52,6 +53,7 @@ interface CommentingDataExtended {
 
 interface PostDataBundle {
     postData: PostDataExtended;
+    postMedia: PostMediaData[];
     comments: CommentingDataExtended[];
 };
 

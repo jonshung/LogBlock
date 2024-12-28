@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,8 +17,11 @@ import jakarta.persistence.Table;
 public class Commenting {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "commentid")
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator="commenting_generator"
+    )
+    @SequenceGenerator(name = "commenting_generator", sequenceName="commenting_seq", allocationSize = 1) 
     private int commentID;
 
     @Id

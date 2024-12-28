@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { PostData, PostMediaData, ProfileData } from "../interfaces/common-interfaces";
+import { addPostingMediaData, createPost } from "../utils/PostAPI";
 
-export default function CreateBox() {
+export default function CreateBox({ cUser }: { cUser: ProfileData | null }) {
     const [dialogue, setDialogue] = useState(false);
     const [confirmDialogue, setConfirmDialogue] = useState(false);
     const [create, setCreate] = useState(false);
     const [media, setMedia] = useState<FileList | null>(null);
+
+    /** Data fields */
+    const [captionText, setCaptionText] = useState("")
 
     const toggleUp = () => {
         setCreate(false);
@@ -21,6 +26,22 @@ export default function CreateBox() {
         setCreate(!create);
         setConfirmDialogue(false);
         setDialogue(false);
+        if(cUser === null) {
+            setMedia(null);
+            return;
+        }
+        let postData: PostData = {
+            caption: captionText,
+            postID: 0,
+            originalAuthor: cUser.userID,
+            creationDate: new Date().toJSON(),
+            lastModifiedDate: new Date().toJSON()
+        };
+        const postID = await createPost(postData);
+        if(postID == null) {
+            setMedia(null);
+            return;
+        }
 
         if (media) {
             for (let i = 0; i < media.length; i++) {
@@ -35,9 +56,13 @@ export default function CreateBox() {
                 });
 
                 const file = await res.json();
-                console.log(file.url); // file.url is the URL of the uploaded media
+                let postMediaData: PostMediaData = {
+                    postID: postID,
+                    mediaID: 0,
+                    mediaURI: file.url
+                };
+                const id = await addPostingMediaData(postMediaData);
             }
-
             setMedia(null);
         }
     }
@@ -112,8 +137,11 @@ export default function CreateBox() {
                                         name="content"
                                         placeholder="Type something here..."
                                         className="w-full h-[350px] p-[10px] text-black border border-[#b0b0b0] rounded-[15px] resize-none"
+                                        value = {captionText}
+                                        onChange={e => setCaptionText(e.target.value)}
                                     />
                                 </div>
+                                {/*
                                 <div>
                                     <p className="ml-[7px] text-[1.1875rem] text-black font-bold">Tags</p>
                                     <textarea
@@ -121,7 +149,7 @@ export default function CreateBox() {
                                         placeholder="Tag someone here..."
                                         className="w-full h-[40px] px-[10px] py-[7px] text-black border border-[#b0b0b0] rounded-[15px] resize-none"
                                     />
-                                </div>
+                                </div>*/ }
                                 <div>
                                     <p className="ml-[7px] text-[1.1875rem] text-black font-bold">Media</p>
                                     <div className="w-full h-[270px] text-black border border-[#b0b0b0] rounded-[15px] resize-none overflow-x-hidden overflow-y-scroll">

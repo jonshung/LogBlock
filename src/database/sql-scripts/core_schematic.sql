@@ -17,11 +17,12 @@ CREATE TABLE Posting (
 );
 
 CREATE TABLE PostingMedia (
-    postID INTEGER REFERENCES Posting(postID),
-    mediaID SERIAL,
+    postID NOT NULL INTEGER REFERENCES Posting(postID),
+    mediaID INTEGER NOT NULL,
     mediaURI VARCHAR(2000) DEFAULT '',
     PRIMARY KEY (postID, mediaID)
 );
+CREATE SEQUENCE postingmedia_seq START 1 INCREMENT 1
 
 CREATE TABLE PostingTagging (
     postID INTEGER REFERENCES Posting(postID),
@@ -52,12 +53,13 @@ CREATE TABLE BlockedProfile (
 
 CREATE TABLE Commenting (
     postID INTEGER REFERENCES Posting(postID),
-    commentID SERIAL,
+    commentID INTEGER NOT NULL,
     commentAuthor INTEGER REFERENCES Profile(userID) NOT NULL,
     commentCaption VARCHAR(500) DEFAULT '',
     commentCreation DATE DEFAULT CURRENT_DATE,
     PRIMARY KEY (postID, commentID)
 );
+CREATE SEQUENCE commenting_seq START 1 INCREMENT 1
 
 CREATE TABLE Connection (
     connector INTEGER REFERENCES Profile(userID),

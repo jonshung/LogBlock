@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { checkAdmin } from "../utils/AdminAPI";
+import { useEffect, useState } from "react";
 
 const links = [
     { name: "Home", href: "/",
@@ -28,8 +30,11 @@ export default function NavLinks() {
         }
     });
 
-    const isAdmin = true;
-
+    const [isAdmin, setIsAdmin] = useState(false);
+    useEffect(() => {
+        const run = async() => setIsAdmin(await checkAdmin());
+        run();
+    }, [])
     return (
         <>
             {links.map((link) => {

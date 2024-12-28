@@ -1,25 +1,28 @@
 package com.logblock.backend.PostServiceTests;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Optional;
 import java.util.Date;
+import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.logblock.backend.DataSource.DTO.CommentingDTO;
+import com.logblock.backend.DataSource.DTO.PostingDTO;
 import com.logblock.backend.DataSource.Model.Commenting;
 import com.logblock.backend.DataSource.Model.CommentingId;
+import com.logblock.backend.DataSource.Model.Posting;
 import com.logblock.backend.DataSource.Repository.CommentRepository;
 import com.logblock.backend.PostService.CommentService;
 import com.logblock.backend.PostService.PostService;
-import com.logblock.backend.DataSource.DTO.PostingDTO;
-import com.logblock.backend.DataSource.Model.Posting;
 
 import jakarta.transaction.Transactional;
 
@@ -63,12 +66,12 @@ public class CommentServiceTest {
     // Test case for creating a comment
     @Test
     void testCreateComment() {
-        when(commentRepository.addCommenting(1, comment)).thenReturn(1);
+        when(commentRepository.addCommenting(comment)).thenReturn(1);
 
-        int result = commentService.createComment(comment);
+        int result = commentService.createComment(CommentingDTO.toDTO(comment));
 
         assertEquals(1, result, "Comment creation should return the correct comment ID.");
-        verify(commentRepository, times(1)).addCommenting(1, comment); // Ensure repository method was called
+        verify(commentRepository, times(1)).addCommenting(comment); // Ensure repository method was called
     }
 
     // Test case for updating an existing comment

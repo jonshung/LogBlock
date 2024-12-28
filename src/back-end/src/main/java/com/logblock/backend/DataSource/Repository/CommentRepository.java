@@ -26,14 +26,11 @@ public interface CommentRepository extends JpaRepository<Commenting, CommentingI
     /**
      * Add a new comment to a post.
      *
-     * @param postID     ID of the post
-     * @param newComment The comment to be added
      * @return ID of the newly added comment
      */
     @Transactional
-    default int addCommenting(int postID, Commenting newComment) {
-        newComment.setPostID(postID);
-        Commenting savedComment = save(newComment); // Use save() to persist the new comment
+    default int addCommenting(Commenting c) {
+        Commenting savedComment = save(c); // Use save() to persist the new comment
         return savedComment.getCommentID(); // Return the ID of the newly added comment
     }
 

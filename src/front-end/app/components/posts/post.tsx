@@ -2,15 +2,18 @@
 
 import { useState } from 'react';
 import EditPost from './edit-post';
-import { PostMediaData, TagData, CommentingDataExtended, ProfileData, PostDataExtended, } from '@/app/interfaces/common-interfaces';
+import { PostMediaData, TagData, CommentingDataExtended, ProfileData, PostDataExtended, CommentingData, } from '@/app/interfaces/common-interfaces';
+import { addCommentingTo } from '@/app/utils/CommentingAPI';
 
 interface PostProps {
     post: PostDataExtended;
     user : ProfileData | null;
-    comments: CommentingDataExtended[]
+    comments: CommentingDataExtended[];
+    postMedias: PostMediaData[]
+    reloadTrigger: (postID: number) => void
 }
 
-const Post: React.FC<PostProps> = ({ post, user, comments }) => {
+const Post: React.FC<PostProps> = ({ post, user, comments, postMedias, reloadTrigger }) => {
     const [isUpvoted, setIsUpvoted] = useState(false);
     const [isSharedDialogOpen, setSharedDialogOpen] = useState(false);
     //const [comments, setComments] = useState<CommentingData[]>(post.comments || []);
@@ -27,17 +30,23 @@ const Post: React.FC<PostProps> = ({ post, user, comments }) => {
 
     const toggleComments = () => setShowComments((prev) => !prev);
 
-    const handleAddComment = () => {
+    const handleAddComment = async () => {
+        if(!user) {
+            setNewComment('');
+            return;
+        }
         if (newComment.trim()) {
-            /*
-            const newCommentData: CommentingDataExtended = {
+            
+            const newCommentData: CommentingData = {
                 commentID: 0,
-                commentAuthor: 1, // Mock user ID
-                commentCaption: newComment,
-                commentCreation: new Date().toISOString(),
+                postID: post.postData.postID,
+                authorID: user.userID,
+                caption: newComment,
+                creationDate: new Date().toJSON()
             };
-            */
+            await addCommentingTo(newCommentData);
             setNewComment(''); // Clear input
+            reloadTrigger(post.postData.postID);
         }
     };
 
@@ -60,7 +69,7 @@ const Post: React.FC<PostProps> = ({ post, user, comments }) => {
         <div className="post">
             {/* Header */}
             <div className="post-header">
-                <img src={post.authorImage} alt={post.authorDisplayName} className="avatar" />
+                <img src={post.authorImage}  className="avatar" />
                 <div>
                     <p className="name">{post.authorDisplayName}</p>
                     <p className="date">{post.postData.creationDate}</p>
@@ -119,14 +128,14 @@ const Post: React.FC<PostProps> = ({ post, user, comments }) => {
 
             {/* Media */}
             <div>
-                {/*post.media.map((media) => (
+                {postMedias.map((media) => (
                     <img
                         className="post-image"
                         key={media.mediaID}
                         src={media.mediaURI}
                         alt={`media-${media.mediaID}`}
                     />
-                ))*/}
+                ))}
             </div>
 
             {/* Actions */}
@@ -218,7 +227,7 @@ const Post: React.FC<PostProps> = ({ post, user, comments }) => {
                         {/* Avatar */}
                         <img
                             src={user.profileImg}
-                            alt={user.displayName}
+                            //alt={user.displayName}
                             style={{
                                 width: '50px',
                                 height: '50px',
@@ -271,7 +280,6 @@ const Post: React.FC<PostProps> = ({ post, user, comments }) => {
                         >
                             <img
                                 src={comment.authorImage || 'https://via.placeholder.com/50'}
-                                alt={comment.authorDisplayName}
                                 style={{
                                     width: '50px',
                                     height: '50px',

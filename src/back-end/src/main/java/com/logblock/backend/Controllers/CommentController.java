@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,10 +49,10 @@ public class CommentController {
      * @param commentInfo The comment to create
      * @return Response with the newly created comment ID
      */
-    @PostMapping
-    public ResponseEntity<?> createComment(@RequestBody Commenting commentInfo) {
+    @PostMapping( path = "/add/", headers = "Accept=application/json", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createComment(@RequestBody CommentingDTO commentInfo) {
         int result = commentService.createComment(commentInfo);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(result);//
     }
 
     /**
@@ -61,7 +62,7 @@ public class CommentController {
      * @param commentID ID of the comment to delete
      * @return Response with the status of the deletion
      */
-    @DeleteMapping("/{postID}/{commentID}")
+    @DeleteMapping("/del/{postID}/{commentID}")
     public ResponseEntity<?> deleteComment(@PathVariable int postID, @PathVariable int commentID) {
         int result = commentService.deleteComment(postID, commentID);
         return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();

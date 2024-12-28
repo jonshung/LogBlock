@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { PostDataBundle, ProfileData } from "../interfaces/common-interfaces";
-import Post from "../components/posts/post";
+import Post from "./posts/post";
 import { useInView } from "react-intersection-observer";
+import { useRouter } from "next/navigation";
+import { bundlePostAndComment, getPostData } from "../utils/PostAPI";
 
 export const POST_PER_PAGE = 4;
 
@@ -19,6 +21,8 @@ export const InfiniteScrollingContainer = ({ generatingFunction, profileContext 
     const [scrollTrigger, isInView] = useInView({
         threshold: 1
     });
+    const router = useRouter();
+
     useEffect(() => {
         if (isInView && hasMore) {
           loadMorePosts();
@@ -35,12 +39,28 @@ export const InfiniteScrollingContainer = ({ generatingFunction, profileContext 
         posts.forEach((post) => {
             generatedPosts.push(post.postData.postData.postID);
         })
-        console.log(posts.length);
         setPostsBundle((prev) => [...prev, ...posts] )
     };
 
+    const reload = async (postID: number) => {
+        for(let i = 0; i < postsBundle.length; i++) {
+            let bundle = postsBundle[i];
+            if(bundle.postData.postData.postID != postID) continue;
+            let postData = null;
+            postData = await getPostData(postID.toString());
+            if(!postData) return;
+
+            const newBundle = await bundlePostAndComment([postData]);
+            if(!newBundle) return;
+            
+            postsBundle[i] = newBundle[0];
+            break;
+        }
+        router.refresh();
+    }
+
     return (
-        <div className="w-full">
+        <div className="w-full block">
             <div>
                 { postsBundle.map((postBundle) => (
                     <Post
@@ -48,6 +68,8 @@ export const InfiniteScrollingContainer = ({ generatingFunction, profileContext 
                         user={profileContext}
                         post={postBundle.postData}
                         comments={postBundle.comments}
+                        postMedias={postBundle.postMedia}
+                        reloadTrigger={reload}
                     />
                 )) }
             </div>

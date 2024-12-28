@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.logblock.backend.AdminService.AdminService;
 import com.logblock.backend.DataSource.DTO.ReportingDTO;
+import com.logblock.backend.DataSource.Model.Profile;
 import com.logblock.backend.DataSource.Model.Reporting;
+import com.logblock.backend.ProfileService.ProfileService;
 
 @RestController
 @RequestMapping("/admin")
@@ -22,6 +25,8 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private ProfileService profileService;
     /**
      * Retrieve all reports in the system.
      *
@@ -59,5 +64,20 @@ public class AdminController {
     public ResponseEntity<?> closeAccount(@PathVariable int userID) {
         int result = adminService.closeAccount(userID);
         return result > 0 ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    /**
+     * Check for administrative privilege
+     *
+     * @param userID ID of the user to close the account
+     * @return Response with the status of the administration
+     */
+    @GetMapping("/")
+    public ResponseEntity<?> checkAdmin() {
+        Profile u = profileService.getMe();
+        if(u == null) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        return ResponseEntity.ok().build();
     }
 }
