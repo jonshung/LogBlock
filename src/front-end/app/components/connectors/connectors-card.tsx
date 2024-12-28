@@ -1,15 +1,13 @@
 import Link from "next/link";
 
-export default function ConnectorsCard() {
-    const name = "Henry Clauss";
-
+export default function ConnectorsCard({ name, image }: { name: string; image: string }) {
     return (
         <Link
             href="/"
             className="flex items-center w-full h-[65px] text-black tetx-lg font-medium"
         >
             <img
-                src="https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/Henry_Clauss_hq9ijp.png"
+                src={image}
                 width={50}
                 height={50}
             />
