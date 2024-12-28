@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -76,6 +77,7 @@ public class SecurityConfiguration {
 			.csrf((csrf) -> csrf.disable())
 			.securityMatcher(authentication_endpoint)
 			.authorizeHttpRequests((authorize) -> authorize 			// pre-authorizing authentication endpoints
+				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAuthority("LB_ADMIN")
 				.anyRequest().authenticated()
 			)
 			.oauth2Login((configurer) -> {

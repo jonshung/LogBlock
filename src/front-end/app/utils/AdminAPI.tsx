@@ -10,5 +10,5 @@ export const checkAdmin = async() => {
     } catch(e) {
         // nothing
     }
-    return data != null && data.status != HttpStatusCode.OK_200;
+    return data != null && data.status == HttpStatusCode.OK_200;
 }

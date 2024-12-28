@@ -29,12 +29,13 @@ export default function NavLinks() {
             current = link.href;
         }
     });
-
     const [isAdmin, setIsAdmin] = useState(false);
+
     useEffect(() => {
         const run = async() => setIsAdmin(await checkAdmin());
         run();
-    }, [])
+    }, []);
+
     return (
         <>
             {links.map((link) => {
