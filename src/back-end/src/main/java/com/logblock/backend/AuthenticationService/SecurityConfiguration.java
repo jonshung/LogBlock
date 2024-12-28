@@ -2,6 +2,7 @@ package com.logblock.backend.AuthenticationService;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,14 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.logblock.backend.ProfileService.ProfileService;
 
 
 @Configuration
@@ -33,6 +37,9 @@ public class SecurityConfiguration {
 
     @Autowired
     private Environment env;
+
+	@Autowired
+	private ProfileService profileService;
     
 	@Bean
 	public ClientRegistrationRepository userDetailsService() {
@@ -69,8 +76,8 @@ public class SecurityConfiguration {
 			.csrf((csrf) -> csrf.disable())
 			.securityMatcher(authentication_endpoint)
 			.authorizeHttpRequests((authorize) -> authorize 			// pre-authorizing authentication endpoints
-				.requestMatchers("/admin/**").hasAuthority("LB_ADMIN")
-				.anyRequest().authenticated())
+				.anyRequest().authenticated()
+			)
 			.oauth2Login((configurer) -> {
 				configurer.successHandler(this.successHandler()).failureHandler(this.failureHandler())
 				.userInfoEndpoint(userInfo -> userInfo
@@ -96,6 +103,20 @@ public class SecurityConfiguration {
 		return (authorities) -> {
 			Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 			mappedAuthorities.add(new SimpleGrantedAuthority("LB_USER"));
+			authorities.forEach(authority -> {
+				if (OidcUserAuthority.class.isInstance(authority)) {
+					OidcUserAuthority oidcUserAuthority = (OidcUserAuthority)authority;
+
+					Map<String, Object> userAttributes = oidcUserAuthority.getAttributes();
+
+					com.logblock.backend.DataSource.Model.Profile p = profileService.getProfileByEmail((String) userAttributes.get("email"));
+					if(p == null) return;
+					if(p.getPrivLevel() >= 2) {
+						mappedAuthorities.add(new SimpleGrantedAuthority("LB_ADMIN"));
+					}
+				}
+			});
+
 			return mappedAuthorities;
 		};
 	}

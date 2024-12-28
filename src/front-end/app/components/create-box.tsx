@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { PostData, PostMediaData, ProfileData } from "../interfaces/common-interfaces";
 import { addPostingMediaData, createPost } from "../utils/PostAPI";
+import { useRouter } from "next/navigation";
 
 export default function CreateBox({ cUser }: { cUser: ProfileData | null }) {
     const [dialogue, setDialogue] = useState(false);
     const [confirmDialogue, setConfirmDialogue] = useState(false);
     const [create, setCreate] = useState(false);
     const [media, setMedia] = useState<FileList | null>(null);
+    const router = useRouter();
 
     /** Data fields */
     const [captionText, setCaptionText] = useState("")
@@ -65,6 +67,7 @@ export default function CreateBox({ cUser }: { cUser: ProfileData | null }) {
             }
             setMedia(null);
         }
+        router.refresh();
     }
 
     const handleDiscard = () => {
@@ -106,7 +109,7 @@ export default function CreateBox({ cUser }: { cUser: ProfileData | null }) {
                         className="ml-[25px]"
                     />
                     <span className="w-[15px]" />
-                    <p className="text-xl text-[#3a3a3a]">What do you think?</p>
+                    <p className="text-xl text-[#3a3a3a]">What are you thinking?</p>
                 </div>
             </div>
 
