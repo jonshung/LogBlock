@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker compose up --build --force-recreate --no-deps
+docker compose up --build --force-recreate

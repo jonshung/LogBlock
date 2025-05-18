@@ -22,7 +22,7 @@ public class AccountService {
      */
     public int createAccount(String email) {
         // Create a new user with default or provided values
-        Profile newUser = new Profile(email, email.split("@")[0], "New user bio.", "defaultProfilePic.png", 0);
+        Profile newUser = new Profile(email, email.split("@")[0], "New user bio.", "https://res.cloudinary.com/dumr9ghyv/image/upload/v1734769387/Henry_Clauss_hq9ijp.png", 0);
         userRepository.addUser(newUser);
         return newUser.getUserID();
     }
